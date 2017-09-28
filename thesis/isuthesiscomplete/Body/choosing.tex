@@ -1,0 +1,177 @@
+\section{Hybrid approach}
+\label{sec:hybrid-approach}
+Lets look at all the candidate traversal strategies before explaining and
+reasoning our decision tree.
+
+\input{figures/candidates}
+
+\subsection{Candidate traversal strategies}
+\label{sec:candidate-traversals}
+\begin{itemize}
+\item \textbf{\textit{Depth-first search (DFS)}} traverses a CFG by starting at
+a arbitary node as root and explores as far as possible along each branch before
+backtracking.\newline
+\item \textbf{\textit{Post order traversal (POS)}} traverses the vertices in the
+order that they were last visited by the algorithm. In CFGs that does not
+contain loops, post order guarantees that a node will be visited only after
+visiting its successors.
+\item \textbf{\textit{Reverse post order traversal (RPS)}} is the reverse of a
+postordering, i.e. a list of the vertices in the opposite order of their last
+visit. In CFGs that does not contain loops, reverse post order guarantees that a
+node will be visited only after visiting its predecessors.
+\item \textbf{\textit{Worklist approach}} starts off with all nodes in a
+worklist. Then a node is removed from the worklist and processed. If the state
+changes, then its successors (for forward dataflow problems) or predecessors
+(for backward dataflow problems) are added to the worklist.  Another node is
+taken from the worklist if one exists and the process repeats until the list is
+empty. Worklist approach visits nodes only on demand and removes redundant visit
+of nodes. Worklist approach has two types.
+\begin{itemize}
+\item Worklist with post ordering of nodes : In this strategy,  worklist is
+initialized with post ordering of nodes.
+\item Worklist with reverse post ordering of nodes : In this strategy,  worklist
+is initialized with reverse post ordering of nodes.
+\end{itemize}
+\item \textbf{\textit{Random traversal (RAN)}} traverses a CFG in random order
+of its nodes.
+\end{itemize}
+There are two other non-standard traversal strategies mentioned below which were
+created due to the property of our CFG nodes.
+\begin{itemize}
+\item \textbf{\textit{Traversing in the increasing order of node ids (IN-ID)}}
+This traversal visits nodes in the increasing order of their node ids. We have a
+property associates with the nodes in the CFG called node id. Node ids are
+assigned while constructing the CFG of the program. Node ids are assigned in a
+topological order. For sequential graph, traversing the graph in the increasing
+order of node ids will give the flow of the program from entry point to exit
+point.
+
+\item \textbf{\textit{Traversing in the decreasing order of node ids (DC-ID)}}
+This traversal visits nodes in the decreasing order of their node ids. For
+sequential graph, traversing the graph in the decreasing order of node ids will
+give the backward flow of the program.
+\end{itemize}
+
+% \begin{figure*}[ht!]
+% \centering
+% \includegraphics[width=\linewidth]{figures/tree.pdf}
+%   \caption{Traversal strategy selection decision tree.}
+% \label{fig:decision-tree}
+% \end{figure*}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\linewidth]{figures/decision.png}
+\caption{Traversal strategy selection decision diagram. $P_0$ to $P_{11}$ are
+markings for paths.}
+\label{fig:decision-diagram}
+\end{figure}
+
+Let us reason the decisions taken by the decision tree and the optimizations
+performed on it.
+\subsection{Reasoning of the Decision tree}
+\label{sec:Decision tree explained}
+First, we check if the traversal is data flow sensitive or not. We distinguish
+the traversal based on this property because traversal without data flow
+completes in a single traversal of the CFG, while data flow sensitive traversal
+traverses the CFG multiple time till all the nodes reach fixpoint ie the ouput
+of all the nodes stabilizes. Hence the decision making process differs based on
+the data flow  property. Lets look at the decision tree if the traversal is data
+flow sensitive.\newline
+\subsubsection{Decision tree for data flow sensitive traversal}
+For data flow sensitive traversal, we look at the type of the control flow in
+the CFG. This property is important now because the type of control flow
+determines the number of traversal needed for data flow sensitive traversal.
+\paragraph{Sequential CFG} \label{sec:decision-ds-seq}
+If the graph is sequential, it means the CFG has no branches or loops. When we
+know this property of graph, we can see that solving the data flow equations is
+straightforward. Each node has only one predecessor/successor and hence if the
+nodes are ordered in such a way that it is processed only after it's predecessor
+(forward traversal) or it's successor (backward traversal), then the sequential
+CFG will attain fix point in single traversal.
+In order to get this ordering for sequential graph, we just have to traverse the
+graph in the increasing of order of the CFG node ids (IN-ID) for forward
+traversal and decreasing order of node ids (dc-id) for backward traversal. This
+is because node ids are assigned in topological order as they are created and
+for sequential graphs with no branches or loops, traversing the graph in the
+increasing order of node ids will ensure that we traverse the node's predecessor
+before the node itself. Traversing the graph in the decreasing order of node ids
+will ensure that we traverse the node's successors before the node itself. Hence
+hybrid traversal picks IN-ID for forward traversal and DC-ID for backward
+traversal approach for sequential CFG. P-1 and P-2 in figure
+\ref{fig:decision-tree} are the paths that lead to these decisions.\par
+\textit{Optimization on the chosen traversal} : From the knowledge that the
+graph is sequential and the traversal is data flow sensitive, hybrid approach
+knows that IN-ID for forward traversal and DC-ID for backward traversal, will
+complete the data flow sensitive traversal in first iteration of the CFG and we
+do not have to check fixpoint in the first iteration to confirm it. Hence hybrid
+approach removes fixpoint checking operation.\par
+
+Approaches like DFS, POS, RPS, RAN will take two iteration to realize that we
+have reached fix point in the first traversal, which is an overhead and an
+unwanted traversal. WPOS and WRPS will visit only as much nodes as needed but it
+will add an overhead of creating and maintaining the worklist. Also approaches
+like DFS, POS, RPS involves accessing edge informations to determine the next
+node to visit while IN-ID and DC-ID already has the nodes in order and just
+visits them.\par
+
+If the CFG is not sequential, then we check if the CFG has loops.
+\paragraph{CFG with branches and no loop} \label{sec:decision-ds-br}
+If the CFG does not have loop, then it is a CFG with branches and no loops. When
+we know this property of graph, we can see that this CFG will stabilize in
+single traversal if all predecessors of the node have been processed before the
+node itself(for forward traversal) or if all the successors of the node have
+been processed before the node itself(for backward traversal). RPS guarantees
+such ordering for forward traversal and POS guarantees such ordering for
+backward traversal. Hence hybrid picks RPS for forward traversal and POS for
+backward traversal. P-9 and P-10 in figure \ref{fig:decision-tree} are the paths
+that lead to these decisions.\par \textit{Optimization on the chosen traversal}
+: From the knowledge that the graph has only branches and the traversal is data
+flow sensitive, hybrid approach knows that RPS for forward traversal and POS for
+backward traversal, will complete the data flow sensitive traversal in first
+iteration of the CFG and will complete the data flow sensitive traversal in
+first iteration of the CFG and we do not have to check fixpoint in the first
+iteration to confirm it. Hence hybrid approach removes fixpoint checking
+operation.\par Approaches like DFS, RAN, IN-ID, DC-ID will take multiple
+iteration to reach fix point. WPOS and WRPS has an overhead of creating and
+maintaining the worklist.
+
+\paragraph{CFG with loops}
+If the CFG has loops, it may or may not have branches other than the loop. We
+next determine if the traversal is loop sensitive or not.\par \textbf{Loop
+insensitive} : If the traversal is insensitive to loop, then we can just ignore
+the loops present in the CFG and make decision based on the structure of the
+rest of the CFG. If the CFG have branches other than the loop, then hybrid picks
+RPS for forward traversal and POS for backward traversal based on the
+explanation in Section \ref{sec:decision-ds-br}. P-5 and P-6 in figure
+\ref{fig:decision-tree} are the paths that lead to these decisions. If the CFG
+does not have branches other than the loop, then hybrid picks IN-ID for forward
+traversal and DC-ID for backward traversal based on the explanation in Section
+\ref{sec:decision-ds-seq}. P-7 and P-8 in figure \ref{fig:decision-tree} are the
+paths that lead to these decisions.\par \textbf{Loop sensitive} : If the
+traversal is loop sensitive and the CFG has loops, then no ordering of nodes can
+guarantee fix point convergence in single traversal. Worklist approach is the
+near best here as it visits node only on demand. Hybrid approach chooses WRPS
+for forward traversal and WPOS for backward traversal. P-3 and P-4 in figure
+\ref{fig:decision-tree} are the paths that lead to these decisions.\par
+--------------discussion needed on why worklist is near best and not the
+best-----------------\par Now let us look at the decision tree if the traversal
+is data flow insensitive.
+\subsubsection{Decision tree for data flow insensitive traversal}
+% We check if the traversal is sensitive to the traversal strategy used.
+% Traversal sensitivity means the output of the traversal changes from one
+% traversal strategy to another. If the traversal is sensitive to the traversal
+% strategy, then hybrid cannot pick the best strategy as we may compromise on
+% the soundess of the result. We did not check this property when the traversal
+% is data flow sensitive. This is because, even if data flow traversal is
+% traversal sensitive, we will run the traversal till the fixpoint is reached
+% and hence we will end up with the correct result.\par
+If the traversal is data flow insensitive, then hybrid approach picks random
+traversal. This is because since there is no data flow in the traversal, the
+traversal is local to the node and is not dependent on the output of other nodes
+and hence the nodes could be visited in any order.\par Other approaches like
+DFS, POS, RPS involves accessing edge informations to determine the next node to
+visit while WPOS and WRPS has an overhead of creating the worklist. IN-ID and
+DC-ID has an unwanted contraint of accessing the nodes in order, which is an
+overhead.\par Let us look at the algorithms that computes the required static
+and dynamic properties.
+\input{static-prop}

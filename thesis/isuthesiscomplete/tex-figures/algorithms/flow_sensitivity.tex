@@ -1,0 +1,16 @@
+\begin{algorithm}[ht!]
+\caption{Algorithm to detect data-flow sensitivity}
+\label{algo:flow-sensitive}
+\KwIn{\lstinline|t := traversal(n : Node) : T \{ tbody \}|}
+\KwOut{\textit{true/false}}
+$A$ $\leftarrow$ \textit{getAliases}(\lstinline|tbody|, \lstinline|n|)\;
+\ForEach{ \lstinline|stmt| $\in$ \lstinline|tbody|}{
+	\If{$stmt$ $=$ \lstinline|output(n', t')|}{
+		\If{\lstinline|t'| $==$ \lstinline|t| and \lstinline|n'| $\notin$ $A$ }{
+			return \textit{true}\;
+		}
+	}
+	
+}
+return \textit{false}\;
+\end{algorithm}

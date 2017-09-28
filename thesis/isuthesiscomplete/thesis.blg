@@ -1,0 +1,19 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+The style file: apa.bst
+A level-1 auxiliary file: Preface/titlepage.aux
+A level-1 auxiliary file: Preface/acknowl.aux
+A level-1 auxiliary file: Preface/abstract.aux
+A level-1 auxiliary file: Body/introduction.aux
+A level-1 auxiliary file: Body/contributions.aux
+A level-1 auxiliary file: Body/approach.aux
+A level-1 auxiliary file: Body/eval.aux
+A level-1 auxiliary file: Body/related.aux
+A level-1 auxiliary file: Body/conclusion.aux
+Database file #1: Reference/refs.bib
+Repeated entry---line 650 of file Reference/refs.bib
+ : @inproceedings{thummalapenta2009alattin
+ :                                        ,
+I'm skipping whatever remains of this entry
+Database file #2: Reference/refs-static-dynamic.bib
+Warning--can't use both volume and number fields in livshits2005dynamine
+(There was 1 error message)

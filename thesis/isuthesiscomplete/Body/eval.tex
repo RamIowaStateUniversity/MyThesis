@@ -1,0 +1,391 @@
+\chapter{Empirical Evaluation}
+\label{sec:eval}
+
+We conducted an empirical evaluation on a set of 21 basic source code analyses
+and 2 public massive code datasets to evaluate several factors about our hybrid
+approach for selecting and optimizing traversal strategies.
+First, we show the benefit of using our optimized selected traversal over
+standard ones by evaluating the \emph{reduction in running times} of our hybrid
+approach over the standards ones (\secref{sec:performance-gain}).
+Then, we evaluate the correctness of the analysis results using our hybrid
+approach to show that the decision analyses and optimizations in our approach
+does not affect the correctness of the source code analyses
+(\secref{sec:soundness}).
+We also evaluate the precision of our selection algorithm by measuring how often
+the hybrid approach selects the most time-efficient traversal
+(\secref{sec:prediction-accuracy}).
+Finally, we evaluate how the different components in the approach and different
+kinds of static and runtime properties impact the overall performance? This is
+done in \secref{sec:analysis-decision-tree} and
+\secref{sec:analysis-traversal-opt}, and via various insight analysis of our
+results.
+
+%\noindent
+%%
+%\textbf{RQ1.} \emph{How much reduction in running time can be achieved using 
+%our hybrid approach?} The answer to this shows the benefit of using our 
+%optimized selected traversal over standard ones.
+%
+%\noindent
+%%
+%\textbf{RQ2.} \emph{Are the analysis results correct using the hybrid approach?}
+ %This will show that the decision analyses and optimizations in our approach 
+%does not affect the correctness of the source code analyses' results.
+%
+%\noindent
+%%
+%\textbf{RQ3.} \emph{How often does the hybrid approach select the most 
+%time-efficient traversal?} 
+%
+%\noindent
+%%
+%\textbf{RQ4.} \emph{How do the different components in the approach and 
+%different kinds of static and runtime properties impact the overall 
+%performance?} This is done by various insight analysis of our evaluation 
+%results.
+
+\section{Analyses, Datasets and Experiment Setting}
+\label{sec:exp-settings}
+
+\input{tex-figures/analysis_table}
+
+\subsection{Analyses.} We collected source code analyses that traverse control flow 
+graphs from textbooks and source code analysis tools. We also made sure that the 
+analyses list covers all the static properties discussed in  
+\secnref{sec:compute-properties}, i.e., data-flow sensitivity, loop sensitivity and 
+traversal direction. We ended up with 21 source code analyses as shown in 
+\tabref{tab:analysis-table}. They include 10 basic ones (analyses 1, 2, 8, 9, 
+10, 11, 12, 14, 15 and 19) from textbooks~\cite{compilers, programanalysis} and 11 
+tothers for detecting source code bugs, and code smells from the Soot 
+framework~\cite{vallee1999soot} (analyses 3, 4, 5, 13, 17 and 18), and 
+FindBugs tool~\cite{findbugs-paste2007} (analyses 6, 7, 16, 20 and 21). 
+%We included analysis that needs control flow information to act upon. 
+%The standard textbook analysis were chosen since these are the base analysis upon which more complicated analysis act on.
+\tabref{tab:analysis-table} also shows the number of traversals each analysis 
+contains and their static properties as described in \secref{sec:compute-properties}. 
+%Most analyses have 2 traversals and all the first traversals are flow-insensitive and loop-insensitive.
+The sets of traversals cover all types of static properties for 
+flow-sensitivity, loop-sensitivity and direction (forward, backward and iterative).
+All analyses are intra-procedural. We implemented all twenty one of these analysis using constructs described in \secref{sec:language}. In \tabref{tab:analysis-table}, Ts denotes total number of traversals, $t_i$ denotes properties of traversal $i$-th, \emph{Flw} denotes data-flow sensitive, \emph{Lp} denotes loop sensitive,
+\emph{Dir} denotes traversal direction where ---, $\rightarrow$ and $\leftarrow$ 
+mean iterative, forward and backward, respectively.
+%For expressing these analyses, we made use of Boa language~\cite{dyer2013boa}. Boa is a domain-specific language for mining open-source software repositories at the large scale. We extended Boa data schema to support the graph data structure and extended its syntax to support program analysis constructs described in~ \secref{sec:language}.
+
+\input{tex-figures/dataset_table}
+
+\input{tex-figures/time-breakdown-table}
+
+\subsection{Datasets.} We ran the analyses on two datasets: DaCapo 9.12 benchmark~\cite{blackburn2006dacapo}, 
+DaCapo for short, and a ultra-large-scale dataset containing projects from
+GitHub, GitHub for short.
+%
+DaCapo dataset contains the source code of 10 open source Java projects: 
+Apache Batik, Apache FOP, Apache Aurora, Apache Tomcat, Jython, Xalan-Java, 
+PMD, H2 database, Sunflow and Daytrader. GitHub dataset contains the 
+source code of more than 380K Java projects collected from 
+GitHub.com. Each method in the datasets was used to generate a control 
+flow graph (CFG) on which the analyses would be run. The statistics of the 
+two datasets are shown in \tabref{tab:dataset-table}. DaCapo dataset contains 
+287K non-empty CFGs while GitHub dataset contains more than 162M. Both 
+have similar distributions of CFGs over graph \graphprop{}. Most CFGs are sequential 
+and only 10\% have loops.
+
+\subsection{Setting.} We compared our \textit{hybrid} approach against the six 
+standard traversal strategies in \secref{sec:candidates}: DFS, PO, RPO, WPO, 
+WRPO and ANY. The running time for each analysis is measured from the start 
+to the end of the analysis which includes constructing CFGs and traversing 
+CFGs. The running time for our hybrid approach also includes the time for 
+computing the static and runtime properties, making the traversal strategy 
+decision, optimizing it and then using the optimized traversal strategy to 
+traverse the CFG and run the analysis.
+%
+The analyses on DaCapo dataset were run on  a single machine with 24 GB of 
+memory and 24-cores, running on Linux 3.5.6-1.fc17 kernel. Running analyses 
+on GitHub dataset on a single machine would take weeks to finish, so we 
+run them on a distributed cluster which runs a  standard  Hadoop 1.2.1 
+with 1 name and job tracker node, 10 compute nodes with totally 148 cores, 
+and 1 GB of RAM for each map/reduce task.
+
+%Our experiments were run on two modes.
+%\begin{itemize}
+%\item Sequential mode : Run on a single machine with 24 GB of memory and 24-cores, running
+%on Linux 3.5.6-1.fc17 kernel.
+%\item Cluster Mode : Programs  were  executed  on  a  standard  Hadoop 1.0.3
+%install with 1 name node, 1 job tracker node, and 6 compute nodes.
+%\end{itemize}
+
+\section{Running Time and Time Reduction}
+\label{sec:performance-gain}
+
+We first report the running times and then study the achieved reductions against standard traversal strategies. 
+
+\subsection{Running Time}
+
+\tabref{tab:time} shows the running times for 21 analyses on the two 
+datasets. On average (column \textbf{Avg. Time}), each analysis took 
+0.14--0.21 ms and 0.005--0.012 ms to analyze a graph in Dacapo and GitHub 
+datasets, respectively. The variation in the average analysis time is 
+mainly due to the difference in the machines used to run the analysis for 
+DaCapo and GitHub datasets, as described in Section 3.1. Also, the average 
+sizes of graphs in DaCapo are much larger than the average sizes of the graphs in the GitHub.
+%
+Columns \textbf{Static} and \textbf{Runtime} show the time contributions for 
+different components of the hybrid approach: the time for determining the 
+static properties of each analysis which is done once for each analysis, and 
+the time for constructing the CFG of each method and traversing the CFG which 
+is done once for every constructed CFG. 
+%From the results shown in table \ref{tab:time}, it can be seen that, about 70\%--80\% of the time 
+%is contributed by the actual traversal and 20\%--25\% of the time is 
+%contributed by CFG creation phase which also includes affixing dynamic 
+%properties. 
+We can see that the time for collecting static information is negligible, 
+less than 0.2\% for DaCapo dataset and less than 0.01\% for GitHub 
+dataset, when compared to the total runtime information collection time, as it is performed only 
+once per traversal. When compared to the average runtime information collection time, the static 
+time is quite significant. However, the overhead introduced by static 
+information collection phase diminishes as the number of CFGs increases and 
+becomes insignificant when running on those two large datasets. This result 
+shows the benefit of our hybrid approach when applying on ultra-large-scale
+analysis.
+
+\subsection{Time Reduction}
+
+\input{tex-figures/reduction-table}
+
+To evaluate the efficiency in running time of the hybrid approach over other 
+traversal strategies, we ran the 21 analyses on DaCapo and GitHub 
+datasets using hybrid approach and other candidate traversals. When comparing 
+the hybrid approach to a standard strategy $S$, we computed the reduction 
+rate $R=(T_S-T_H)/T_S$ where $T_S$ and $T_H$ are the running times using the 
+standard and the hybrid strategy, respectively. 
+%
+Some analyses have some worst case traversal strategies which might not be 
+feasible to run on dataset at the scale of 162 million graphs as in 
+GitHub dataset. For example, using post-order for forward data-flow 
+analysis will visit the CFG in the direction which is opposite to the 
+natural direction of the analysis and hence takes a lot of time to complete 
+the analysis. For such combinations of analyses and traversal strategies, the 
+map and the reducer tasks time out in the cluster setting and, thus, we did 
+not provide the running times. 
+The corresponding cells in \figref{tab:reduction-analyses} are denoted with symbol --.
+%And for the same reason that some strategies do not have running time, we have 
+%also not calculated hybrid's overall reduction over such strategies.
+%
+%Analyses on DaCapo were run on sequential mode while those on SourceForge were run on cluster mode. 
+
+The result in \figref{tab:reduction-analyses} shows that the hybrid approach 
+helps reduce the running times in almost all cases. The values indicates the 
+reduction in running time by adopting hybrid approach compared against the standard strategies. 
+%The executions failed on some pairs of analyses and standard traversals due to 
+%memory problems which are indicated by the symbol - in the corresponding cells. 
+Most of positive reductions are from 10\% (\colorbox{lightblack}{light yellow 
+cells}) or even from 50\% (\colorbox{lightgreen}{light green cells}). More 
+importantly, the most time-efficient and the worst traversal strategies vary 
+across the analyses which supports the need of our hybrid traversal strategy.
+%
+Over all analyses, the reduction was highest against any order and 
+post-order (PO and WPO) strategies. The reduction was lowest against the strategy 
+using depth-first search (DFS) and worklist with reverse post-ordering (WRPO). 
+When compared with the next best performing traversal strategy for each analysis, hybrid approach reduces the overall execution time by 
+about 13 minutes to 72 minutes on GitHub dataset. We do not 
+report the overall numbers for GitHub dataset due to the presence of failed 
+runs.
+
+\figref{tab:reduction-analysis-properties} shows time reductions for 
+different types of analyses. For \textit{data-flow sensitive} ones, the 
+reduction rates are high ranging from 32\% to 84\%. 
+%The 10\% reduction is when compared 
+%to the most popular traversal strategy for the analysis and the 90\% 
+%reduction is when compared to the worst performing traversal strategy for the 
+%analysis. 
+The running time was not improved much for \emph{non data-flow sensitive} 
+traversals, which correspond to the last three rows in \figref{tab:reduction-analyses} 
+with mostly one digit reductions (\colorbox{lightblue}{light orange 
+cells}). 
+We actually perform almost as same as Any order traversal 
+strategy for analyses in this category. This is because Any order traversal 
+strategy is the best strategy for all the CFGs in these analyses. Hybrid 
+approach also chooses any order traversal strategy and hence there is no 
+scope for performance gain. 
+
+\figref{tab:reduction-graph-properties} shows time reduction for
+different \graphprop{} types of input graphs. We can see that
+reductions over graphs with loops is highest and those over any graphs
+is lowest.
+
+\subsection{Time reduction against hand optimized analysis}
+\label{sec:hand-optimized}
+\input{tex-figures/reduction-table-oopsla-guideline}
+
+Another way to extract more performance is to hand optimize the analysis.
+\fignref{fig:reduction-oopsla} compares Hybrid approach against hand optimized analysis. Hand optimized analysis has single best optimized traversal strategy applied for each analysis. For data-flow analysis, hand optimized analysis uses WPO/WRPO guideline while for non data flow analysis, it uses ANY traversal strategy, as it is the best traversal strategy for non data-flow analysis. WPO/WRPO guideline suggests that if the direction of the traversal is backward, use WPO else use WRPO. This guideline  
+simplifies the hybrid approach, where the decision is based on only traversal 
+direction while Hybrid approach uses the decision tree in \fignref{fig:decision-diagram}. 
+\fignref{fig:reduction-oopsla} shows the 
+comparison of hybrid approach against hand optimized analysis. We can see that for 
+about half of the data-flow analysis, we gain at least 10\% reduction. For analysis like 
+RS, SS, VFR and MWN, the gain is much higher since these analyses are 
+selective in terms of the program statements that they analyze. WPO and WRPO 
+would not work for these analyses since in case of both WPO and WRPO, there 
+exists a fixed cost of creating and maintaining a worklist of size equals to 
+the number of CFG nodes. When analyses selectively analyzes a small subset of 
+all nodes in the CFGs, this overhead becomes substantial. Our hybrid strategy 
+is not only able to select an alternative strategy instead of WPO/WRPO for 
+such selective analyses, whenever possible (when the input graphs do not 
+contain loops), but also optimize WPO/WRPO (in case of input graphs with loops), 
+such that the overheads are minimized.
+For non-data flow analysis, there is no gain against hand optimized analysis since ANY is the best traversal strategy for such analysis and both Hybrid approach and hand optimized analysis applied ANY traversal strategy for all the graphs for non-data flow analysis.
+\section{Correctness of Analysis Results}
+\label{sec:soundness}
+
+To evaluate the correctness of analysis results, we first chose worklist 
+as standard strategy to run analyses on DaCapo dataset to create the 
+groundtruth of the results. We then ran analyses using our hybrid approach 
+and compared the results with the groundtruth. In all analyses on all 
+input graphs from the dataset, the results from our hybrid approach always 
+exactly matched the corresponding ones in the groundtruth. 
+%\todo{That means the 
+%hybrid approach does not compromise on the correctness of the result while 
+%picking and optimizing the best traversal strategy.} 
+
+\section{Traversal Strategy Selection Precision}
+\label{sec:prediction-accuracy}
+
+\input{prediction-precision}
+
+\input{tex-figures/loop-precision}
+
+In this experiment, we evaluated how well the hybrid approach picks the most 
+time-efficient strategy. We ran the 21 analyses on the DaCapo dataset using 
+all the candidate traversals and the one selected by the hybrid approach. One 
+selection is counted for each pair of a traversal and an input graph where 
+the hybrid approach selects a traversal strategy based on the properties of 
+the analysis and input graph. A selection is considered correct if its 
+running time is at least as good as the running time of the fastest among all 
+candidates. The precision is computed as the ratio between the number of 
+correct selections over the total number of all selections. 
+%
+As shown in \tabref{tab:prediction-precision}, the selection precision is 100\% 
+for all analyses that are not \textit{loop sensitive}. For analyses that 
+involve \textit{loop sensitive} traversals, the prediction precision is 99.99\%. 
+
+We further analyzed the result to see what contributed to these mispredictions. 
+Let us break the CFGs in the DaCapo dataset by the graph \graphprop{}: sequential CFGs, 
+CFGs with branches and no loops, and CFGs with loops, and discuss the selection precision.
+
+For \textbf{sequential CFGs \& CFGs with branches and no loops}, the selection  
+precision is 100\%---the hybrid approach always picks the most time-efficient 
+traversal strategy.
+
+For \textbf{CFGs with loops}, the selection precision is 100\% for \emph{loop 
+	insensitive} traversals. The mispredictions occur with \emph{loop sensitive} 
+traversals on CFGs with loops. Figure \ref{fig:loops} shows scatter charts 
+for the traversal selection results for 16 analyses that are \textit{loop 
+	sensitive}. In the chart, 1 indicates a correct selection and 0 indicates a 
+misprediction. CFGs are organized along the $x$- axis in the increasing order 
+of their sizes measured as the numbers of nodes. 
+%
+The scatter charts show that the mispredictions tend to happen with larger 
+CFGs. 
+%
+The reason is that, for \textit{loop sensitive} traversals, the hybrid 
+approach picks worklist as the best strategy. The worklist approach was 
+picked because it visits only as many nodes as needed when compared to other 
+traversal strategies which visit redundant nodes. However using worklist 
+imposes an overhead of creating and maintaining a worklist containing all 
+nodes in the CFG. This overhead is negligible for small CFGs. However, when 
+running analyses on large CFGs, this overhead could become higher 
+than the cost for visiting redundant nodes. Therefore, selecting worklist for 
+\emph{loop sensitive} traversals on large CFGs might not always result in the 
+best running times. 
+
+\input{tex-figures/misprediction-graph}
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.50\linewidth]{tex-figures/loop-ae-ns.pdf}
+%	\caption{Hybrid approach's performance against best approaches for mis-predicted graphs.}%
+%	\label{fig:loop-ae-ns}%
+%\end{figure}
+
+\fignref{fig:mis-graph} shows the Hybrid approach's performance against best 
+approaches for mis-predicted graphs for 16 analyses that has \emph{loop sensitive} traversals. We can see that for 
+majority of the mis-predicted graphs, Hybrid approach's performance is 
+comparable to the best approaches. 
+%As graph's size increases, Hybrid's performance for mis-predicted graphs worsens and is no more comparable to the best approach. 
+
+\section{Analysis on the Decision Tree Distribution}
+\label{sec:analysis-decision-tree}
+
+\input{tex-figures/paths-table}
+
+\input{tex-figures/paths-table2.tex}
+
+Decision tree is the key component in our hybrid approach. Given an analysis 
+traversal and an input graph, a path along the check points in the tree will 
+be used to determine the traversal strategy at the corresponding leaf node. 
+There are such 11 paths leading to 11 leaf nodes as shown in \figref{fig:decision-diagram}. 
+%
+In this experiment, we want to study the contribution of each path in 
+determining strategies for CFGs from the two datasets. Two tables in 
+\figref{fig:decision-distribution} show the result for 21 analyses. Background colors indicate the ranges of values: \colorbox{lightred}{0\%}, 
+\colorbox{lightblue}{(0\%, 1\%)}, \colorbox{lightblack}{[1\%, 10\%)} and \colorbox{lightgreen}{[10\%, 100\%]}.
+%
+%We evaluated the importance of all the paths in the decision tree that leads to the traversal strategy decision by computing the number of times a path has been taken by the CFGs in the \textit{DaCapo} dataset and the \textit{SourceForge} dataset for the 18 analyses. Figure \ref{fig:decision-distribution} shows two tables, one for each dataset with distribution of decisions over the paths of the decision tree. 
+The result shows a trend which is consistent between two datasets that 5 
+paths (P1, P2, P3 and P11) in the decision tree were used often---more 
+than average. Paths P4, P9 and P10 are less frequently used and paths P5, P6, 
+P7 and P8 were rarely used. 
+%Paths P5, P6, P7, P8 has been visited very less. 
+These four paths were taken less often than the others because they are only 
+used for CFGs with loops which are only 10\% of the CFGs in the datatsets.
+%and this 10\% is shared between these 4 paths. 
+%But this 10\% is significant as \textit{SourceForge} dataset contains about 16 million CFGs with loops and the gain in execution time by choosing the best strategy for these CFGs is significant and hence these 4 paths are important in the decision tree. 
+In addition, these paths are taken when the traversal is data-flow sensitive 
+and loop insensitive. Only two of our analyses contains such traversal.
+%
+It is also worth to note that, from \figref{fig:decision-diagram}, those four paths 
+(P5--P8) are the longest paths in the tree. The fact that these longest paths 
+are rare (less than 1\% for both DaCapo and GitHub datasets) shows that 
+most analyses and graphs are classified by our technique using fewer dynamic 
+checks.
+
+%The path P11 which leads to sequential order traversal strategy is dominant as all the analysis involves atleast one \textit{data flow insensitive} traversal and for such traversal, according to hybrid approach, sequential order traversal strategy is chosen for all the CFGs. Hence path P11 occupies atleast half of the pie-chart for all the analysis. One can argue that sequential order traversal strategy could be chosen as the default strategy if it occupies half of the pie-chart. Performance of sequential order traversal strategy in Figure \ref{fig:dacapo-singlemachine-time-percentage} answers that argument as hybrid approach gains atleast 40\% reduction in time when compared to sequential order traversal strategy. This is because for traversal for which sequential order traversal strategy is chosen are trivial traversals and for traversals for which sequential order traversal strategy is not chosen, are the traversals that contain major chunk of the analysis. Hence choosing the best traversal for these traversals are important.
+
+\section{Analysis on Traversal Optimization}
+\label{sec:analysis-traversal-opt}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/hybrid-optimization}
+\caption{Reduction in execution time of the hybrid approach due to traversal optimization.}%
+\label{fig:hy-opt-off}%
+\end{figure}
+
+We evaluated the importance of optimizing the chosen traversal strategy by 
+comparing the hybrid approach with the non-optimized version. We computed 
+the reduction rate on the running times for the 21 analyses. 
+\fignref{fig:hy-opt-off} shows the reduction in execution time due to 
+traversal strategy optimization. For analyses that involve at least one 
+\textit{data-flow sensitive} traversal, the optimization helps to reduce at 
+least 60\% of running time. This is because optimizations in such traversals 
+reduce the number of iterations of traversals over the graphs by eliminating 
+the redundant result re-computation traversal and the
+unnecessary fixpoint condition checking traversal. For analyses involving only 
+\textit{data-flow insensitive} traversal, there is no reduction in execution time, as 
+hybrid approach does not attempt to optimize.
+
+
+%\section{Hybrid Approach vs. Hand-Optimized Analysis}
+%\label{sec:hand-optimized}
+%
+%\input{tex-figures/hand-optimized}
+%
+%This section evaluates the overhead incurred by the hybrid approach for selecting 
+%the traversal strategies at runtime. We compared the running times of the 21 
+%analyses using the hybrid approach and the hand-optimized version where the best 
+%traversal strategy is applied using the decision tree in \fignref{fig:decision-diagram} 
+%as guideline. \tabref{tab:hand-optimize-table} shows the increase 
+%in running times due to the cost of selection of traversal strategies at runtime. The 
+%running time increases only by 1\% to 2\% but it in return provides significant 
+%value in providing automated support to ease programmer's burden and reduce 
+%errors, when possible.

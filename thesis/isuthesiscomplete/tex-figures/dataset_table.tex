@@ -1,0 +1,16 @@
+\begin{table*}[t]
+\scriptsize
+\centering
+\caption{Statistics of the generated control flow graphs from two datasets.}
+%\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{Dataset} & \multicolumn{1}{c}{All graphs} & \multicolumn{1}{c}{Sequential} & \multicolumn{1}{c}{Branches} & \multicolumn{3}{c}{Loops} \\
+\cmidrule(lr){5-7}      &       &       &       & \multicolumn{1}{c}{All graphs} & \multicolumn{1}{c}{Branches} & \multicolumn{1}{c}{No branches} \\
+\midrule
+DaCapo & 287K & 186K (65\%) & 73K (25\%) & 28K (10\%) & 21K (7\%) & 7K (2\%)\\
+GitHub & 161,523K & 111,583K (69\%) & 33,324K (21\%) & 16,617K (10\%) & 11,674K (7\%) & 4,943K (3\%) \\
+\bottomrule
+\end{tabular}%
+\label{tab:dataset-table}%
+\end{table*}%

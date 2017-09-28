@@ -1,0 +1,80 @@
+\subsection{Computation of static properties}
+\label{sec:static}
+\input{tex-figures/algorithms/flow_sensitivity.tex}
+\input{tex-figures/algorithms/loop_sensitivity.tex}
+%\input{tex-figures/algorithms/traversal_sensitivity.tex}
+Properties of the traversal are computed by performing analysis over the control-flow graph representation of the traversal. The required static properties are data flow sensitivity, loop sensitivity and traversal direction.
+%\begin{definition}
+%A \textbf{Control Flow Graph (CFG)} of a program is defined as $G$ = $(N, E,
+%\top, \bot)$, where G is a directed graph with a set of nodes N representing
+%program statements and a set of edges E representing the control flow between
+%statements. $\top$ and $\bot$ denote the start and end nodes of the graph.
+%\end{definition}
+
+%\subsubsection{Property 1 :  Data flow sensitivity}
+%\label{sec:dataflow}
+%\begin{definition}
+%If an analysis at a node in a graph is dependent on the analysis output of other %nodes, then
+%such analysis are said to be \textbf{Data flow sensitive}. Analysis that are
+%sensitive to the informations flowing through the graph are
+%said to be data flow sensitive analysis. Consider \textit{live\_analysis} traversal
+%in live variable analysis in Figure \ref{fig:live-variable}. In line 17 and 18, the $live$
+%variable of current node n is dependent on the $live$ variable
+%of its successors. Hence \textit{live\_analysis traversal} in live variable analysis
+%is data flow sensitive.
+%\end{definition}
+
+\subsubsection{Determining data flow sensitivity}
+\label{sec:determine-dataflow}
+Given a traversal \texttt{t := traversal(n : Node) : OType \{ tbody \}} where $t$ is the traversal identifier, $n$ is the input node, $OType$ is the output type and $tbody$ is the traversal body, Algorithm \ref{algo:flow-sensitive} returns a boolean variable indicating data flow sensitivity of the traversal. $True$ indicates \textit{data flow sensitive}. The algorithm initially gets the control flow graph of the $tbdoy$ using the \textit{getcfg} function in line 1. Line 2 computes all the aliases of $n$ using the \textit{getAliases} function. \textit{getAliases} performs local may alias on CFG $G$ and returns the aliases of $n$. We then traverse the CFG $G$ node by node. Line 4 checks if any node contains a \textit{METHODCALL} statement and if it is, we get the method name of the method call using auxiliary function \textit{getMethod} in Line 5. If the method call is output($n'$, $t'$), then we determine that the traversal is trying to get the traversal output of node $n'$ of traversal $t'$. Line 6 then determines whether $t'$ is equal to $t$, which then indicates that the traversal is accessing the traversal output of node $n'$ of the current traversal $t$. Line 7 checks if $n'$ does not belong to the alias of the current node $n$. If true, then we determine that the traversal needs the traversal output of nodes other than the current node $n$ of the current traversal $t$. Hence we conclude that the traversal is \textit{data flow sensitive}.
+
+%\subsubsection{Property 2 :  Loop sensitivity}
+%\label{sec:loop}
+%\begin{definition}
+%Loops in data flow analysis affect the number of traversals needed over the graph. But some data flow analysis are
+%not affected by the loops present and we term these analysis as \textbf{loop in-sensitive} data flow analysis. If loops dictates the number of traversal needed over the graph, then such analysis are termed as \textbf{loop sensitive} data flow analysis. In data flow analysis, a node's output is dependent
+%on its neighbour's(successor/predecessor) output. If a back edge is present in the graph, then the back edge's destination
+%node will be visted before back edge's source node. Since the source node's output will not be available, the destination
+%node's output cannot be computed in the current traversal
+%and hence another traversal is needed. Now we have to determine whether the %analysis really needs the source node's
+%output to compute the destination node's output. Look at the
+%\textit{dominator} traversal in dominator analysis in Figure \ref{fig:dominator}. From line 10, we can see that
+%\textit{intersection} is used to merge the current node's output with
+%its neighbors output. \textit{Intersection} only shrinks a node's output from one iteration to another. In this case, a back edge's
+%source node's output can affect the back edge's destination
+%node's output only if some element has been removed from
+%the source node, because only when an element is removed,
+%the set can further shrink in intersection and newly added elements does not affect in intersection. In \textit{dominator} traversal of dominator analysis, we can see that no element is removed from
+%the output during the analysis and hence we can conclude that \textit{dominator} traversal block is \textit{loop insensitive}. In \textit{live\_analysis} traversal block of live variable analysis(Figure \ref{fig:live-variable}), we can see that \textit{union} is used for merging(line 18)
+%and for union merge type, only the new elements added to the neighbors can affect the current node's output. From line 22,
+%we see that new elements are added to node's output during the analysis and hence \textit{live\_analysis} traversal block in live variable analysis is
+%\textit{loop sensitive}.
+%\end{definition}
+\subsubsection{Determining loop sensitivity}
+\label{sec:determine-loop}
+Given a traversal \texttt{t := traversal(n : Node) : OType \{ tbody \}} where $t$ is the traversal identifier, $n$ is the input node, $OType$ is the output type and $tbody$ is the traversal body, Algorithm \ref{algo:loop-sensitive} returns a boolean variable indicating loop sensitivity of the traversal. $True$ indicates \textit{loop sensitive}. The algorithm initially gets the control flow graph of $tbody$ using the \textit{getcfg} function. Line 2 computes all the aliases of $n$ using the \textit{getAliases} function. We then traverse the CFG $G$ node by node. Line 9-17 collects $lhs$ of expressions whose $rhs$ is \textit{output($n'$, $t'$)} and $t'$ is equal to $t$. This collection is partioned into $V$ and $V'$. $V$ contains all $lhs$ when $n'$ is an alias of node $n$ and $V'$ contains all lhs when $n'$ is not an alias of node $n$. Basically $V$ contains all variables whose value is the traversal output of the current traversal $t$ on current node $n$. $V'$ contains all variables whose value is the traversal output of the current traversal $t$ on other nodes. Once we have $V$ and $V'$, we traverse all the nodes once more. Line 21-24 checks whether the node contains \textit{union($C1$, $C2$)} method call. If true, we try to determine if one of the collections belong to $V$  and the other collection belongs to $V'$. This basically tells that union has been performed as merging of the current node's traversal output and some other node's traversal output. Hence we add \textit{union} as a merge operation. Here $M$ collects all the merge operation. \textit{Intersection} is also checked in the same way (Line 26-30).\par 
+In line 31-35, we check if node contains either \textit{add($C1$, $e$)} or \textit{addAll($C1$, $C2$)} method call. If true, we check whether $C1$ is a part of $V$, ie whether $C1$ is a collection that contains traversal output of the current node $n$. If true, it indicates that some information is being added to the traversal output of the current node $n$ and we mark that using $genFlag$ in line 33. Similary in line 36-40, we check if node contains either \textit{remove($C1$, $e$)} or \textit{removeAll($C1$, $C2$)} method call. If true, we check whether $C1$ is a part of $V$, ie whether $C1$ is a collection that contains traversal output of the current node $n$. If true, it indicates that some information is being removed from the traversal output of the current node $n$ and we mark that using $killFlag$ in line 38. 
+Line 43-48 concludes that the traversal is \textit{loop sensitive} if either the traversal has union merge operation and the $genFlag$ set or it has intersection merge operation and $killFlag$ set. In all other cases, it is \textit{loop insensitive}.
+
+%\subsubsection{Property 3 :  Traversal sensitivity}
+%\label{sec:traversal}
+%\begin{definition}
+%\textbf{Traversal sensitive} analysis are analysis that are sensitive to the traversal strategy used and the results of the analysis differ from one traversal strategy to another. If the traversal block contains non commutative operations involving global variable, then such traversal blocks are \textbf{traversal sensitive}.
+%\end{definition}
+
+%\paragraph{Determining traversal sensitivity}
+%Given a traversal block with its identifier $t$ and input node $n$ and Global variables $GV$ of the program, Algorithm \ref{algo:traversal-sensitive} returns a boolean variable indicating the traversal sensitivity of the traversal block. $True$ indicates \textit{traversal sensitive}. The algorithm initially gets the control flow graph of the traversal block's body using the \textit{getcfg} function in line 1. We then traverse the CFG $G$ node by node. Line 4 checks if the node contains either \textit{add($C1$, $e$)} or \textit{addAll($C1$, $C2$)} method call. If it does, Line 5 checks if $C1$ is a global variable of type sequence, then we conclude it as \textit{traversal sensitive}. This is because \textit{Sequence} is order dependent data type and adding elements in different order will provide different ordering of elements in \textit{Sequence} data type, while this is not the case in \textit{Set} data type as any order of adding elements will produce the same state. Line 9 checks whether the method call is \textit{hasElement($C1$, $e$)} or \textit{equals($C1$, $C2$)}. If so, we check if $C1$ is a global variable. If true, then we conclude the traversal block is \textit{traversal sensitive}. This is because operations like \textit{hasElement} and \textit{equals} produce non-commutative results and hence the presence of these operations on global variable makes the traversal sensitive to the traversal strategy used. Line 15-23 checks if the node is an $lhs$ = $rhs$ statement and if $lhs$ is an global variable and $rhs$ contains a non global varaiable, then the traversal block is \textit{traversal sensitive}. This is because if global variable is assigned using a local variable, then the last traversed node will affect the value of $lhs$ and hence it is \textit{traversal sensitive}.
+
+\subsection{Computation of dynamic properties}
+\label{sec:dynamic}
+The only dynamic property that we need from the input CFG is whether it contains
+branches and loops. Since CFG is the representation of a program, these
+properties could be determined while creation of the CFG. Since CFGs are
+constructed by parsing the expressions and the statements in the program, we can
+see that for a given language, only certain constructs, for example - “While”,
+“For” in Java create loops. For a given language, it is easy to enumerate the
+constructs in the language that generate loops and branches. And while creating
+the CFG, when the construct that generates loop is encountered, then the CFG is
+marked as containing loops. Similarly when the construct that generates branch
+is encountered, then the cfg is marked as containing branches.
+Hence the dynamic properties are affixed to the CFG during its creation.

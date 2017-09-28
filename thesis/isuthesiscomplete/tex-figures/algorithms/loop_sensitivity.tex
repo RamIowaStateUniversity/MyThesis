@@ -1,0 +1,59 @@
+%\begin{wrapfigure}{R}{.5\textwidth}
+\begin{algorithm}
+\caption{Algorithm to detect loop sensitivity}
+\label{algo:loop-sensitive}
+\begin{multicols}{2}
+\KwIn{\lstinline|t := traversal(n: Node) : T \{ tbody \}|}
+\KwOut{\textit{true/false}}
+$V$ $\leftarrow$ \{\} // a set of output variables related to n\;
+$V'$ $\leftarrow$ \{\} // a set of output variables not related to n\; 
+\lstinline|expand| $\leftarrow$ \textit{false}\; 
+\lstinline|shrink| $\leftarrow$ \textit{false}\;
+\lstinline|gen| $\leftarrow$ \textit{false}\; 
+\lstinline|kill| $\leftarrow$ \textit{false}\;
+$A$ $\leftarrow$ \textit{getAliases($n$)}\; 
+\ForEach{ \lstinline|stmt| $\in$ \lstinline|tbody| }{
+	\If{ \lstinline|stmt| is \lstinline|v| = \lstinline|output|($n'$,
+	$t'$)}{ \If{$t'$ $==$ \lstinline|t|}{
+			\eIf{$n'$ $\in$ $A$}{
+				$V$ $\leftarrow$ $V$ $\cup$ \textit{\lstinline|v|}\;
+			}{
+				$V'$ $\leftarrow$ $V'$ $\cup$ \textit{\lstinline|v|}\;					
+			}
+		}
+	}
+}
+\ForEach{ \lstinline|stmt| $\in$ \lstinline|tbody| }{
+		\If{ \lstinline|stmt| $=$ \lstinline|union|($c_1$, $c_2$) }{
+			\If{ ($c_1$ $\in$ $V$ and $c_2$ $\in$ $V'$) $||$ ($c_1$ $\in$ $V'$ and $c_2$
+			$\in$ $V$)}{ 
+				\lstinline|expand| $\leftarrow$ \textit{true}\; 
+			}
+		}
+		\If{ \lstinline|stmt| $=$ \lstinline|intersection|($c_1$, $c_2$)}{
+			\If{($c_1$ $\in$ $V$ and $c_2$ $\in$ $V'$) $||$ ($c_1$ $\in$ $V'$
+			and $c_2$ $\in$ $V$)}{ 
+				\lstinline|shrink| $\leftarrow$ \textit{true}\;
+			}
+		}
+		\If{ \lstinline|stmt| $=$ \lstinline|add|($c_1$, $e$) $||$	
+		\lstinline|addAll|($c_1$, $c_2$)}{ 
+			\If{$c_1$ $\in$ $V$}{ 
+				\lstinline|gen| $\leftarrow$ \textit{true}\; 
+			}
+		}
+		\If{ \lstinline|stmt| $=$ \lstinline|remove|($c_1$, $e$) $||$
+		\lstinline|removeAll|($c_1$, $c_2$)}{ 
+			\If{$c_1$ $\in$ $V$}{ 
+				\lstinline|kill| $\leftarrow$ \textit{true}\;
+			}
+		}
+}
+\eIf{ (\lstinline|expand| and \lstinline|gen|) $||$ (\lstinline|shrink| and
+\lstinline|kill|) }{ return \textit{true}\;
+}{
+	return \textit{false}\;
+}
+\end{multicols}
+\end{algorithm}
+%\end{wrapfigure}

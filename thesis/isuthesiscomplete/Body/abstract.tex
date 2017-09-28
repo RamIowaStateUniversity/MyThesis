@@ -1,0 +1,26 @@
+Our newfound ability to analyze source code in massive software
+repositories such as GitHub has led to an uptick in data-driven
+solutions to software engineering problems. Source code analysis is
+often realized as traversals over source code artifacts represented as
+graphs. Since the number of artifacts that are analyzed is huge, in
+millions, the efficiency of the source code analysis technique is very
+important. The performance of source code analysis techniques heavily
+depends on the order of nodes visited during the traversals: the
+traversal strategy. For instance, selecting the best traversal strategy and optimizing it for a software engineering task, that infers the temporal specification between pairs of API method calls, could reduce the running time on a large codebase from 64\% to 96\%. 
+While, there exists several choices for traversal strategy, like depth-first, post-order, reverse post-order, etc., there exists no technique to choose the most time-efficient strategy for traversals. In this paper, we show that a single traversal strategy does not fit all source code analysis scenarios. Somewhat more
+surprisingly, we demonstrate that given the source code expressing the
+analysis task (in a declarative form) one can compute static
+characteristics of the task, which together with the runtime
+characteristics of the input, can help predict the most time-efficient
+traversal strategy for that (analysis task, input) pair. We also
+demonstrate that these strategies can be realized in a manner that is
+effective in accelerating ultra-large-scale source code analysis. Our
+evaluation shows that our technique successfully selected the most
+time-efficient traversal strategy for 99.99\%-100\% of the time and
+using the selected traversal strategy and optimizing it, the running times of a
+representative collection of source code analysis in our evaluation
+were considerably reduced by 1\%-28\% (13 minutes to 72 minutes in absolute time) when compared against the best performing traversal strategy. The case studies show that hybrid traversal reduces 80--175 minutes in running times for three software engineering tasks. The overhead imposed by
+collecting additional information for our approach is less than
+0.2\% of the total running time for a large dataset that contains 287K
+Control Flow Graphs (CFGs) and less than 0.01\% for an ultra-large
+dataset that contains 162M CFGs.

@@ -1,0 +1,30 @@
+\begin{algorithm}
+\KwIn{t := traversal(n : Node) : OType \{ tbody \}, GlobalVariables $GV$}
+\KwOut{\textit{true/false}}
+$G$ $\leftarrow$ \textit{getcfg($tbody$)}\;
+\ForEach{ $node \in G.nodes$ }{
+	\If{$node.stmt$ is of kind $METHODCALL$}{
+		\If{\textit{getMethod($node.stmt$)} $\in$ \{\textit{add($C1$, $e$), addAll($C1$, $C2$)}\}}{
+			\If{$C1$ $\in$ $GV$ and $C1$ is of type $Sequence$}{ 
+				\textit{return true}\;
+			}
+		}\If{\textit{getMethod($node.stmt$)} $\in$ \{\textit{has($C1$, $e$), equals($C1$, $C2$)}\}}{
+			\If{$C1$ $\in$ $GV$ || $C2$ $\in$ $GV$}{ 
+				\textit{return true}\;
+			}
+		}
+	}
+	\If{$node.stmt$ is of kind $lhs = rhs$}{
+		\If{$node.stmt.lhs \in GV$}{
+			\ForEach{$v \in node.stmt.rhs$}{
+				\If{$v$ $\notin$ $GV$}{ 
+					\textit{return true}\;
+				}
+			}
+		}
+	}
+}
+\textit{return false}\;
+\caption{Algorithm to detect traversal sensitivity}
+\label{algo:traversal-sensitive}
+\end{algorithm}

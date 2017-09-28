@@ -1,0 +1,223 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Aho et~al.}{2006}]{compilers}
+Aho, A.~V., Lam, M.~S., Sethi, R., and Ullman, J.~D. (2006).
+\newblock {\em Compilers: Principles, Techniques, and Tools (2Nd Edition)}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA.
+
+\bibitem[\protect\astroncite{Atkinson and
+  Griswold}{2001}]{atkinson2001implementation}
+Atkinson, D.~C. and Griswold, W.~G. (2001).
+\newblock Implementation techniques for efficient data-flow analysis of large
+  programs.
+\newblock In {\em Proceedings of the IEEE International Conference on Software
+  Maintenance (ICSM'01)}, ICSM '01, pages 52--, Washington, DC, USA. IEEE
+  Computer Society.
+
+\bibitem[\protect\astroncite{Ayewah et~al.}{2007}]{findbugs-paste2007}
+Ayewah, N., Pugh, W., Morgenthaler, J.~D., Penix, J., and Zhou, Y. (2007).
+\newblock Evaluating static analysis defect warnings on production software.
+\newblock In {\em Proceedings of the 7th ACM SIGPLAN-SIGSOFT Workshop on
+  Program Analysis for Software Tools and Engineering}, PASTE '07, pages 1--8,
+  New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Bader and Madduri}{2008}]{bader2008snap}
+Bader, D.~A. and Madduri, K. (2008).
+\newblock {SNAP}, small-world network analysis and partitioning: An open-source
+  parallel graph framework for the exploration of large-scale networks.
+\newblock In {\em 2008 IEEE International Symposium on Parallel and Distributed
+  Processing}, pages 1--12.
+
+\bibitem[\protect\astroncite{Blackburn et~al.}{2006}]{blackburn2006dacapo}
+Blackburn, S.~M., Garner, R., Hoffmann, C., Khang, A.~M., McKinley, K.~S.,
+  Bentzur, R., Diwan, A., Feinberg, D., Frampton, D., Guyer, S.~Z., Hirzel, M.,
+  Hosking, A., Jump, M., Lee, H., Moss, J. E.~B., Phansalkar, A.,
+  Stefanovi\'{c}, D., VanDrunen, T., von Dincklage, D., and Wiedermann, B.
+  (2006).
+\newblock The {DaCapo} benchmarks: Java benchmarking development and analysis.
+\newblock In {\em Proceedings of the 21st Annual ACM SIGPLAN Conference on
+  Object-oriented Programming Systems, Languages, and Applications}, OOPSLA
+  '06, pages 169--190, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Bourdoncle}{1993}]{bourdoncle93}
+Bourdoncle, F. (1993).
+\newblock {Efficient Chaotic Iteration Strategies With Widenings}.
+\newblock In {\em Proceedings of the International Conference on Formal Methods
+  in Programming and their Applications}, pages 128--141. Springer-Verlag.
+
+\bibitem[\protect\astroncite{Christakis et~al.}{2016}]{Christakis2016}
+Christakis, M., M\"{u}ller, P., and W\"{u}stholz, V. (2016).
+\newblock Guiding dynamic symbolic execution toward unverified program
+  executions.
+\newblock In {\em Proceedings of the 38th International Conference on Software
+  Engineering}, ICSE '16, pages 144--155, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Crary et~al.}{1998}]{Crary98}
+Crary, K., Weirich, S., and Morrisett, G. (1998).
+\newblock Intensional polymorphism in type-erasure semantics.
+\newblock In {\em Proceedings of the International Conference on Functional
+  Programming}.
+
+\bibitem[\protect\astroncite{Csallner et~al.}{2008}]{DSD-Crasher}
+Csallner, C., Smaragdakis, Y., and Xie, T. (2008).
+\newblock Dsd-crasher : A hybrid analysis tool for bug finding.
+\newblock {\em ACM Trans. Softw. Eng. Methodol.}, 17(2):8:1--8:37.
+
+\bibitem[\protect\astroncite{Dyer et~al.}{2013}]{dyer2013boa}
+Dyer, R., Nguyen, H.~A., Rajan, H., and Nguyen, T.~N. (2013).
+\newblock Boa: A language and infrastructure for analyzing ultra-large-scale
+  software repositories.
+\newblock In {\em Proceedings of the 2013 International Conference on Software
+  Engineering}, ICSE '13, pages 422--431, Piscataway, NJ, USA. IEEE Press.
+
+\bibitem[\protect\astroncite{Engler et~al.}{2001}]{engler-sosp2001}
+Engler, D., Chen, D.~Y., Hallem, S., Chou, A., and Chelf, B. (2001).
+\newblock Bugs as deviant behavior: A general approach to inferring errors in
+  systems code.
+\newblock In {\em Proceedings of the Eighteenth ACM Symposium on Operating
+  Systems Principles}, SOSP '01, pages 57--72, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Ernst}{2003}]{Ernst2003}
+Ernst, M.~D. (2003).
+\newblock Static and dynamic analysis: Synergy and duality.
+\newblock In {\em WODA 2003: ICSE Workshop on Dynamic Analysis}, pages 24--27.
+
+\bibitem[\protect\astroncite{Flanagan}{2006}]{Flanagan06}
+Flanagan, C. (2006).
+\newblock Hybrid type checking.
+\newblock In {\em Conference Record of the 33rd ACM SIGPLAN-SIGACT Symposium on
+  Principles of Programming Languages}, POPL '06, pages 245--256, New York, NY,
+  USA. ACM.
+
+\bibitem[\protect\astroncite{Gregor and Lumsdaine}{2005}]{gregor2005parallel}
+Gregor, D. and Lumsdaine, A. (2005).
+\newblock The parallel {BGL}: A generic library for distributed graph
+  computations.
+\newblock {\em Parallel Object-Oriented Scientific Computing (POOSC)}, 2:1--18.
+
+\bibitem[\protect\astroncite{Harper and Morrisett}{1995}]{Harper95}
+Harper, R. and Morrisett, G. (1995).
+\newblock Compiling polymorphism using intensional type analysis.
+\newblock In {\em Proceedings of the Symposium on Principles of Programming
+  Languages}, POPL '95, pages 130--141, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Hong et~al.}{2012}]{hong2012green}
+Hong, S., Chafi, H., Sedlar, E., and Olukotun, K. (2012).
+\newblock Green-marl: A {DSL} for easy and efficient graph analysis.
+\newblock In {\em Proceedings of the Seventeenth International Conference on
+  Architectural Support for Programming Languages and Operating Systems},
+  ASPLOS XVII, pages 349--362, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Jagannathan et~al.}{1998}]{must-alias}
+Jagannathan, S., Thiemann, P., Weeks, S., and Wright, A. (1998).
+\newblock {Single and Loving It: Must-alias Analysis for Higher-order
+  Languages}.
+\newblock In {\em Proceedings of the 25th ACM SIGPLAN-SIGACT Symposium on
+  Principles of Programming Languages}, POPL '98, pages 329--341, New York, NY,
+  USA. ACM.
+
+\bibitem[\protect\astroncite{Kildall}{1973}]{kildall1973unified}
+Kildall, G.~A. (1973).
+\newblock A unified approach to global program optimization.
+\newblock In {\em Proceedings of the 1st Annual ACM SIGACT-SIGPLAN Symposium on
+  Principles of Programming Languages}, POPL '73, pages 194--206, New York, NY,
+  USA. ACM.
+
+\bibitem[\protect\astroncite{Le}{2013}]{Le2013}
+Le, W. (2013).
+\newblock Segmented symbolic analysis.
+\newblock In {\em Proceedings of the 2013 International Conference on Software
+  Engineering}, ICSE '13, pages 212--221, Piscataway, NJ, USA. IEEE Press.
+
+\bibitem[\protect\astroncite{Li et~al.}{2006}]{cpminer}
+Li, Z., Lu, S., and Myagmar, S. (2006).
+\newblock {CP-Miner: Finding Copy-Paste and Related Bugs in Large-Scale
+  Software Code}.
+\newblock {\em IEEE Trans. Softw. Eng.}, 32(3):176--192.
+
+\bibitem[\protect\astroncite{Livshits and
+  Zimmermann}{2005}]{livshits2005dynamine}
+Livshits, B. and Zimmermann, T. (2005).
+\newblock Dynamine: finding common error patterns by mining software revision
+  histories.
+\newblock In {\em ACM SIGSOFT Software Engineering Notes}, volume~30, pages
+  296--305. ACM.
+
+\bibitem[\protect\astroncite{Livshits and Lam}{2005}]{livshits2005finding}
+Livshits, V.~B. and Lam, M.~S. (2005).
+\newblock Finding security vulnerabilities in java applications with static
+  analysis.
+\newblock In {\em USENIX Security Symposium}, volume~14, pages 18--18.
+
+\bibitem[\protect\astroncite{Malewicz et~al.}{2010}]{malewicz2010pregel}
+Malewicz, G., Austern, M.~H., Bik, A.~J., Dehnert, J.~C., Horn, I., Leiser, N.,
+  and Czajkowski, G. (2010).
+\newblock Pregel: A system for large-scale graph processing.
+\newblock In {\em Proceedings of the 2010 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '10, pages 135--146, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Nguyen et~al.}{2014}]{nguyen2014mining}
+Nguyen, H.~A., Dyer, R., Nguyen, T.~N., and Rajan, H. (2014).
+\newblock Mining preconditions of apis in large-scale code corpus.
+\newblock In {\em Proceedings of the 22nd ACM SIGSOFT International Symposium
+  on Foundations of Software Engineering}, pages 166--177. ACM.
+
+\bibitem[\protect\astroncite{Nielson et~al.}{2010}]{programanalysis}
+Nielson, F., Nielson, H.~R., and Hankin, C. (2010).
+\newblock {\em Principles of Program Analysis}.
+\newblock Springer Publishing Company, Incorporated.
+
+\bibitem[\protect\astroncite{Ramanathan et~al.}{2007}]{ramanathan-icse2007}
+Ramanathan, M.~K., Grama, A., and Jagannathan, S. (2007).
+\newblock Path-sensitive inference of function precedence protocols.
+\newblock In {\em Proceedings of the 29th International Conference on Software
+  Engineering}, ICSE '07, pages 240--250, Washington, DC, USA. IEEE Computer
+  Society.
+
+\bibitem[\protect\astroncite{Siek and Taha}{2007}]{Siek07}
+Siek, J. and Taha, W. (2007).
+\newblock Gradual typing for objects.
+\newblock In {\em Proceedings of the 21st European Conference on
+  Object-Oriented Programming}, ECOOP '07, pages 2--27, Berlin, Heidelberg.
+  Springer-Verlag.
+
+\bibitem[\protect\astroncite{Thummalapenta and
+  Xie}{2009}]{thummalapenta2009alattin}
+Thummalapenta, S. and Xie, T. (2009).
+\newblock Alattin: Mining alternative patterns for detecting neglected
+  conditions.
+\newblock In {\em Proceedings of the 2009 IEEE/ACM International Conference on
+  Automated Software Engineering}, pages 283--294. IEEE Computer Society.
+
+\bibitem[\protect\astroncite{Vall{\'e}e-Rai et~al.}{1999}]{vallee1999soot}
+Vall{\'e}e-Rai, R., Co, P., Gagnon, E., Hendren, L., Lam, P., and Sundaresan,
+  V. (1999).
+\newblock Soot : Java bytecode optimization framework.
+\newblock In {\em Proceedings of the 1999 conference of the Centre for Advanced
+  Studies on Collaborative research}, page~13. IBM Press.
+
+\bibitem[\protect\astroncite{Weimer and Necula}{2005}]{weimer-tacas2005}
+Weimer, W. and Necula, G.~C. (2005).
+\newblock Mining temporal specifications for error detection.
+\newblock In {\em Proceedings of the 11th International Conference on Tools and
+  Algorithms for the Construction and Analysis of Systems}, TACAS'05, pages
+  461--476, Berlin, Heidelberg. Springer-Verlag.
+
+\bibitem[\protect\astroncite{Yang et~al.}{2006}]{yang-icse2006}
+Yang, J., Evans, D., Bhardwaj, D., Bhat, T., and Das, M. (2006).
+\newblock Perracotta: Mining temporal api rules from imperfect traces.
+\newblock In {\em Proceedings of the 28th International Conference on Software
+  Engineering}, ICSE '06, pages 282--291, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Zhang et~al.}{2011}]{Palus}
+Zhang, S., Saff, D., Bu, Y., and Ernst, M.~D. (2011).
+\newblock Combined static and dynamic automated test generation.
+\newblock In {\em Proceedings of the 2011 International Symposium on Software
+  Testing and Analysis}, ISSTA '11, pages 353--363, New York, NY, USA. ACM.
+
+\bibitem[\protect\astroncite{Zhong et~al.}{2009}]{zhong2009mapo}
+Zhong, H., Xie, T., Zhang, L., Pei, J., and Mei, H. (2009).
+\newblock Mapo: Mining and recommending api usage patterns.
+\newblock {\em ECOOP 2009--Object-Oriented Programming}, pages 318--343.
+
+\end{thebibliography}

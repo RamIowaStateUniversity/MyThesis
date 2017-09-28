@@ -1,0 +1,36 @@
+\begin{figure}[ht!]
+\centering
+\begin{lstlisting}
+1  allNodes : Set<int>;
+
+2  init := traversal (n : Node) { 
+3	add(allNodes, n.id);
+4  }
+
+5  dom_T := traversal (n : Node) : Set<int> { 
+6 	Set<int> dom;
+7	if(output(n, dom_T) == null) {
+8		dom = allNodes;
+9	} else {
+10		dom = output(n, dom_T);
+11	}
+12	foreach(p : n.preds) 
+13		dom = intersection(dom, output(p, dom_T)) 
+14	add(dom, n.id); 
+15	return dom; 
+16 } 
+
+17 fp := fixp(Set<int> dom, Set<int> prev_dom) : bool {
+18	if(equals(dom, prev_dom))
+19		return true;
+20	return false;
+21 }
+
+22 traverse(g, init, FORWARD); 
+23 traverse(g, dom_T, FORWARD, fp); 				
+\end{lstlisting}
+\caption{Dominator analysis performs traversal over the graph to determine the dominators of each node. It has two traversals. \textit{init} traversal collects all node ids. \textit{dom\_T} is called with a fixpoint and it runs till all the nodes reach the fixpoint condition.}
+\label{fig:dominator}
+\end{figure}
+
+

@@ -1,0 +1,109 @@
+\section{Related Works}
+\label{sec:related}
+% Our work on the hybrid technique to select and optimize traversal strategies for
+% source code analysis is related to the works that optimize source code analysis.
+
+Atkinson and Griswold~\cite{atkinson2001implementation} discuss several
+implementation techniques for improving the efficiency of data-flow analysis,
+namely: factoring data-flow sets, visitation order of the statements, selective
+reclamation of the data-flow sets. They discuss two commonly used traversal
+strategies: iterative search and worklist, and propose a new worklist algorithm
+that results in 20\% fewer node visits. In their algorithm, a node is processed
+only if the data-flow information of any of its successors (or predecessors) has
+changed.
+Tok\etal~\cite{tok-etal} proposed a new worklist algorithm for accelerating
+inter-procedural flow-sensitive data-flow analysis. They generate
+inter-procedural def-use chains on-the-fly to be used in their worklist
+algorithm to re-analyze only parts that are affected by the changes in the flow
+values.
+Hind and Pioli~\cite{hind-pioli} proposed an optimized priority-based worklist
+algorithm for pointer alias analysis, in which the nodes awaiting processing
+are placed on a worklist prioritized by the topological order of the CFG, such
+that nodes higher in the CFG are processed before nodes lower in the CFG.
+Bourdoncle~\cite{bourdoncle93} proposed the notion of weak topological ordering
+(WTO) of directed graphs and two iterative strategies based on WTO for computing
+the analysis solutions in dataflow and abstraction interpretation domains.
+Bourdoncle' technique is more suitable for cyclic graphs, however for acyclic
+graphs Bourdoncle proposes any topological ordering.
+Kildall~\cite{kildall1973unified} proposes combining several optimizing
+functions with flow analysis algorithms for solving global code optimization
+problems. For some classes of data-flow analysis problems, there exist
+techniques for efficient analysis. For example, demand interprocedural data-flow
+analysis~\cite{horwitz-etal} can produce precise results in polynomial time for
+inter-procedural, finite, distributive, subset problems (IFDS), constant
+propagation~\cite{wegman-etal}, etc.
+These works propose new traversal strategies for improving the efficiency of
+certain class of source code analysis, whereas our technique does not propose
+new traversal strategies, instead it proposes a technique for selecting the best
+traversal strategy from a list of candidate traversal strategies, based on the
+static properties of the analysis and the runtime characteristics of the input
+graph.
+
+Cobleigh\etal~\cite{cobleigh-etal} study the effect of worklist algorithms in
+model checking. They identified four dimensions along which a worklist algorithm
+can be varied. Based on four dimensions, they evaluate 9 variations of worklist
+algorithm. They do not solve traversal strategy selection problem. Moreover, the
+properties that they consider do not take analysis into account, they are mainly
+variations of the worklist algorithm. For instance, using stack or queue to
+implement worklist (stack gives depth-first and queue gives breadth-first order
+of nodes).
+% (stack gives depth-first and queue gives breadth-first order of nodes), order in
+% which successors are visited, choosing between push or pull model while adding
+% nodes to worklist, and using graph vs. graph with tuples.
+We consider both static properties of the analysis, such as data-flow
+sensitivity and loop sensitivity, and the cyclicity of the graph. Further, we
+also consider non-worklist based algorithms, such as post-order, reverse
+post-order, control flow order, any order, etc., as candidate strategies
+for selection.
+
+% \subsection{BigCode Analysis Frameworks}
+Several infrastructures exist today for performing ultra-large-scale
+analysis~\cite{dyer2013boa,Bajracharya-etal-04,Gousi13}. Boa~\cite{dyer2013boa}
+is a language and infrastructure for analyzing open source projects from GitHub,
+SourceForge, etc. Sourcerer~\cite{Bajracharya-etal-04} is an infrastructure for
+large-scale collection and analysis of open source code.
+GHTorrent~\cite{Gousi13} is a dataset and tool suite for analyzing GitHub
+projects. These frameworks currently support structural or abstract syntax tree
+(AST) level analysis and a parallel framework such as map-reduce is used to
+improve the performance of ultra-large-scale analysis. We believe, when these frameworks
+support graph level analysis, such as control-flow and data-flow analysis, our
+technique of selecting the best traversal strategy can improve the performance
+beyond parallelization.
+
+% \subsection{Graph Analysis Frameworks}
+There have been many works that targeted graph traversal optimization through
+various ways. Green-Marl~\cite{hong2012green} is a domain specific language for
+expressing graph analysis. Green-Marl uses the domain specific knowledge in
+applying optimizations. It uses the high-level algorithmic description of the
+graph analysis written in Green-Marl to exploiting the exposed data level
+parallelism.
+In a way, Green-Marl' optimization is similar to ours, where both the approaches
+utilize the properties of the analysis description, however our technique also
+utilizes the properties of the graphs in selecting the best traversal strategy.
+Moreover, Green-Marl' optimization is through parallelism, ours is by selecting
+the suitable traversal strategy.
+Pregel~\cite{malewicz2010pregel} is a map-reduce like framework that aims to
+bring distributed processing to graph algorithms. While Pregel' performance gain
+is through parallelism, our approach achieves performance gain by traversing the
+graph efficiently.
+There have also been few libraries that support parallel or distributed graph
+analysis: Parallel BGL~\cite{gregor2005parallel} is a distributed version of
+BGL, while SNAP~\cite{bader2008snap} is a stand-alone parallel graph analysis
+package.
+
+
+
+% \subsection{Optimizing Program Analyses}
+% There are two categories of approaches to data flow analysis: iterative
+% methods~\cite{nodelisting1,nodelisting2} and elimination
+% methods~\cite{elimination-method}.
+% The iterative methods, such as round-robin, node listing, worklist algorithms
+% solve the data flow equations by initializing the output at nodes to some
+% conservative values and recompute them successively till a fixed point is
+% reached. The round robin and node listing approaches recomputes the data flow
+% properties of all nodes repeatedly, whereas worklist approaches visits the nodes
+% selectively. Performance of iterative methods heavily depends on the number of
+% nodes visited and the order of the nodes visited.
+% The elimination methods, such as interval analysis, solve systems of equations
+% by reducing the flow graph, and their performance depends on the reducibility of
+% the flow graphs.

@@ -1,0 +1,43 @@
+\chapter{Case Studies}
+\label{sec:case-studies}
+
+\input{tex-figures/case-study-table}
+
+We implemented three case studies using our formalism for source 
+code analysis and evaluated using hybrid and WRPO traversal. We are comparing 
+against only WRPO since it is the next best performing traversal. 
+%for all the three case studies.
+
+\textbf{API Precondition Mining (APM).} This case study mines a large corpus 
+of API usages to derive potential preconditions for API methods~\cite{nguyen2014mining}. 
+The key idea of this work is that API preconditions would be checked frequently in a 
+corpus with a large number of API usages, while project-specific 
+conditions would be less frequent. 
+%
+This case study analysis mined the preconditions for all methods of 
+\lstinline|java.lang.String|. 
+
+\textbf{API Usage Mining (AUM).} This case study analyzes API usage code and 
+mines API usage patterns~\cite{zhong2009mapo}. The mined patterns help 
+developers understand and write API usages more effectively 
+with less errors. Our analysis mined usage patterns for 
+\lstinline|java.util| APIs. 
+
+\textbf{Finding Security Vulnerabilities with Tainted Object 
+Propagation (SVT).} This case study formulated a variety of widespread SQL 
+injections, as tainted object propagation problems~\cite{livshits2005finding}. 
+Our analysis looked for all SQL injection vulnerabilities 
+matching the specifications in the statically analyzed code. 
+
+\autoref{fig:case-study-table} shows that hybrid traversal helps reduce 
+running times significantly by 80--175 minutes, which is from 6\%--10\% relatively. 
+
+%\input{tex-figures/precondition-result}
+%
+%\autoref{fig:precondition-result} shows the first and second most occurring 
+%preconditions for top-4 most frequently-used methods in \lstinline|java.lang.String|. 
+%%
+%All of them have only one argument. {\receiver} and {\argument} denote the 
+%receiver and the argument, respectively. All the first conditions correctly 
+%capture the constraint of non-nullability on the receivers of those instant 
+%methods. 

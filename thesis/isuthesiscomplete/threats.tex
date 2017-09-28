@@ -1,0 +1,50 @@
+\chapter{Threats to Validity}
+\label{sec:threats}
+% \todo{1. Second paragraph had data about branches along with loops - add that back please.\newline
+% 2. check this sentence\newline
+% "role in improving the overall performance of the analysis a large dataset of graphs."}\par
+Our first threat to validity is our selection of source code analysis used in our
+evaluation. While there exists no source for a standard set of analysis, we
+relied mainly on text books and source code analysis tools to select analysis. We
+have selected basic control and data-flow analyses, and analyses to find bugs or
+code smells.
+We made sure to include analysis that covers all the properties of interest. For
+instance, our analysis set includes: both forward/backward analysis, data-flow sensitive and insensitive analysis, loop sensitive and insensitive
+analysis. 
+% As part of future work, we plan to extend the scope to
+% inter-procedural analyses, which should enable more sophisticated choices like
+% pointer and alias analysis.
+
+Our next threat to validity is our selection of ultra-large-scale datasets that
+provide graphs for running the analyses. The datasets do not contain a balanced
+distribution of different graph \graphprop{} (sequential, branch and loop). Both
+DaCapo and GitHub datasets contains majority of sequential graphs (65\% and
+69\%, respectively) and only 10\% are graphs with loops. The impact of this
+threat can be seen in our evaluation of the importance of paths and decisions in
+our decision tree. Paths and decisions along sequential graphs are taken more
+often. This threat is not easy to mitigate, as it is hard to find and difficult
+to expect a real-world code dataset to contain a balanced distribution of graphs
+of various types. Nonetheless, our evaluation shows that the selection and
+optimization of the best traversal strategy for these 35\% of the graphs (graphs
+with branches and loops) plays an important role in improving the overall
+performance of the analysis over a large dataset of graphs.
+% Possible threats:
+% \begin{itemize}
+% 	\item Analysis
+% 	\begin{itemize}
+% 		\item Selected analysis contains only 4 backward traversals when compared to 11 forward traversals. So the decisions and reductions will be slightly skewed towards traversal strategies favoring forward traversals.
+% 		\item Only two analysis with loop insensitive property were included in the traversal which undermines the decisions favoring loop insensitive traversals.
+% 	\end{itemize}
+% 	\item Running time
+% 	\begin{itemize}
+% 	\item All analyses were run only once as running multiple times on such large dataset is not feasible.
+% 	\end{itemize}
+% 	\item Dataset
+% 	\begin{itemize}
+% 	\item Both the dataset contains only 10\% of cfg with loops. This once again undermines the decisions taken for cfgs with loops.
+% 	\end{itemize}
+% 	\item Traversal implementation (Not sure whether this is a threat)
+% 	\begin{itemize}
+% 	\item Traversals were implemented as optimized as possible. But there could be more optimized version out there which if used can alter the results.
+% 	\end{itemize}
+% \end{itemize}

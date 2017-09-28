@@ -1,0 +1,67 @@
+\chapter{Related Work}
+\label{sec:related}
+
+To the best of our knowledge, our proposal to leverage information about the
+program analysis code, and the nature of the data on which analysis is applied
+to select appropriate traversal strategies has not been explored previously.
+Below we discuss works that are related to various aspects of our proposal. 
+
+\emph{Mixing static and dynamic information.} %
+The general philosophy of mixing static and dynamic information has a long 
+history~\cite{Ernst2003} in both the software engineering and the programming 
+languages communities, with examples such as DSD-Crasher~\cite{DSD-Crasher}, 
+Palus~\cite{Palus}, segmented symbolic execution~\cite{Le2013}, guided 
+dynamic symbolic execution~\cite{Christakis2016}, gradual typing~\cite{Siek07}
+, hybrid type checking \cite{Flanagan06}, intensional polymorphism~\cite{Harper95, 
+Crary98}, etc. While our proposal also mixes static information 
+about program analysis with dynamic information about the data, none of the 
+previous works have proposed utilizing this information for selecting 
+appropriate traversal strategies for realizing the program analysis.
+
+\emph{Optimizing program analysis.}%
+Atkinson ~\cite{atkinson2001implementation} presented techniques that reduce 
+the time and space required to perform data-flow analysis of large programs. 
+While their techniques proposed modifications to the underlying data-flow 
+analyses that yield improvement in performance and also proposed reclamation 
+of the data-flow sets during data-flow analysis that result in saving space, 
+hybrid approach gives performance gain by analyzing the user written 
+algorithm and the input graph received.\newline Kildall ~\cite{kildall1973unified} 
+presented an algorithm which, in conjunction with various optimizing 
+functions, provides global program optimization, Optimizing functions have 
+been described which provide constant propagation, common sub-expression 
+elimination, and a degree of register optimization. While their approach 
+provides unified approach to global program optimization, we concentrate on 
+optimizing the process that does program optimization using the program's 
+structure and the algorithms characteristics.
+
+\emph{Ultra-large-scale source code mining.}%
+In terms of ultra large scale processing, Boa~\cite{dyer2013boa} is a 
+language and infrastructure for analyzing ultra-large-scale software 
+repositories. Boa provides a different kind of performance gain through its 
+infrastructure and eases testing MSR-related hypotheses, it is not suitable 
+for graph processing algorithms and does not leverage information from 
+algorithms written in Boa.
+
+\emph{Graph traversal optimization.}%
+There have been many works that targeted graph traversal optimization through 
+various ways. Green-Marl~\cite{hong2012green} provides performance benefits 
+by using domain specific knowledge in applying optimizations. It uses high-level 
+algorithmic description written in Green-Marl to exploiting the exposed 
+data level parallelism. While green marl provides performance benefits by 
+taking algorithm written into consideration, hybrid approach takes both 
+algorithm and graph structure into account. And in ultra large scale dataset, 
+containing millions of graphs with different structures, the gain that we can 
+incur by taking graph structure into account is significant.
+
+Pregel~\cite{malewicz2010pregel} is a MapReduce like framework that aims to 
+bring distributed processing to graph algorithms. While Pregel's performance 
+gain is through parallelism and handles large graphs processing through 
+vertex centric approach, our approach achieves performance gain by traversing 
+the graph efficient suitable to the algorithm.
+
+There have also been few libraries that support parallel or distributed graph 
+analysis: Parallel BGL~\cite{gregor2005parallel}  is a distributed version of 
+BGL while SNAP~\cite{bader2008snap}  is a stand-alone parallel graph analysis 
+package.
+% TODO - text below requires huge amount of editing.
+% Organize under the categories given above.

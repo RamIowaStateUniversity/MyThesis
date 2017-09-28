@@ -1,0 +1,22 @@
+\chapter{Conclusion}
+\label{conclusion}
+Improving the performance of source code analyses that runs on massive code bases
+is an ongoing challenge. One way to improve the performance of
+source code analysis expressed as traversals over graphs like CFGs, is by picking
+the optimal traversal strategy that defines the order of nodes visited. The
+selection of the best traversal strategy depends both on the properties of the
+analysis and the input graph on which the analysis is run.
+We proposed a hybrid technique for selecting and optimizing graph traversal
+strategies for source code analysis expressed as traversals over graphs. Our
+solution includes a system for expressing source code analysis as traversals, a set
+of static properties of the analysis and algorithms to compute them, a decision
+tree that checks static properties along with graph properties to select the
+most time-efficient traversal strategy.
+Our evaluation shows that the hybrid technique successfully selected the most
+time-efficient traversal strategy for 99.99\%--100\% of the time and 
+using the selected traversal strategy and optimizing it, the running times of a
+representative collection of source code analysis in our evaluation
+were considerably reduced by 1\%-28\% (13 minutes to 72 minutes in absolute time) when compared against the best performing traversal strategy. The case studies show that hybrid traversal reduces 80--175 minutes in running times for three software engineering tasks. The overhead imposed by 
+collecting additional information for our approach is less than 0.2\% of 
+the total running time for a large dataset and less than 0.01\% for an 
+ultra-large dataset.

@@ -1,0 +1,5 @@
+Approach overview
+https://docs.google.com/drawings/d/1GqwGgyEsoi6ZAx6wu01SbihPbTUa-e3U7_-T0eZEQ5Q/edit?usp=sharing
+
+Decision tree
+https://docs.google.com/drawings/d/1MqMk8T1lIa_mTnyH0VyClrPZipIQguMQPhmyfWCtKcE/edit?usp=sharing

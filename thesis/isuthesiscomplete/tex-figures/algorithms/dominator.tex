@@ -1,0 +1,42 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Dominator analysis: an example program analysis expressed using our
+system.},label={lst:dominators}] 
+allNodes : Set<int>;
+
+initT := traversal (n : Node) { 
+	add(allNodes, n.id);
+}
+
+domT := traversal (n : Node) : Set<int> { 
+	Set<int> dom;
+	if(output(n, domT) == null)
+		dom = allNodes;
+	else
+		dom = output(n, domT);
+	foreach(p : n.preds) 
+		dom = intersection(dom, output(p, domT)) 
+	add(dom, n.id); 
+	return dom; 
+} 
+
+fp := fixp(Set<int> curr, Set<int> prev) : bool {
+	if(equals(curr, prev))
+		return true;
+	return false;
+}
+
+traverse(g, initT, ITERATIVE); @\label{line:traverse}@
+traverse(g, domT, FORWARD, fp); 				
+\end{lstlisting}
+% \caption{}
+% % 
+% % 
+% % Dominator analysis performs traversal over the graph to determine the
+% % dominators of each node. It has two traversals. \textit{init} traversal collects
+% % all node ids. \textit{dom\_T} is called with a fixpoint and it runs till all the
+% % nodes reach the fixpoint condition.}
+% \label{fig:dominator}
+\end{figure}
+
+

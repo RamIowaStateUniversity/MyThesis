@@ -1,0 +1,45 @@
+
+\begin{figure}[t]
+\begin{footnotesize}
+\setlength{\tabcolsep}{0.5pt}
+\begin{tabular}{ | c |>{\columncolor[gray]{0.8}} c |>{\columncolor[gray]{0.8}} c |>{\columncolor[gray]{0.8}} c |>{\columncolor{SkyBlue}} c |>{\columncolor{SkyBlue}} c |>{\columncolor{SkyBlue}} c |>{\columncolor{Salmon}} c |>{\columncolor{Salmon}} c |>{\columncolor{Salmon}} c | }
+\hline
+	\multirow{1}{*}{\textbf{Analysis}} & \multicolumn{3}{ c|}{Node size < 300}  & \multicolumn{3}{ c|}{Node size - 300 to 500} & \multicolumn{3}{ c|}{Node size > 500}  \\ \hhline{|*1{>{\arrayrulecolor{white}} }*{10}{>{\arrayrulecolor{black}}-}|}
+	 & DFS & RPO/PO & Worklist & DFS & RPO/PO & Worklist & DFS & RPO/PO & Worklist \\ \hline
+	\cellcolor{LimeGreen} DOM & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark &  \checkmark & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}PDOM & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}LV & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}RD & \checkmark & \checkmark & \checkmark & $\times$ & $\times$ & = & $\times$ & $\times$ & = \\ \hline
+	\cellcolor{LimeGreen}LMA & \checkmark & \checkmark & \checkmark & $\times$ & $\times$ & = & $\times$ & $\times$ & = \\ \hline
+	\cellcolor{LimeGreen}LMNA & \checkmark & \checkmark & \checkmark &  \checkmark & \checkmark & = & $\times$ & $\times$ & = \\ \hline
+	\cellcolor{LimeGreen}AE & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}VBE & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}USA & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}RS & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}NA & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}CSD & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}LIC & \checkmark & \checkmark & \checkmark & $\times$ & $\times$ & = & $\times$ & $\times$ & = \\ \hline
+	\cellcolor{LimeGreen}DC & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{LimeGreen}CP & \checkmark & \checkmark & \checkmark & $\times$ & $\times$ & = & $\times$ & $\times$ & = \\ \hline
+	\cellcolor{Peach}WNIL & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark & = & \checkmark & \checkmark & = \\ \hline
+	\cellcolor{Peach}DEI & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark &  \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+	\cellcolor{Peach}IL & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark &  \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+	\cellcolor{Peach}UIR & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark &  \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+	\cellcolor{Peach}UDV & \checkmark & \checkmark & \checkmark &  \checkmark &  \checkmark &  \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+\end{tabular}
+
+\hfill \break \break  \hspace{3ex}
+\begin{tabular}{ |c|c| } 
+ \hline
+ \cellcolor{SkyBlue} Data flow analysis & \cellcolor{Salmon} Data flow in-sensitive analysis \\
+ \hline
+\end{tabular}
+
+
+
+
+\end{footnotesize}
+\caption{Table showing significance test result for nodes of differnt sizes.
+The tick symbol indicates significant gain and the cross symbol indiactes
+insignificant gain. Equals symbol indicates that we do get gain compared to the approach but is not significant enough.}
+\end{figure}

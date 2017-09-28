@@ -1,0 +1,43 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Running times (ms) of the three analyses on graph A using different traversal strategies.\relax }}{2}{figure.caption.9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Reaching definition analysis.}}}{2}{subfigure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Post-dominator analysis.}}}{2}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Collector analysis.}}}{2}{subfigure.1.3}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Running times of three analyses using different traversal strategies on a large codebase.\relax }}{3}{figure.caption.13}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of the hybrid approach for selecting and optimizing graph traversal strategy.\relax }}{9}{figure.caption.16}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Running example of applying the post dominator analysis on an input graph containing branch and loop.\relax }}{14}{figure.caption.54}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Traversal strategy selection decision tree.\relax }}{23}{figure.caption.109}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Reduction in running times.\relax }}{32}{figure.caption.125}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Time reduction for each analysis.}}}{32}{subfigure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Overall reduction over analysis properties.}}}{32}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Overall reduction over graph properties.}}}{32}{subfigure.1.3}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Reduction in running times against hand optimized analysis.\relax }}{34}{figure.caption.130}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Scatter charts for analyses that have loop sensitive traversals. \relax }}{35}{figure.caption.134}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {CP}}}{35}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {CSD}}}{35}{subfigure.3.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {DC}}}{35}{subfigure.3.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {LIC}}}{35}{subfigure.3.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {USA}}}{35}{subfigure.3.5}
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {VFR}}}{35}{subfigure.3.6}
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {MWN}}}{35}{subfigure.3.7}
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {AE}}}{35}{subfigure.3.8}
+\contentsline {subfigure}{\numberline {(i)}{\ignorespaces {LMA}}}{35}{subfigure.3.9}
+\contentsline {subfigure}{\numberline {(j)}{\ignorespaces {LMNA}}}{35}{subfigure.3.10}
+\contentsline {subfigure}{\numberline {(k)}{\ignorespaces {LV}}}{35}{subfigure.3.11}
+\contentsline {subfigure}{\numberline {(l)}{\ignorespaces {NA}}}{35}{subfigure.3.12}
+\contentsline {subfigure}{\numberline {(m)}{\ignorespaces {RD}}}{35}{subfigure.3.13}
+\contentsline {subfigure}{\numberline {(n)}{\ignorespaces {RS}}}{35}{subfigure.3.14}
+\contentsline {subfigure}{\numberline {(o)}{\ignorespaces {VBE}}}{35}{subfigure.3.15}
+\contentsline {subfigure}{\numberline {(p)}{\ignorespaces {SS}}}{35}{subfigure.3.16}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Hybrid approach's performance against best approaches for mis-predicted graphs.\relax }}{37}{figure.caption.151}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Distribution of decisions over the paths of the decision tree.\relax }}{38}{figure.caption.153}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribution of decisions over the paths of the decision tree for the DaCapo Dataset.\relax }}{39}{figure.caption.154}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Reduction in execution time of the hybrid approach due to traversal optimization.\relax }}{39}{figure.caption.156}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Running time (minutes) of the case studies on GitHub data.\relax }}{40}{figure.caption.158}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

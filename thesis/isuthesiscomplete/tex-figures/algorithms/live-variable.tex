@@ -1,0 +1,42 @@
+\begin{figure}[ht!]
+\centering
+\begin{lstlisting}
+2  killT := traversal (n : Node) : string { 
+3  	if(n.stmt.kind == VARDECL || n.statement.kind == ASSIGNMENT) { 
+4		return n.stmt.lhs; 
+5	} 
+6	return null; 
+7  } 
+
+8  genT := traversal (n : Node<P>) : Set<String> { 
+9	return n.stmt.rhs.variables; 
+10 } 
+
+
+11 liveT := traversal (n : Node) : Set { 
+12	live := output(n, liveT); 
+13	kill := output(n, killT); 
+14	gen := output(node, genT);  
+15	foreach(s : node.succs) {
+16		s_live := output(s, liveT);
+17		live.out = union(live.out, s_live.in); 
+18	}
+19	live.in = live.out; 
+20	remove(live.in, kill); 
+21	addAll(live.in, gen); 
+22	return live; 
+23 }
+
+24 fp := fixp(Set<string> out, Set<string> prev_out) : bool {
+25	if(equals(out, prev_out))
+26		return true;
+27	return false;
+28 }
+
+29 traverse(g, killT, FORWARD, null);
+30 traverse(g, genT, FORWARD, null); 
+31 traverse(g, liveT, BACKWARD, fp); 				
+\end{lstlisting}
+\caption{Live variable analysis performs traversal over the graph to determine the live variables at each node. In \textit{kill\_traversal}, output of each node is the variable defined in it. In \textit{gen\_traversal}, output of each node is the variable used in it. The \textit{live\_analysis} traversal is the traversal which performs the live variable analysis. This traversal is called with fixpoint function as it is a data flow analysis and runs till the fixpoint is reached.}
+\label{fig:live-variable}
+\end{figure}

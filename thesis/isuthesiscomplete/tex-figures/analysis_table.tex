@@ -1,0 +1,37 @@
+\begin{table*}[t]
+	\scriptsize
+  \centering
+  \caption{List of source code analyses and the properties of their involved 
+	traversals.}
+	%\setlength{\tabcolsep}{5.5pt}
+\begin{tabular}{rrrcccccrccc}
+\toprule
+      & \multicolumn{1}{c}{Analysis} & \multicolumn{1}{c}{Ts} & \multicolumn{3}{c}{$t_1$} & \multicolumn{3}{c}{$t_2$} & \multicolumn{3}{c}{$t_3$} \\
+\cmidrule(lr){4-6} \cmidrule(lr){7-9} \cmidrule(lr){10-12}
+      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & Flw   & Lp  & Dir & Flw   & Lp  & \multicolumn{1}{c}{Dir} & Flw   & Lp  & Dir \\
+\midrule
+1     & Copy propagation (CP) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \xmark & \xmark & --- \\
+2     & Common sub-expression detection (CSD) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \xmark & \xmark & --- \\
+3     & Dead code (DC) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\leftarrow$ & \xmark & \xmark & --- \\
+4     & Loop invariant code (LIC) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \xmark & \xmark & --- \\
+5    & Upsafety analysis (USA) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \xmark & \xmark & --- \\
+6    & Valid FileReader (VFR) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \xmark & \xmark & --- \\
+7    & Mismatched wait/notify (MWN) & 3     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \xmark & \xmark & --- \\
+8     & Available expression (AE)  & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+9     & Dominator (DOM)  & 2     & \xmark & \xmark & ---   & \cmark & \xmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+10     & Local may alias (LMA) & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+11     & Local must not alias (LMNA) & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+12     & Live variable (LV) & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\leftarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+13    & Nullness analysis (NA) & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+14    & Post dominator (PDOM) & 2     & \xmark & \xmark & ---   & \cmark & \xmark & $\leftarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+15    & Reaching definition (RD)  & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+16    & Resource status (RS) & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+17    & Very busy expression (VBE)  & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\leftarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+18    & Safe Synchronization (SS) & 2     & \xmark & \xmark & ---   & \cmark & \cmark & $\rightarrow$ & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+19    & Used and defined variable (UDV) & 1     & \xmark & \xmark & ---   & \cellcolor{lightgray} & \cellcolor{lightgray} & \multicolumn{1}{c}{\cellcolor{lightgray}} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+20    & Useless increment in return (UIR) & 1     & \xmark & \xmark & ---   & \cellcolor{lightgray} & \cellcolor{lightgray} & \multicolumn{1}{c}{\cellcolor{lightgray}} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+21    & Wait not in loop (WNIL) & 1     & \xmark & \xmark & ---   & \cellcolor{lightgray} & \cellcolor{lightgray} & \multicolumn{1}{c}{\cellcolor{lightgray}} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+\bottomrule
+\end{tabular}%
+  \label{tab:analysis-table}%
+\end{table*}%
