@@ -9,7 +9,7 @@ More importantly, depending on the properties of analyses and graphs, existing
 traversals could be optimized to improve their performance.  
 Hybrid traversal selection relies on several technical underpinnings: 
 
-\noindent{\bf [Traversal Declaration and Traverse Expression]} 
+\section{Traversal Declaration and Traverse Expression} 
 Programmers can declare their program analyses
 as one or more {\bf traversal} declarations and run them using {\bf traverse} expression.
 The runtime implementation of the {\bf traverse} expression selects a suitable 
@@ -18,7 +18,7 @@ Main benefit of these linguistic abstractions is that they abstract away
 traversal related code so that the traversal strategy can be replaced as needed 
 by the analysis runtime.
 
-\noindent{\bf [Data-Flow and Loop Sensitivity Analyses for Traversals]}
+\section{Data-Flow and Loop Sensitivity Analyses for Traversals}
 We show that traversal strategy selection depends on three critical properties
 of the traversal: {\em data-flow sensitivity}, {\em loop sensitivity}, and 
 {\em traversal direction}. We propose algorithms for computing these properties.
@@ -26,14 +26,14 @@ Our analysis system implements these algorithms.
 These properties are computed statically and their values are stored as metadata 
 to be utilized by the traversal selection at runtime.
 
-\noindent{\bf [Graph \Graphprop{}]}
+\section{Graph \Graphprop{}}
 We have observed that the traversal strategy selection depends on one
 dynamic property of the input which is {\em graph \graphprop{}}. This property partitions
 the set of graphs into three categories: those that are sequential, those with branches
 but no cycles, and those with cycles. Our system computes this property at 
 graph construction time and stores it as an attribute in the runtime graph representation. 
 
-\noindent{\bf [Decision Tree for Traversal Strategy Selection]}
+\section{Decision Tree for Traversal Strategy Selection}
 We have devised a {\em decision tree} for traversal strategy selection that 
 given data-flow sensitivity, loop sensitivity, and traversal direction properties 
 of the analysis and the \graphprop{} property of the input graph produces 
@@ -46,6 +46,7 @@ efficiency of BigCode analysis thus speeding up data-driven science in this impo
 Second, it frees up programmers from having to write traversal related code 
 and then optimizing it based on the analysis and the graph at hand. 
 
+\section{Evaluation Contribution}
 We have evaluated our technique using a set of 21 source code analysis that
 includes control and data-flow analysis, and analysis to find bugs. The
 evaluation is performed on two datasets: a dataset containing well-maintained

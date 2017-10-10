@@ -2,7 +2,7 @@
 \label{sec:approach}
 \label{sec:overview}
  
-In this section we first provide a brief overview of our technique, 
+In this chapter we first provide a brief overview of our technique, 
 followed by an overview of the constructs used for expressing source code analyses.
 We then describe properties, analyses, and a decision tree that are 
 the technical underpinnings of our selection technique.
@@ -64,7 +64,7 @@ is determined for every input graph.
 \label{sec:compute-properties}
 While it is known in the literature that choosing a right traversal strategy for
 the source code analysis can significantly improve the
-performance~\cite{atkinson2001implementation}, how to choose a right traversal
+performance. For example, ~\cite{atkinson2001implementation} have developed a hybridized iterative-worklist algorithm that processes fewer blocks than the traditional algorithm. Despite these advances, how to choose a right traversal
 strategy, what factors influence the selection of the right traversal strategy,
 what properties of the analysis and graph are important, and how to determine
 them, were not known.
@@ -411,7 +411,7 @@ The selected traversal strategies are describe below:
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/decision.pdf}
+\includegraphics[width=1\linewidth]{figures/decision.pdf}
 \caption{Traversal strategy selection decision tree.}
 \label{fig:decision-diagram}
 \end{figure}

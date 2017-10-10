@@ -17,22 +17,22 @@ post-order, reverse post-order, etc, no single strategy works best for
 different kinds of analyses and different kinds of graphs.
 Our contribution is {\em hybrid traversal selection}, a
 novel source code analysis optimization technique for source code
-analyses expressed as graph traversals.
+analyses expressed as graph traversals. This work was done collaboratively with Dr. Hridesh Rajan, Dr.Hoan A Nguyen and Ganesha Upadhaya. Consequently, chapters 1-4 in this thesis are based on that collaborative work.
 
-\begin{figure}[t]
+\begin{figure*}[t]%
 \centering
 \subfloat[Reaching definition analysis.] {
-\includegraphics[width=.32\linewidth]{figures/motivation-a-rd}
+\includegraphics[width=.5\linewidth]{figures/motivation-a-rd}
 }
 \subfloat[Post-dominator analysis.] {
-\includegraphics[width=.32\linewidth]{figures/motivation-a-pdom}
-}
+\includegraphics[width=.5\linewidth]{figures/motivation-a-pdom}
+}\\
 \subfloat[Collector analysis.] {
-\includegraphics[width=.32\linewidth]{figures/motivation-a-col}
+\includegraphics[width=.5\linewidth]{figures/motivation-a-col}
 }
 \caption{Running times (ms) of the three analyses on graph A using different traversal strategies.}
 \label{fig:example-a-graph}
-\end{figure}
+\end{figure*}
 
 {\bf Motivation and Key Observations.\ }
 To motivate, consider a software engineering task that infers the temporal 
@@ -60,6 +60,13 @@ of each client method. The traversal strategy could be chosen from a
 set of standard strategies e.g depth-first search (DFS), post-order 
 (PO), reverse post-order (RPO), worklist with post-ordering (WPO), 
 worklist with reverse post-ordering (WRPO) and any order (ANY).
+In ANY order traversal strategy, nodes can
+be visited in any order. In post-order traversal, the successors of
+any node are visited before visiting the node, while in reverse post-order traversal, the
+predecessors of any node are visited before visiting the node. In Worklist with Post-Order and Worklist with reverse post-order, the nodes are visited in the order they appear in the worklist. A worklist is a
+data structure used to keep track of nodes to be visited. In WPO, worklist is
+initialized with post-ordering of nodes, while in WRPO, The
+worklist is initialized with nodes in the reverse post-order.
 
 Figure \ref{fig:example-a-graph} shows the performance of each of these three 
 analyses when using standard traversal strategies.
@@ -150,22 +157,4 @@ were considerably reduced by 1\%-28\% (13 minutes to 72 minutes in absolute time
 The overhead imposed by our approach is negligible (less than 0.2\% of the total 
 running time for a large dataset and less than 0.01\% for an ultra-large dataset). 
 
-In summary, this paper makes the following contributions:
-\begin{itemize}
-  \item It describes a system for expressing source code analysis as traversals. The
-  constructs and operations in the system allows different source code analysis to
-  be expressed in a manner that allows automatic selection of the best traversal
-  strategies.
-  \item It defines a set of novel properties about the traversal expressed 
-  in our system. It also describes algorithms for analysing traversals for inferring 
-  these properties. 
-  \item It describes a novel decision tree for selecting the most suitable traversal 
-  strategy. The static and runtime properties also allows
-  certain optimizations to be performed on the selected traversal strategy to
-  further improve the performance.
-  \item It demonstrates the potentially broad range of applications of
-  hybrid traversal selection for optimizing source code analysis such
-  as available expressions, local may alias, live variable, nullness
-  analysis, post dominator, reaching definitions, resource status,
-  very busy expression, etc.
-\end{itemize}
+The rest of the thesis is organized as follows. Chapter 2 lists the contribution of our work. Chapter 3.1 describes our system For expressing source code analysis as traversals, while Chapter 3.2 presents the factors that influence the selection of the optimal traversal strategy for any given traversal. Chapter 3.3 lists all the candidate traversal strategies while Chapter 3.4 describes our decision tree to select traversal strategy and also presents an example analysis and graph and walks through the decision tree. Chapter 4 presents our experimental setup, the evaluation that we did and the analysis of our results. Chapter 5 discusses the three case studies that we implemented using our formalism for source code analysis and their results. Chapter 6 discusses about the threat to validity while Chapter 7 discusses related work. Chapter 8 concludes and gives some possible ideas for future work.

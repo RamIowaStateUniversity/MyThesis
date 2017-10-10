@@ -1,0 +1,22 @@
+\begin{table*}[ht!] \centering \small
+\caption{Syntax reference.}
+\label{tab:syntax}
+% \resizebox{\textwidth}{!}{
+\begin{tabular}{|p{1.5cm}|p{2.5cm}|p{11cm}|}
+\hline 
+\textbf{Construct} & \textbf{Syntax} & \textbf{Description}\\\hline
+Traversal & \lstinline|t := traversal(n : Node) : T { tbody }| & \lstinline|t| is the name of the traversal that takes a single parameter \lstinline|n| representing the graph node that is being visited. A traversal may define a return type \lstinline|T| representing the output type. A block of code that generates the traversal output at a graph node is given by \lstinline|tbody|.\\\hline
+Traverse & \lstinline|traverse(g, t, d, df, ls, fp)| & \lstinline|g| is the
+graph to be traversed, \lstinline|t| is the traversal to be invoked,
+\lstinline|d| is the traversal direction and \lstinline|df|, \lstinline|ls|, \lstinline|fp| are optional
+parameters. \lstinline|df| is of boolean type which indicates whether the analysis is data flow sensitive or not. \lstinline|ls| is also an boolean variable, indicating whether the analysis is loop sensitive or not. \lstinline|fp| is a variable name of the user defined fixpoint function. A traversal direction is a value from the set \{\lstinline|FORWARD|,
+\lstinline|BACKWARD|, \lstinline|ITERATIVE|\}\\\hline 
+Fixpoint & \lstinline|fp := fixp(...) : bool { fbody }| & \lstinline|fixp| is a keyword for defining a fixpoint function. A fixpoint function can take any number of parameters, and it
+must always return a boolean. The body of the fixpoint function is defined in
+the \lstinline|fbody| block.\\\hline 
+Output & \lstinline|output(n, t)| & \lstinline|output| is used for querying the
+traversal output associated with a graph node \lstinline|n|, in the traversal
+\lstinline|t|\\\hline 
+\end{tabular}
+% }
+\end{table*}

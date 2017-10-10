@@ -1,12 +1,13 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Operations on collections.\relax }}{12}{table.caption.25}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Syntax reference.\relax }}{12}{table.caption.30}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Operations on collections.\relax }}{12}{table.caption.31}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces List of source code analyses and the properties of their involved traversals.\relax }}{29}{table.caption.116}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Statistics of the generated control flow graphs from two datasets.\relax }}{29}{table.caption.118}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Time contribution of each phase (in miliseconds).\relax }}{30}{table.caption.119}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Traversal strategy prediction precision.\relax }}{35}{table.caption.133}
+\contentsline {table}{\numberline {4.1}{\ignorespaces List of source code analyses and the properties of their involved traversals.\relax }}{29}{table.caption.122}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Statistics of the generated control flow graphs from two datasets.\relax }}{29}{table.caption.124}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Time contribution of each phase (in miliseconds).\relax }}{30}{table.caption.125}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Traversal strategy prediction precision.\relax }}{35}{table.caption.139}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

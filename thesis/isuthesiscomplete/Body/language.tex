@@ -90,7 +90,7 @@ block of code that generates the traversal output at a graph node is given by
 \lstinline|tbody|. The \lstinline|tbody| may contain common statements and
 expressions, such as variable declarations, assignments, conditional statements,
 loop statements, and method calls, along with some special expressions discussed
-in this section.
+in this chapter.
 % 
 % 
 % A traversal visits every node in the control flow graph and executes a block of
@@ -128,7 +128,7 @@ traverse(g, t, d, df, ls, fp)
 A \lstinline|traverse| expression takes six parameters: \lstinline|g| is the
 graph to be traversed, \lstinline|t| is the traversal to be invoked,
 \lstinline|d| is the traversal direction and \lstinline|df|, \lstinline|ls|, \lstinline|fp| are optional
-parameters. \lstinline|df| is of boolean type which indicates whether the analysis is data flow sensitive or not. \lstinline|ls| is also an boolean variable, indicating whether the analysis is loop sensitive or not. If \lstinline|df| is not provided, Algorithm 1 in Section 2.2.2 will be used to compute this property. Similarly, if \lstinline|ls| is not provided, Algorithm 2 in Section 2.2.4 will be used to compute this property. \lstinline|fp| is a variable name of the user defined fixpoint function. A
+parameters. \lstinline|df| is of boolean type which indicates whether the analysis is data flow sensitive or not. \lstinline|ls| is also an boolean variable, indicating whether the analysis is loop sensitive or not. If \lstinline|df| is not provided, Algorithm 1 in Chapter 3.2.1 will be used to compute this property. Similarly, if \lstinline|ls| is not provided, Algorithm 2 in Chapter 3.2.3 will be used to compute this property. \lstinline|fp| is a variable name of the user defined fixpoint function. A
 traversal direction is a value from the set \{\lstinline|FORWARD|,
 \lstinline|BACKWARD|, \lstinline|ITERATIVE|\}, where \lstinline|FORWARD| is used
 to represent a forward analysis (predecessors of a node are processed before the
@@ -152,6 +152,8 @@ can be passed in the \lstinline|traverse| expression.
 We also provide a special expression \lstinline|output(n, t)| for querying the
 traversal output associated with a graph node \lstinline|n|, in the traversal
 \lstinline|t|.
+
+\input{figures/syntax}
 % 
 % 
 % 
@@ -216,7 +218,7 @@ A traversal output associated with graph nodes can be queried using a special
 expression \lstinline|output()|. 
 To be able to express a variety of source code analysis, our system provides
 primitive and collection datatypes with well-defined operations.
-Later in this section we demonstrate how the constructs and operations of the
+Later in this chapter we demonstrate how the constructs and operations of the
 system enables determining properties of the source code analysis expressed
 in our system, such that optimal traversal strategies can be automatically
 selected.
@@ -266,31 +268,31 @@ expressed using our system.}, label={lst:dominators}]
 	traverse(g, domT, BACKWARD, fp); 				
 \end{lstlisting}
 
-Listing \ref{lst:dominators} mainly defines two traversals \lstinline|initT|
-(lines 2-4) and \lstinline|domT| (lines 5-20), and invokes them using
-\lstinline|traverse| expressions (lines 26 and 27). Line 21-25 defines a
-fixpoint function using \lstinline|fixp| block, which is used in the
-\lstinline|traverse| expression in line 27. Line 1 defines a variable
-\lstinline|allNodes| of collection type \lstinline|Set|, where
-\lstinline|Set<int>| defines a collection type \lstinline|Set| with elements of
-type \lstinline|int|. Line 3 uses an operation \lstinline|add| (defined in
-\tabref{tab:operations}) on collection \lstinline|allNodes|. The common
+Listing \ref{lst:dominators} mainly defines two traversals \textbf{\lstinline|initT|}
+(lines 2-4) and \textbf{\lstinline|domT|} (lines 5-20), and invokes them using
+\textbf{\lstinline|traverse|} expressions (lines 26 and 27). Line 21-25 defines a
+fixpoint function using \textbf{\lstinline|fixp|} block, which is used in the
+\textbf{\lstinline|traverse|} expression in line 27. Line 1 defines a variable
+\textbf{\lstinline|allNodes|} of collection type \textbf{\lstinline|Set|}, where
+\textbf{\lstinline|Set<int>|} defines a collection type \textbf{\lstinline|Set|} with elements of
+type \textbf{\lstinline|int|}. Line 3 uses an operation \textbf{\lstinline|add|} (defined in
+\tabref{tab:operations}) on collection \textbf{\lstinline|allNodes|}. The common
 statements and expressions used in the language to express the analysis are not
 described in our system, however all standard statements and expressions are
 allowed.
-For instance, \lstinline|if-else| statements are used in lines 7-15,
-\lstinline|foreach| iteration is used in lines 16-17, and so on.
+For instance, \textbf{\lstinline|if-else|} statements are used in lines 7-15,
+\textbf{\lstinline|foreach|} iteration is used in lines 16-17, and so on.
 Lines 26 and 27 provides two flavors of invoking traversals using
-\lstinline|traverse| expressions: one without a fixpoint and other with a
+\textbf{\lstinline|traverse|} expressions: one without a fixpoint and other with a
 user-defined fixpoint function. A usage of special expression
-\lstinline|output(n, domT)| can be seen in line 8. The traversal
-\lstinline|initT| does not define any output for CFG nodes, whereas, the
-traversal \lstinline|domT| defines an output of type \lstinline|Set<int>| for
+\textbf{\lstinline|output(n, domT)|} can be seen in line 8. The traversal
+\textbf{\lstinline|initT|} does not define any output for CFG nodes, whereas, the
+traversal \textbf{\lstinline|domT|} defines an output of type \textbf{\lstinline|Set<int>|} for
 every node in the CFG. For managing the analysis output of nodes,
-\lstinline|domT| traversal maintains an internal map that contains analysis
-output for every node, which can be queried using \lstinline|output(n, domT)|.
-A pre-defined variable \lstinline|g| that represents the CFG is used in the
-\lstinline|traverse| expressions in lines 26 and 27.
+\textbf{\lstinline|domT|} traversal maintains an internal map that contains analysis
+output for every node, which can be queried using \textbf{\lstinline|output(n, domT)|}.
+A pre-defined variable \textbf{\lstinline|g|} that represents the CFG is used in the
+\textbf{\lstinline|traverse|} expressions in lines 26 and 27.
 
 \input{tex-figures/algorithms/postdominator.tex}
 \fignref{fig:running-example} takes an example graph, and shows the results of

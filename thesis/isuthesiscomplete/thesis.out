@@ -5,32 +5,37 @@
 \BOOKMARK [0][-]{section*.7}{ABSTRACT}{}% 5
 \BOOKMARK [0][-]{chapter.8}{1. Introduction}{}% 6
 \BOOKMARK [0][-]{chapter.14}{2. Contributions}{}% 7
-\BOOKMARK [0][-]{chapter.15}{3. Hybrid Traversal Selection for Efficient Source Code Analysis}{}% 8
-\BOOKMARK [1][-]{section.17}{3.1 A System For Expressing Source Code Analysis As Traversals}{chapter.15}% 9
-\BOOKMARK [1][-]{section.56}{3.2 Static and Runtime Properties}{chapter.15}% 10
-\BOOKMARK [2][-]{subsection.57}{3.2.1 Data-Flow Sensitivity}{section.56}% 11
-\BOOKMARK [2][-]{subsection.68}{3.2.2 Computing Data-Flow Sensitivity}{section.56}% 12
-\BOOKMARK [2][-]{subsection.69}{3.2.3 Loop Sensitivity}{section.56}% 13
-\BOOKMARK [2][-]{subsection.105}{3.2.4 Computing Loop Sensitivity}{section.56}% 14
-\BOOKMARK [2][-]{subsection.107}{3.2.5 Graph Cyclicity}{section.56}% 15
-\BOOKMARK [1][-]{section.108}{3.3 Traversal Strategies - Candidates}{chapter.15}% 16
-\BOOKMARK [1][-]{section.110}{3.4 Decision Tree for Traversal Strategy Selection}{chapter.15}% 17
-\BOOKMARK [2][-]{subsection.112}{3.4.1 An Example}{section.110}% 18
-\BOOKMARK [1][-]{section.113}{3.5 Optimizing the Selected Traversal Strategy}{chapter.15}% 19
-\BOOKMARK [0][-]{chapter.114}{4. Empirical Evaluation}{}% 20
-\BOOKMARK [1][-]{section.115}{4.1 Analyses, Datasets and Experiment Setting}{chapter.114}% 21
-\BOOKMARK [2][-]{subsection.117}{4.1.1 Analyses.}{section.115}% 22
-\BOOKMARK [2][-]{subsection.120}{4.1.2 Datasets.}{section.115}% 23
-\BOOKMARK [2][-]{subsection.121}{4.1.3 Setting.}{section.115}% 24
-\BOOKMARK [1][-]{section.122}{4.2 Running Time and Time Reduction}{chapter.114}% 25
-\BOOKMARK [2][-]{subsection.123}{4.2.1 Running Time}{section.122}% 26
-\BOOKMARK [2][-]{subsection.124}{4.2.2 Time Reduction}{section.122}% 27
-\BOOKMARK [2][-]{subsection.129}{4.2.3 Time reduction against hand optimized analysis}{section.122}% 28
-\BOOKMARK [1][-]{section.131}{4.3 Correctness of Analysis Results}{chapter.114}% 29
-\BOOKMARK [1][-]{section.132}{4.4 Traversal Strategy Selection Precision}{chapter.114}% 30
-\BOOKMARK [1][-]{section.152}{4.5 Analysis on the Decision Tree Distribution}{chapter.114}% 31
-\BOOKMARK [1][-]{section.155}{4.6 Analysis on Traversal Optimization}{chapter.114}% 32
-\BOOKMARK [0][-]{chapter.157}{5. Case Studies}{}% 33
-\BOOKMARK [0][-]{chapter.159}{6. Threats to Validity}{}% 34
-\BOOKMARK [0][-]{chapter.160}{7. Related Work}{}% 35
-\BOOKMARK [0][-]{chapter.161}{8. Conclusion}{}% 36
+\BOOKMARK [1][-]{section.15}{2.1 Traversal Declaration and Traverse Expression}{chapter.14}% 8
+\BOOKMARK [1][-]{section.16}{2.2 Data-Flow and Loop Sensitivity Analyses for Traversals}{chapter.14}% 9
+\BOOKMARK [1][-]{section.17}{2.3 Graph Cyclicity}{chapter.14}% 10
+\BOOKMARK [1][-]{section.18}{2.4 Decision Tree for Traversal Strategy Selection}{chapter.14}% 11
+\BOOKMARK [1][-]{section.19}{2.5 Evaluation Contribution}{chapter.14}% 12
+\BOOKMARK [0][-]{chapter.20}{3. Hybrid Traversal Selection for Efficient Source Code Analysis}{}% 13
+\BOOKMARK [1][-]{section.22}{3.1 A System For Expressing Source Code Analysis As Traversals}{chapter.20}% 14
+\BOOKMARK [1][-]{section.62}{3.2 Static and Runtime Properties}{chapter.20}% 15
+\BOOKMARK [2][-]{subsection.63}{3.2.1 Data-Flow Sensitivity}{section.62}% 16
+\BOOKMARK [2][-]{subsection.74}{3.2.2 Computing Data-Flow Sensitivity}{section.62}% 17
+\BOOKMARK [2][-]{subsection.75}{3.2.3 Loop Sensitivity}{section.62}% 18
+\BOOKMARK [2][-]{subsection.111}{3.2.4 Computing Loop Sensitivity}{section.62}% 19
+\BOOKMARK [2][-]{subsection.113}{3.2.5 Graph Cyclicity}{section.62}% 20
+\BOOKMARK [1][-]{section.114}{3.3 Traversal Strategies - Candidates}{chapter.20}% 21
+\BOOKMARK [1][-]{section.116}{3.4 Decision Tree for Traversal Strategy Selection}{chapter.20}% 22
+\BOOKMARK [2][-]{subsection.118}{3.4.1 An Example}{section.116}% 23
+\BOOKMARK [1][-]{section.119}{3.5 Optimizing the Selected Traversal Strategy}{chapter.20}% 24
+\BOOKMARK [0][-]{chapter.120}{4. Empirical Evaluation}{}% 25
+\BOOKMARK [1][-]{section.121}{4.1 Analyses, Datasets and Experiment Setting}{chapter.120}% 26
+\BOOKMARK [2][-]{subsection.123}{4.1.1 Analyses.}{section.121}% 27
+\BOOKMARK [2][-]{subsection.126}{4.1.2 Datasets.}{section.121}% 28
+\BOOKMARK [2][-]{subsection.127}{4.1.3 Setting.}{section.121}% 29
+\BOOKMARK [1][-]{section.128}{4.2 Running Time and Time Reduction}{chapter.120}% 30
+\BOOKMARK [2][-]{subsection.129}{4.2.1 Running Time}{section.128}% 31
+\BOOKMARK [2][-]{subsection.130}{4.2.2 Time Reduction}{section.128}% 32
+\BOOKMARK [2][-]{subsection.135}{4.2.3 Time reduction against hand optimized analysis}{section.128}% 33
+\BOOKMARK [1][-]{section.137}{4.3 Correctness of Analysis Results}{chapter.120}% 34
+\BOOKMARK [1][-]{section.138}{4.4 Traversal Strategy Selection Precision}{chapter.120}% 35
+\BOOKMARK [1][-]{section.158}{4.5 Analysis on the Decision Tree Distribution}{chapter.120}% 36
+\BOOKMARK [1][-]{section.161}{4.6 Analysis on Traversal Optimization}{chapter.120}% 37
+\BOOKMARK [0][-]{chapter.163}{5. Case Studies}{}% 38
+\BOOKMARK [0][-]{chapter.165}{6. Threats to Validity}{}% 39
+\BOOKMARK [0][-]{chapter.166}{7. Related Work}{}% 40
+\BOOKMARK [0][-]{chapter.167}{8. Conclusion}{}% 41
