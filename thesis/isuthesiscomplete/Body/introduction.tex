@@ -3,9 +3,9 @@
 
 The availability of open source repositories like GitHub is driving
 data-driven solutions to software engineering problems, e.g.
-specification inference~\cite{nguyen2014mining}, discovering programming
-patterns~\cite{thummalapenta2009alattin}, suggesting bug
-fixes~\cite{livshits2005dynamine,cpminer}, etc.
+specification inference by ~\cite{nguyen2014mining}, discovering programming
+patterns by ~\cite{thummalapenta2009alattin}, suggesting bug
+fixes by ~\cite{livshits2005dynamine,cpminer}, etc.
 These software engineering tasks analyze different source code
 representations, such as text, abstract syntax trees (ASTs), control
 flow graphs (CFGs), at massive scale.
@@ -37,17 +37,17 @@ analyses expressed as graph traversals. This work was done collaboratively with 
 {\bf Motivation and Key Observations.\ }
 To motivate, consider a software engineering task that infers the temporal 
 specifications between pairs of API method calls, i.e., a call to $a$ must be 
-followed by a call to $b$~\cite{engler-sosp2001,ramanathan-icse2007,weimer-tacas2005,yang-icse2006}. 
+followed by a call to $b$ by ~\cite{engler-sosp2001,ramanathan-icse2007,weimer-tacas2005,yang-icse2006}. 
 A data-driven approach for inference is to look for pairs of API calls that frequently go in pairs in 
 the same order at API call sites in the client methods' code. Such an 
 approach contains (at least) three source code analyses on the control flow graph 
 (CFG) of each client method: 
 %
 1) identifying references of the API classes and call sites of the API 
-methods which can be done using \emph{reaching definition} analysis~\cite{programanalysis}; 
+methods which can be done using \emph{reaching definition} analysis(~\cite{programanalysis}); 
 %
 2) identifying the pairs of API calls ($a$, $b$) where $b$ follows $a$ in the 
-client code which can be done using \emph{post-dominator} analysis~\cite{compilers}; and 
+client code which can be done using \emph{post-dominator} analysis(~\cite{compilers}); and 
 %
 3) collecting pairs of temporal API calls by traversing all nodes in the 
 CFG--let us call this \emph{collector} analysis. 
@@ -71,7 +71,7 @@ worklist is initialized with nodes in the reverse post-order.
 Figure \ref{fig:example-a-graph} shows the performance of each of these three 
 analyses when using standard traversal strategies.
 These runs are analyzing the CFG of a method in the DaCapo 
-benchmark~\cite{blackburn2006dacapo}. 
+benchmark(~\cite{blackburn2006dacapo}). 
 Actual implementation of this method is not important, but it suffices
 to know that the CFG, which we shall refer to as Graph A, has 50 nodes
 and has branches but no loops. Figure \ref{fig:example-a-graph} shows
@@ -129,7 +129,7 @@ significant.
 To illustrate, consider \figref{fig:motive} that shows the performance of 
 our entire illustrative example (inferring temporal specifications) on a 
 large corpus of 287,000 CFGs extracted from the DaCapo
-benchmark dataset~\cite{blackburn2006dacapo}.
+benchmark dataset(~\cite{blackburn2006dacapo}).
 \figref{fig:motive} shows the 
 bar chart for the total running times of the three analyses. The \textbf{Best}
  strategy is an ideal one where we can always choose the most efficient with 

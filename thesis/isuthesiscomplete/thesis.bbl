@@ -39,11 +39,24 @@ Blackburn, S.~M., Garner, R., Hoffmann, C., Khang, A.~M., McKinley, K.~S.,
   Object-oriented Programming Systems, Languages, and Applications}, OOPSLA
   '06, pages 169--190, New York, NY, USA. ACM.
 
+\bibitem[\protect\astroncite{Blume et~al.}{1996}]{blume1996parallel}
+Blume, W., Doallo, R., Eigenmann, R., Grout, J., Hoeflinger, J., and Lawrence,
+  T. (1996).
+\newblock Parallel programming with polaris.
+\newblock {\em Computer}, 29(12):78--82.
+
 \bibitem[\protect\astroncite{Bourdoncle}{1993}]{bourdoncle93}
 Bourdoncle, F. (1993).
 \newblock {Efficient Chaotic Iteration Strategies With Widenings}.
 \newblock In {\em Proceedings of the International Conference on Formal Methods
   in Programming and their Applications}, pages 128--141. Springer-Verlag.
+
+\bibitem[\protect\astroncite{Choi et~al.}{1993}]{choi1993efficient}
+Choi, J.-D., Burke, M., and Carini, P. (1993).
+\newblock Efficient flow-sensitive interprocedural computation of
+  pointer-induced aliases and side effects.
+\newblock In {\em Proceedings of the 20th ACM SIGPLAN-SIGACT symposium on
+  Principles of programming languages}, pages 232--245. ACM.
 
 \bibitem[\protect\astroncite{Christakis et~al.}{2016}]{Christakis2016}
 Christakis, M., M\"{u}ller, P., and W\"{u}stholz, V. (2016).
@@ -63,12 +76,18 @@ Csallner, C., Smaragdakis, Y., and Xie, T. (2008).
 \newblock Dsd-crasher : A hybrid analysis tool for bug finding.
 \newblock {\em ACM Trans. Softw. Eng. Methodol.}, 17(2):8:1--8:37.
 
-\bibitem[\protect\astroncite{Dyer et~al.}{2013}]{dyer2013boa}
-Dyer, R., Nguyen, H.~A., Rajan, H., and Nguyen, T.~N. (2013).
+\bibitem[\protect\astroncite{Dyer et~al.}{2013a}]{dyer2013boa}
+Dyer, R., Nguyen, H.~A., Rajan, H., and Nguyen, T.~N. (2013a).
 \newblock Boa: A language and infrastructure for analyzing ultra-large-scale
   software repositories.
 \newblock In {\em Proceedings of the 2013 International Conference on Software
   Engineering}, ICSE '13, pages 422--431, Piscataway, NJ, USA. IEEE Press.
+
+\bibitem[\protect\astroncite{Dyer et~al.}{2013b}]{dyer2013declarative}
+Dyer, R., Rajan, H., and Nguyen, T.~N. (2013b).
+\newblock Declarative visitors to ease fine-grained source code mining with
+  full history on billions of ast nodes.
+\newblock In {\em ACM SIGPLAN Notices}, volume~49, pages 23--32. ACM.
 
 \bibitem[\protect\astroncite{Engler et~al.}{2001}]{engler-sosp2001}
 Engler, D., Chen, D.~Y., Hallem, S., Chou, A., and Chelf, B. (2001).
@@ -94,12 +113,6 @@ Gregor, D. and Lumsdaine, A. (2005).
 \newblock The parallel {BGL}: A generic library for distributed graph
   computations.
 \newblock {\em Parallel Object-Oriented Scientific Computing (POOSC)}, 2:1--18.
-
-\bibitem[\protect\astroncite{Harper and Morrisett}{1995}]{Harper95}
-Harper, R. and Morrisett, G. (1995).
-\newblock Compiling polymorphism using intensional type analysis.
-\newblock In {\em Proceedings of the Symposium on Principles of Programming
-  Languages}, POPL '95, pages 130--141, New York, NY, USA. ACM.
 
 \bibitem[\protect\astroncite{Hong et~al.}{2012}]{hong2012green}
 Hong, S., Chafi, H., Sedlar, E., and Olukotun, K. (2012).
@@ -143,12 +156,6 @@ Livshits, B. and Zimmermann, T. (2005).
 \newblock In {\em ACM SIGSOFT Software Engineering Notes}, volume~30, pages
   296--305. ACM.
 
-\bibitem[\protect\astroncite{Livshits and Lam}{2005}]{livshits2005finding}
-Livshits, V.~B. and Lam, M.~S. (2005).
-\newblock Finding security vulnerabilities in java applications with static
-  analysis.
-\newblock In {\em USENIX Security Symposium}, volume~14, pages 18--18.
-
 \bibitem[\protect\astroncite{Malewicz et~al.}{2010}]{malewicz2010pregel}
 Malewicz, G., Austern, M.~H., Bik, A.~J., Dehnert, J.~C., Horn, I., Leiser, N.,
   and Czajkowski, G. (2010).
@@ -188,6 +195,13 @@ Thummalapenta, S. and Xie, T. (2009).
   conditions.
 \newblock In {\em Proceedings of the 2009 IEEE/ACM International Conference on
   Automated Software Engineering}, pages 283--294. IEEE Computer Society.
+
+\bibitem[\protect\astroncite{Upadhyaya and
+  Rajan}{2017}]{upadhyaya2017accelerating}
+Upadhyaya, G. and Rajan, H. (2017).
+\newblock On accelerating ultra-large-scale mining.
+\newblock In {\em Proceedings of the 39th International Conference on Software
+  Engineering: New Ideas and Emerging Results Track}, pages 39--42. IEEE Press.
 
 \bibitem[\protect\astroncite{Vall{\'e}e-Rai et~al.}{1999}]{vallee1999soot}
 Vall{\'e}e-Rai, R., Co, P., Gagnon, E., Hendren, L., Lam, P., and Sundaresan,

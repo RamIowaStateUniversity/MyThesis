@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.26)  4 OCT 2017 22:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.26)  11 OCT 2017 23:06
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -669,19 +669,19 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
  [4
 
 
-] (thesis.lof)
+] (thesis.lof [5
+
+
+])
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
- [5
-
-
-]
+ [6]
 \openout2 = `Preface/acknowl.aux'.
 
  (Preface/acknowl.tex
 ACKNOWLEDGEMENTS
-) [6
+) [7
 
 
 
@@ -690,7 +690,7 @@ ACKNOWLEDGEMENTS
 
  (Preface/abstract.tex
 ABSTRACT
-) [7
+) [8
 
 
 
@@ -700,14 +700,14 @@ ABSTRACT
 
  (Body/introduction.tex
 CHAPTER\  1.
-<figures/motivation-a-rd.pdf, id=282, 694.595pt x 393.47pt>
+<figures/motivation-a-rd.pdf, id=330, 694.595pt x 393.47pt>
 File: figures/motivation-a-rd.pdf Graphic file (type pdf)
 
 <use figures/motivation-a-rd.pdf>
 Package pdftex.def Info: figures/motivation-a-rd.pdf used on input line 26.
 (pdftex.def)             Requested size: 225.1209pt x 127.522pt.
 
-<figures/motivation-a-pdom.pdf, id=283, 694.595pt x 375.4025pt>
+<figures/motivation-a-pdom.pdf, id=331, 694.595pt x 375.4025pt>
 File: figures/motivation-a-pdom.pdf Graphic file (type pdf)
 
 <use figures/motivation-a-pdom.pdf>
@@ -718,7 +718,7 @@ Overfull \hbox (14.59996pt too wide) in paragraph at lines 26--29
  [][][][] 
  []
 
-<figures/motivation-a-col.pdf, id=284, 694.595pt x 393.47pt>
+<figures/motivation-a-col.pdf, id=332, 694.595pt x 393.47pt>
 File: figures/motivation-a-col.pdf Graphic file (type pdf)
 
 <use figures/motivation-a-col.pdf>
@@ -736,7 +736,7 @@ ion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex.exe (file ./figures/motivation-a-col.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
->] [3] <figures/motivation-sum.pdf, id=336, 694.595pt x 395.4775pt>
+>] [3] <figures/motivation-sum.pdf, id=384, 694.595pt x 395.4775pt>
 File: figures/motivation-sum.pdf Graphic file (type pdf)
 
 <use figures/motivation-sum.pdf>
@@ -757,7 +757,7 @@ CHAPTER\  2.
 
  (Body/approach.tex
 CHAPTER\  3.
-<figures/hybrid-overview.pdf, id=371, 781.92125pt x 290.08376pt>
+<figures/hybrid-overview.pdf, id=419, 781.92125pt x 290.08376pt>
 File: figures/hybrid-overview.pdf Graphic file (type pdf)
 
 <use figures/hybrid-overview.pdf>
@@ -818,7 +818,7 @@ Overfull \hbox (16.23541pt too wide) in paragraph at lines 5--24
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 271.
  (tex-figures/algorithms/postdominator.tex
-<figures/running-example.pdf, id=468, 992.70876pt x 791.95876pt>
+<figures/running-example.pdf, id=516, 992.70876pt x 791.95876pt>
 File: figures/running-example.pdf Graphic file (type pdf)
 
 <use figures/running-example.pdf>
@@ -828,55 +828,63 @@ Package pdftex.def Info: figures/running-example.pdf used on input line 11.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 304.
  [14]) [15 <./figures/running-example.pdf>]
-(tex-figures/algorithms/flow_sensitivity.tex) [16] [17]
+(tex-figures/algorithms/flow_sensitivity.tex) [16] [17] [18]
 (tex-figures/algorithms/loop_sensitivity.tex
 Overfull \hbox (17.0pt too wide) detected at line 58
 [][] 
  []
 
-[18]) [19] [20] [21] <figures/decision.pdf, id=589, 851.18pt x 561.09625pt>
+) [19] [20] [21] [22] <figures/decision.pdf, id=651, 851.18pt x 561.09625pt>
 File: figures/decision.pdf Graphic file (type pdf)
 
 <use figures/decision.pdf>
-Package pdftex.def Info: figures/decision.pdf used on input line 414.
+Package pdftex.def Info: figures/decision.pdf used on input line 419.
 (pdftex.def)             Requested size: 450.2418pt x 296.80597pt.
- [22] [23 <./figures/decision.pdf>] [24] [25]
-[26]) [27]
+ [23] [24 <./figures/decision.pdf>] [25] [26]
+[27]) [28]
 \openout2 = `Body/eval.aux'.
 
  (Body/eval.tex
 CHAPTER\  4.
-(tex-figures/analysis_table.tex) [28
+(tex-figures/analysis_table.tex) [29
 
 
 
 ] (tex-figures/dataset_table.tex)
-(tex-figures/time-breakdown-table.tex) [29] [30]
-(tex-figures/reduction-table.tex) [31] [32]
-(tex-figures/reduction-table-oopsla-guideline.tex) [33] [34]
+(tex-figures/time-breakdown-table.tex) [30] [31] [32]
+CHAPTER\  5.
+(tex-figures/reduction-table.tex) [33
+
+] [34]
+(tex-figures/reduction-table-oopsla-guideline.tex) [35] [36]
+CHAPTER\  6.
+[37
+
+]
+CHAPTER\  7.
 (prediction-precision.tex) (tex-figures/loop-precision.tex
-<figures/loop-cp.png, id=685, 1400.98407pt x 320.69812pt>
+<figures/loop-cp.png, id=756, 1400.98407pt x 320.69812pt>
 File: figures/loop-cp.png Graphic file (type png)
 
 <use figures/loop-cp.png>
 Package pdftex.def Info: figures/loop-cp.png used on input line 6.
 (pdftex.def)             Requested size: 99.05374pt x 22.67136pt.
 
-<figures/loop-csd.png, id=687, 1400.98407pt x 320.69812pt>
+<figures/loop-csd.png, id=758, 1400.98407pt x 320.69812pt>
 File: figures/loop-csd.png Graphic file (type png)
 
 <use figures/loop-csd.png>
 Package pdftex.def Info: figures/loop-csd.png used on input line 10.
 (pdftex.def)             Requested size: 99.05374pt x 22.67136pt.
 
-<figures/loop-dc.png, id=688, 1400.98407pt x 319.1925pt>
+<figures/loop-dc.png, id=759, 1400.98407pt x 319.1925pt>
 File: figures/loop-dc.png Graphic file (type png)
 
 <use figures/loop-dc.png>
 Package pdftex.def Info: figures/loop-dc.png used on input line 14.
 (pdftex.def)             Requested size: 99.05374pt x 22.56493pt.
 
-<figures/loop-lic.png, id=689, 1400.98407pt x 321.45094pt>
+<figures/loop-lic.png, id=760, 1400.98407pt x 321.45094pt>
 File: figures/loop-lic.png Graphic file (type png)
 
 <use figures/loop-lic.png>
@@ -887,28 +895,28 @@ Overfull \hbox (2.37306pt too wide) in paragraph at lines 6--18
  [][][][][][][][] 
  []
 
-<figures/loop-usa.png, id=690, 1400.98407pt x 320.69812pt>
+<figures/loop-usa.png, id=761, 1400.98407pt x 320.69812pt>
 File: figures/loop-usa.png Graphic file (type png)
 
 <use figures/loop-usa.png>
 Package pdftex.def Info: figures/loop-usa.png used on input line 22.
 (pdftex.def)             Requested size: 99.05374pt x 22.67136pt.
 
-<figures/loop-vfr.png, id=691, 933.98938pt x 213.79875pt>
+<figures/loop-vfr.png, id=762, 933.98938pt x 213.79875pt>
 File: figures/loop-vfr.png Graphic file (type png)
 
 <use figures/loop-vfr.png>
 Package pdftex.def Info: figures/loop-vfr.png used on input line 26.
 (pdftex.def)             Requested size: 99.05374pt x 22.67299pt.
 
-<figures/loop-mwn.png, id=692, 933.98938pt x 213.79875pt>
+<figures/loop-mwn.png, id=763, 933.98938pt x 213.79875pt>
 File: figures/loop-mwn.png Graphic file (type png)
 
 <use figures/loop-mwn.png>
 Package pdftex.def Info: figures/loop-mwn.png used on input line 30.
 (pdftex.def)             Requested size: 99.05374pt x 22.67299pt.
 
-<figures/loop-ae.png, id=693, 1400.98407pt x 319.94531pt>
+<figures/loop-ae.png, id=764, 1400.98407pt x 319.94531pt>
 File: figures/loop-ae.png Graphic file (type png)
 
 <use figures/loop-ae.png>
@@ -919,28 +927,28 @@ Overfull \hbox (2.37306pt too wide) in paragraph at lines 22--34
  [][][][][][][][] 
  []
 
-<figures/loop-lma.png, id=694, 1400.98407pt x 321.45094pt>
+<figures/loop-lma.png, id=765, 1400.98407pt x 321.45094pt>
 File: figures/loop-lma.png Graphic file (type png)
 
 <use figures/loop-lma.png>
 Package pdftex.def Info: figures/loop-lma.png used on input line 38.
 (pdftex.def)             Requested size: 99.05374pt x 22.72458pt.
 
-<figures/loop-lmna.png, id=695, 1400.98407pt x 321.45094pt>
+<figures/loop-lmna.png, id=766, 1400.98407pt x 321.45094pt>
 File: figures/loop-lmna.png Graphic file (type png)
 
 <use figures/loop-lmna.png>
 Package pdftex.def Info: figures/loop-lmna.png used on input line 42.
 (pdftex.def)             Requested size: 99.05374pt x 22.72458pt.
 
-<figures/loop-lv.png, id=696, 1400.98407pt x 322.20375pt>
+<figures/loop-lv.png, id=767, 1400.98407pt x 322.20375pt>
 File: figures/loop-lv.png Graphic file (type png)
 
 <use figures/loop-lv.png>
 Package pdftex.def Info: figures/loop-lv.png used on input line 46.
 (pdftex.def)             Requested size: 99.05374pt x 22.7778pt.
 
-<figures/loop-na.png, id=697, 1400.98407pt x 321.45094pt>
+<figures/loop-na.png, id=768, 1400.98407pt x 321.45094pt>
 File: figures/loop-na.png Graphic file (type png)
 
 <use figures/loop-na.png>
@@ -951,28 +959,28 @@ Overfull \hbox (2.37306pt too wide) in paragraph at lines 38--50
  [][][][][][][][] 
  []
 
-<figures/loop-rd.png, id=698, 1400.98407pt x 321.45094pt>
+<figures/loop-rd.png, id=769, 1400.98407pt x 321.45094pt>
 File: figures/loop-rd.png Graphic file (type png)
 
 <use figures/loop-rd.png>
 Package pdftex.def Info: figures/loop-rd.png used on input line 54.
 (pdftex.def)             Requested size: 99.05374pt x 22.72458pt.
 
-<figures/loop-rs.png, id=699, 1400.98407pt x 321.45094pt>
+<figures/loop-rs.png, id=770, 1400.98407pt x 321.45094pt>
 File: figures/loop-rs.png Graphic file (type png)
 
 <use figures/loop-rs.png>
 Package pdftex.def Info: figures/loop-rs.png used on input line 58.
 (pdftex.def)             Requested size: 99.05374pt x 22.72458pt.
 
-<figures/loop-vbe.png, id=700, 1400.98407pt x 321.45094pt>
+<figures/loop-vbe.png, id=771, 1400.98407pt x 321.45094pt>
 File: figures/loop-vbe.png Graphic file (type png)
 
 <use figures/loop-vbe.png>
 Package pdftex.def Info: figures/loop-vbe.png used on input line 62.
 (pdftex.def)             Requested size: 99.05374pt x 22.72458pt.
 
-<figures/loop-ss.png, id=701, 933.98938pt x 213.79875pt>
+<figures/loop-ss.png, id=772, 933.98938pt x 213.79875pt>
 File: figures/loop-ss.png Graphic file (type png)
 
 <use figures/loop-ss.png>
@@ -983,149 +991,147 @@ Overfull \hbox (2.37306pt too wide) in paragraph at lines 54--66
  [][][][][][][][] 
  []
 
-) [35 <./figures/loop-cp.png> <./figures/loop-csd.png> <./figures/loop-dc.png> 
-<./figures/loop-lic.png> <./figures/loop-usa.png> <./figures/loop-vfr.png> <./f
-igures/loop-mwn.png> <./figures/loop-ae.png> <./figures/loop-lma.png> <./figure
-s/loop-lmna.png> <./figures/loop-lv.png> <./figures/loop-na.png> <./figures/loo
-p-rd.png> <./figures/loop-rs.png> <./figures/loop-vbe.png> <./figures/loop-ss.p
-ng>] (tex-figures/misprediction-graph.tex
-<tex-figures/misprediction/cp-crop.pdf, id=737, 694.595pt x 407.5225pt>
+) [38
+
+ <./figures/loop-cp.png> <./figures/loop-csd.png> <./figures/loop-dc.png> <./fi
+gures/loop-lic.png> <./figures/loop-usa.png> <./figures/loop-vfr.png> <./figure
+s/loop-mwn.png> <./figures/loop-ae.png> <./figures/loop-lma.png> <./figures/loo
+p-lmna.png> <./figures/loop-lv.png> <./figures/loop-na.png> <./figures/loop-rd.
+png> <./figures/loop-rs.png> <./figures/loop-vbe.png> <./figures/loop-ss.png>] 
+(tex-figures/misprediction-graph.tex
+<tex-figures/misprediction/cp-crop.pdf, id=808, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/cp-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/cp-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/cp-crop.pdf used on input li
 ne 4.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/csd-crop.pdf, id=738, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/csd-crop.pdf, id=809, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/csd-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/csd-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/csd-crop.pdf used on input l
 ine 6.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/DC-crop.pdf, id=739, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/DC-crop.pdf, id=810, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/DC-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/DC-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/DC-crop.pdf used on input li
 ne 8.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/LIC-crop.pdf, id=740, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/LIC-crop.pdf, id=811, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/LIC-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/LIC-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/LIC-crop.pdf used on input l
-ine 10.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ine 11.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/usa-crop.pdf, id=741, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/usa-crop.pdf, id=812, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/usa-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/usa-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/usa-crop.pdf used on input l
 ine 13.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/vfr-crop.pdf, id=742, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/vfr-crop.pdf, id=813, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/vfr-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/vfr-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/vfr-crop.pdf used on input l
 ine 15.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/mwn-crop.pdf, id=743, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/mwn-crop.pdf, id=814, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/mwn-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/mwn-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/mwn-crop.pdf used on input l
-ine 17.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ine 18.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/AE-crop.pdf, id=744, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/AE-crop.pdf, id=815, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/AE-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/AE-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/AE-crop.pdf used on input li
-ne 19.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ne 20.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/LMA-crop.pdf, id=745, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/LMA-crop.pdf, id=816, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/LMA-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/LMA-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/LMA-crop.pdf used on input l
 ine 22.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/LMNA-crop.pdf, id=746, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/LMNA-crop.pdf, id=817, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/LMNA-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/LMNA-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/LMNA-crop.pdf used on input 
-line 24.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+line 25.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/LV-crop.pdf, id=747, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/LV-crop.pdf, id=818, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/LV-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/LV-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/LV-crop.pdf used on input li
-ne 26.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ne 27.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/NA-crop.pdf, id=748, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/NA-crop.pdf, id=819, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/NA-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/NA-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/NA-crop.pdf used on input li
-ne 28.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ne 29.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/rd-crop.pdf, id=749, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/rd-crop.pdf, id=820, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/rd-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/rd-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/rd-crop.pdf used on input li
-ne 31.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ne 32.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/rs-crop.pdf, id=750, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/rs-crop.pdf, id=821, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/rs-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/rs-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/rs-crop.pdf used on input li
-ne 33.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ne 34.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/VBE-crop.pdf, id=751, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/VBE-crop.pdf, id=822, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/VBE-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/VBE-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/VBE-crop.pdf used on input l
-ine 35.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ine 36.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
-<tex-figures/misprediction/SS-crop.pdf, id=752, 694.595pt x 407.5225pt>
+<tex-figures/misprediction/SS-crop.pdf, id=823, 694.595pt x 407.5225pt>
 File: tex-figures/misprediction/SS-crop.pdf Graphic file (type pdf)
 
 <use tex-figures/misprediction/SS-crop.pdf>
 Package pdftex.def Info: tex-figures/misprediction/SS-crop.pdf used on input li
-ne 37.
-(pdftex.def)             Requested size: 99.05374pt x 58.10986pt.
+ne 39.
+(pdftex.def)             Requested size: 144.08067pt x 84.53136pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (tex-figures/paths-table.tex [36]) (tex-figures/paths-table2.tex
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [37 <./tex-figures/misprediction/cp-crop.pdf> <./tex-figures/misprediction/cs
-d-crop.pdf
+) [39] [40] [41 <./tex-figures/misprediction/cp-crop.pdf> <./tex-figures/mispre
+diction/csd-crop.pdf
 
 pdfTeX warning: pdflatex.exe (file ./tex-figures/misprediction/csd-crop.pdf): P
 DF inclusion: multiple pdfs with page group included in a single page
@@ -1185,54 +1191,103 @@ DF inclusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex.exe (file ./tex-figures/misprediction/SS-crop.pdf): PD
 F inclusion: multiple pdfs with page group included in a single page
->] <figures/hybrid-optimization.pdf, id=927, 694.595pt x 188.705pt>
+>]
+CHAPTER\  8.
+(tex-figures/paths-table.tex) (tex-figures/paths-table2.tex
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [42
+
+] [43] [44]
+CHAPTER\  9.
+<figures/hybrid-optimization.pdf, id=1014, 694.595pt x 188.705pt>
 File: figures/hybrid-optimization.pdf Graphic file (type pdf)
 
 <use figures/hybrid-optimization.pdf>
-Package pdftex.def Info: figures/hybrid-optimization.pdf used on input line 359
+Package pdftex.def Info: figures/hybrid-optimization.pdf used on input line 366
 .
 (pdftex.def)             Requested size: 450.2418pt x 122.32277pt.
-) [38] [39 <./figures/hybrid-optimization.pdf>] (Body/case-studies.tex
-CHAPTER\  5.
-(tex-figures/case-study-table.tex)) (threats.tex [40
+ [45
+
+ <./figures/hybrid-optimization.pdf>]) [46] (Body/case-studies.tex
+CHAPTER\  10.
+(tex-figures/case-study-table.tex) (tex-figures/precondition-mining.tex)
+Package microtype Info: Loading generic settings for font family
+(microtype)             `cmss' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Try loading font information for OML+cmss on input line 21.
+
+LaTeX Font Info:    No file OMLcmss.fd. on input line 21.
 
 
-]
-CHAPTER\  6.
-) [41
+LaTeX Font Warning: Font shape `OML/cmss/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 21.
+
+[47
+
+
+] (tex-figures/api-usage.tex
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
+
+Overfull \hbox (6.7759pt too wide) in paragraph at lines 6--37
+ [][] 
+ []
+
+)) (threats.tex [48] [49]
+CHAPTER\  11.
+) [50
 
 ]
 \openout2 = `Body/related.aux'.
 
  (Body/related.tex
-CHAPTER\  7.
-[42
+CHAPTER\  12.
+
+Package natbib Warning: Citation `Harper95)' on page 51 undefined on input line
+ 16.
+
+[51
 
 
-]) [43]
+] [52]) [53]
 \openout2 = `Body/conclusion.aux'.
 
  (Body/conclusion.tex
-CHAPTER\  8.
-) [44
+CHAPTER\  13.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--24
+
+ []
+
+) [54
 
 
 
-] (thesis.bbl [45
+] [55] (thesis.bbl [56
 
 
-] [46] [47] [48])
+] [57] [58] [59])
+
+Package natbib Warning: There were undefined citations.
+
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 107.
- [49]
+[60]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
- (thesis.aux (Preface/titlepage.aux) (Preface/acknowl.aux) (Preface/abstract.au
-x) (Body/introduction.aux)
-(Body/contributions.aux) (Body/approach.aux) (Body/eval.aux) (Body/related.aux)
-(Body/conclusion.aux))
+ (thesis.aux (Preface/titlepage.aux) (Preface/acknowl.aux)
+(Preface/abstract.aux) (Body/introduction.aux) (Body/contributions.aux)
+(Body/approach.aux) (Body/eval.aux) (Body/related.aux) (Body/conclusion.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 107.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 828012F2F9FFAB737933D19B8390EC19;3111.
+(rerunfilecheck)             Checksum: F43C18CA7AF51A1039AFE0B67E4B85F0;3706.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
  )
 (\end occurred inside a group at level 1)
@@ -1240,11 +1295,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12874 strings out of 493323
- 197932 string characters out of 3139066
- 416361 words of memory out of 3000000
- 15685 multiletter control sequences out of 15000+200000
- 21585 words of font info for 141 fonts, out of 3000000 for 9000
+ 12939 strings out of 493323
+ 198762 string characters out of 3139066
+ 413798 words of memory out of 3000000
+ 15708 multiletter control sequences out of 15000+200000
+ 22128 words of font info for 145 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  44i,23n,51p,1914b,9092s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
@@ -1257,16 +1312,17 @@ onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmtt9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/
-zapfding/uzdr.pfb>
-Output written on thesis.pdf (56 pages, 4856709 bytes).
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmtt9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/zapfding
+/uzdr.pfb>
+Output written on thesis.pdf (68 pages, 4894936 bytes).
 PDF statistics:
- 1100 PDF objects out of 1200 (max. 8388607)
- 226 named destinations out of 1000 (max. 500000)
- 18961 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 1216 PDF objects out of 1440 (max. 8388607)
+ 252 named destinations out of 1000 (max. 500000)
+ 21073 words of extra memory for PDF output out of 24883 (max. 10000000)
 

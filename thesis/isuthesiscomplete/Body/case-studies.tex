@@ -3,31 +3,30 @@
 
 \input{tex-figures/case-study-table}
 
-We implemented three case studies using our formalism for source 
+We implemented two case studies using our formalism for source 
 code analysis and evaluated using hybrid and WRPO traversal. We are comparing 
 against only WRPO since it is the next best performing traversal. 
 %for all the three case studies.
 
-\textbf{API Precondition Mining (APM).} This case study mines a large corpus 
-of API usages to derive potential preconditions for API methods~\cite{nguyen2014mining}. 
+\section{API Precondition Mining (APM).} 
+This case study mines a large corpus 
+of API usages to derive potential preconditions for API methods(~\cite{nguyen2014mining}). 
 The key idea of this work is that API preconditions would be checked frequently in a 
 corpus with a large number of API usages, while project-specific 
 conditions would be less frequent. 
 %
 This case study analysis mined the preconditions for all methods of 
-\lstinline|java.lang.String|. 
+\lstinline|java.lang.String|. Boa source code for this case study can be found in http://boa.cs.iastate.edu/boa/index.php?q=boa/job/61006 .
+\input{tex-figures/precondition-mining}
+\paragraph{Result analysis.} \autoref{fig:precondition} lists the first and second most mined pre-condition for some of the methods in String java API. For all the methods, the most mined pre-condition is \inline{var!=null}, which is expected as null condition check is done on the parameters before using these parameters in the API methods. Methods like \inline{equals}, \inline{startsWith}, \inline{contains}, \inline{matches} have \inline{var!=null && arg!=null} as the second most mined precondition, as these API methods take a parameter and is applied on a variable. Hence null check is performed on both of these variables. \inline{charAt} takes an index as parameter and a check on whether this index is lesser than the variable's length is made (\inline{arg < var.length}). Hence this is the second most mined precondition for \inline{charAt} method.
 
-\textbf{API Usage Mining (AUM).} This case study analyzes API usage code and 
-mines API usage patterns~\cite{zhong2009mapo}. The mined patterns help 
+\section{API Usage Mining (AUM).} This case study analyzes API usage code and 
+mines API usage patterns(~\cite{zhong2009mapo}). The mined patterns help 
 developers understand and write API usages more effectively 
 with less errors. Our analysis mined usage patterns for 
-\lstinline|java.util| APIs. 
-
-\textbf{Finding Security Vulnerabilities with Tainted Object 
-Propagation (SVT).} This case study formulated a variety of widespread SQL 
-injections, as tainted object propagation problems~\cite{livshits2005finding}. 
-Our analysis looked for all SQL injection vulnerabilities 
-matching the specifications in the statically analyzed code. 
+\lstinline|java.util| APIs.  Boa source code for this case study can be found in http://boa.cs.iastate.edu/boa/?q=boa/job/61007 .
+\input{tex-figures/api-usage}
+\paragraph{Result analysis.} \autoref{fig:api-usage} lists the top 10 API Usage pattern for java.util API. Top two usage patterns are looping a collection using an iterator. Returning the size of the list and return an boolean indicating whether the collection contains more element are the next most mined usage patterns. The other most mined API usage patterns are related to java.util.log class (logging error, info, message).
 
 \autoref{fig:case-study-table} shows that hybrid traversal helps reduce 
 running times significantly by 80--175 minutes, which is from 6\%--10\% relatively. 

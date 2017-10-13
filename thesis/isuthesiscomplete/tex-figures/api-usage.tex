@@ -1,0 +1,40 @@
+\begin{figure}
+%\begin{figure}[t]%
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.5cm}p{15cm}}
+\toprule
+\# & API Pattern \\
+\midrule
+1 & iter=delegates.iterator();
+LOOP (iter.hasNext()) \{ 
+	o=iter.next();
+	IF(o instanceof Object \&\& !iter.hasNext()) \{
+		result=(Object) o
+		IF(result != null) \{
+			return result;
+		\}
+	\}
+\} \\
+2 & iter=delegates.iterator();
+LOOP (iter.hasNext()) \{ 
+	o=iter.next();
+	IF(o instanceof Object) \{
+		store=(Object) o;
+	\}
+\}  \\
+3 & return list.size()  \\
+4 & return iterator.hasNext() \\
+5 & CATCH(Exception) \{ log.error(e.getMessage(),e) \} \\
+6 & CATCH(Exception) \{ log.error(e.getMessage(),e); ErrorDialog.open(e) \} \\
+7 & CATCH(IOException) \{ log.log(Level.FINE,e.toString(),e) \} \\
+8 & return this.map.size() \\
+9 & this.myArrayList.add(value:Object)  \\
+10 & TRY \{ LOG.info("STARTING "+getName()) \} CATCH(Exception) \{\} \\
+\bottomrule
+\end{tabular}%
+\caption{Top 10 API Usage pattern for java.util API.}
+\label{fig:api-usage}
+%\end{figure}
+\end{figure}

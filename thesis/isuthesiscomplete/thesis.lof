@@ -8,36 +8,43 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of the hybrid approach for selecting and optimizing graph traversal strategy.\relax }}{9}{figure.caption.21}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Running example of applying the post dominator analysis on an input graph containing branch and loop.\relax }}{15}{figure.caption.60}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Traversal strategy selection decision tree.\relax }}{23}{figure.caption.115}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Traversal strategy selection decision tree.\relax }}{24}{figure.caption.117}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Reduction in running times.\relax }}{32}{figure.caption.131}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Time reduction for each analysis.}}}{32}{subfigure.1.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Overall reduction over analysis properties.}}}{32}{subfigure.1.2}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Overall reduction over graph properties.}}}{32}{subfigure.1.3}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Reduction in running times against hand optimized analysis.\relax }}{34}{figure.caption.136}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Scatter charts for analyses that have loop sensitive traversals. \relax }}{35}{figure.caption.140}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {CP}}}{35}{subfigure.3.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {CSD}}}{35}{subfigure.3.2}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {DC}}}{35}{subfigure.3.3}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {LIC}}}{35}{subfigure.3.4}
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {USA}}}{35}{subfigure.3.5}
-\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {VFR}}}{35}{subfigure.3.6}
-\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {MWN}}}{35}{subfigure.3.7}
-\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {AE}}}{35}{subfigure.3.8}
-\contentsline {subfigure}{\numberline {(i)}{\ignorespaces {LMA}}}{35}{subfigure.3.9}
-\contentsline {subfigure}{\numberline {(j)}{\ignorespaces {LMNA}}}{35}{subfigure.3.10}
-\contentsline {subfigure}{\numberline {(k)}{\ignorespaces {LV}}}{35}{subfigure.3.11}
-\contentsline {subfigure}{\numberline {(l)}{\ignorespaces {NA}}}{35}{subfigure.3.12}
-\contentsline {subfigure}{\numberline {(m)}{\ignorespaces {RD}}}{35}{subfigure.3.13}
-\contentsline {subfigure}{\numberline {(n)}{\ignorespaces {RS}}}{35}{subfigure.3.14}
-\contentsline {subfigure}{\numberline {(o)}{\ignorespaces {VBE}}}{35}{subfigure.3.15}
-\contentsline {subfigure}{\numberline {(p)}{\ignorespaces {SS}}}{35}{subfigure.3.16}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Hybrid approach's performance against best approaches for mis-predicted graphs.\relax }}{37}{figure.caption.157}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Distribution of decisions over the paths of the decision tree.\relax }}{38}{figure.caption.159}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribution of decisions over the paths of the decision tree for the DaCapo Dataset.\relax }}{39}{figure.caption.160}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Reduction in execution time of the hybrid approach due to traversal optimization.\relax }}{39}{figure.caption.162}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Running time (minutes) of the case studies on GitHub data.\relax }}{40}{figure.caption.164}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Reduction in running times.\relax }}{34}{figure.caption.133}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Time reduction for each analysis.}}}{34}{subfigure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Overall reduction over analysis properties.}}}{34}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Overall reduction over graph properties.}}}{34}{subfigure.1.3}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Reduction in running times against hand optimized analysis.\relax }}{36}{figure.caption.138}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Scatter charts for analyses that have loop sensitive traversals. \relax }}{38}{figure.caption.142}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {CP}}}{38}{subfigure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {CSD}}}{38}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {DC}}}{38}{subfigure.1.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {LIC}}}{38}{subfigure.1.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {USA}}}{38}{subfigure.1.5}
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {VFR}}}{38}{subfigure.1.6}
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {MWN}}}{38}{subfigure.1.7}
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {AE}}}{38}{subfigure.1.8}
+\contentsline {subfigure}{\numberline {(i)}{\ignorespaces {LMA}}}{38}{subfigure.1.9}
+\contentsline {subfigure}{\numberline {(j)}{\ignorespaces {LMNA}}}{38}{subfigure.1.10}
+\contentsline {subfigure}{\numberline {(k)}{\ignorespaces {LV}}}{38}{subfigure.1.11}
+\contentsline {subfigure}{\numberline {(l)}{\ignorespaces {NA}}}{38}{subfigure.1.12}
+\contentsline {subfigure}{\numberline {(m)}{\ignorespaces {RD}}}{38}{subfigure.1.13}
+\contentsline {subfigure}{\numberline {(n)}{\ignorespaces {RS}}}{38}{subfigure.1.14}
+\contentsline {subfigure}{\numberline {(o)}{\ignorespaces {VBE}}}{38}{subfigure.1.15}
+\contentsline {subfigure}{\numberline {(p)}{\ignorespaces {SS}}}{38}{subfigure.1.16}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Hybrid approach's performance against best approaches for mis-predicted graphs.\relax }}{41}{figure.caption.159}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribution of decisions over the paths of the decision tree.\relax }}{43}{figure.caption.161}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Distribution of decisions over the paths of the decision tree for the DaCapo Dataset.\relax }}{44}{figure.caption.162}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Reduction in execution time of the hybrid approach due to traversal optimization.\relax }}{45}{figure.caption.164}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces Running time (minutes) of the case studies on GitHub data.\relax }}{47}{figure.caption.166}
+\contentsline {figure}{\numberline {10.2}{\ignorespaces First and second most mined pre-condition for some of the methods in String java API.\relax }}{48}{figure.caption.168}
+\contentsline {figure}{\numberline {10.3}{\ignorespaces Top 10 API Usage pattern for java.util API.\relax }}{48}{figure.caption.171}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

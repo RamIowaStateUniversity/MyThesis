@@ -55,10 +55,10 @@ analyses list covers all the static properties discussed in
 \secnref{sec:compute-properties}, i.e., data-flow sensitivity, loop sensitivity and 
 traversal direction. We ended up with 21 source code analyses as shown in 
 \tabref{tab:analysis-table}. They include 10 basic ones (analyses 1, 2, 8, 9, 
-10, 11, 12, 14, 15 and 19) from textbooks~\cite{compilers, programanalysis} and 11 
+10, 11, 12, 14, 15 and 19) from textbooks (~\cite{compilers, programanalysis}) and 11 
 tothers for detecting source code bugs, and code smells from the Soot 
-framework~\cite{vallee1999soot} (analyses 3, 4, 5, 13, 17 and 18), and 
-FindBugs tool~\cite{findbugs-paste2007} (analyses 6, 7, 16, 20 and 21). 
+framework (~\cite{vallee1999soot}) (analyses 3, 4, 5, 13, 17 and 18), and 
+FindBugs tool (~\cite{findbugs-paste2007}) (analyses 6, 7, 16, 20 and 21). 
 %We included analysis that needs control flow information to act upon. 
 %The standard textbook analysis were chosen since these are the base analysis upon which more complicated analysis act on.
 \tabref{tab:analysis-table} also shows the number of traversals each analysis 
@@ -75,7 +75,7 @@ mean iterative, forward and backward, respectively.
 
 \input{tex-figures/time-breakdown-table}
 
-\subsection{Datasets.} We ran the analyses on two datasets: DaCapo 9.12 benchmark~\cite{blackburn2006dacapo}, 
+\subsection{Datasets.} We ran the analyses on two datasets: DaCapo 9.12 benchmark (~\cite{blackburn2006dacapo}), 
 DaCapo for short, and a ultra-large-scale dataset containing projects from
 GitHub, GitHub for short.
 %
@@ -114,12 +114,12 @@ and 1 GB of RAM for each map/reduce task.
 %install with 1 name node, 1 job tracker node, and 6 compute nodes.
 %\end{itemize}
 
-\section{Running Time and Time Reduction}
+\chapter{Running Time and Time Reduction}
 \label{sec:performance-gain}
 
 We first report the running times and then study the achieved reductions against standard traversal strategies. 
 
-\subsection{Running Time}
+\section{Running Time}
 
 \tabref{tab:time} shows the running times for 21 analyses on the two 
 datasets. On average (column \textbf{Avg. Time}), each analysis took 
@@ -148,7 +148,7 @@ becomes insignificant when running on those two large datasets. This result
 shows the benefit of our hybrid approach when applying on ultra-large-scale
 analysis.
 
-\subsection{Time Reduction}
+\section{Time Reduction}
 
 \input{tex-figures/reduction-table}
 
@@ -213,7 +213,7 @@ different \graphprop{} types of input graphs. We can see that
 reductions over graphs with loops is highest and those over any graphs
 is lowest.
 
-\subsection{Time reduction against hand optimized analysis}
+\section{Time reduction against hand optimized analysis}
 \label{sec:hand-optimized}
 \input{tex-figures/reduction-table-oopsla-guideline}
 
@@ -235,7 +235,7 @@ such selective analyses, whenever possible (when the input graphs do not
 contain loops), but also optimize WPO/WRPO (in case of input graphs with loops), 
 such that the overheads are minimized.
 For non-data flow analysis, there is no gain against hand optimized analysis since ANY is the best traversal strategy for such analysis and both Hybrid approach and hand optimized analysis applied ANY traversal strategy for all the graphs for non-data flow analysis.
-\section{Correctness of Analysis Results}
+\chapter{Correctness of Analysis Results}
 \label{sec:soundness}
 
 To evaluate the correctness of analysis results, we first chose worklist 
@@ -248,7 +248,7 @@ exactly matched the corresponding ones in the groundtruth.
 %hybrid approach does not compromise on the correctness of the result while 
 %picking and optimizing the best traversal strategy.} 
 
-\section{Traversal Strategy Selection Precision}
+\chapter{Traversal Strategy Selection Precision}
 \label{sec:prediction-accuracy}
 
 \input{prediction-precision}
@@ -310,10 +310,10 @@ best running times.
 \fignref{fig:mis-graph} shows the Hybrid approach's performance against best 
 approaches for mis-predicted graphs for 16 analyses that has \emph{loop sensitive} traversals. We can see that for 
 majority of the mis-predicted graphs, Hybrid approach's performance is 
-comparable to the best approaches. 
+comparable to the best approaches. For analyses like CP, CSD, LIC, USA, DC, LMA, AE, LMNA, VBE and RD, Hybrid running time are almost similar to the Best traversal strategy for smaller graphs. For graphs of size greater than 200, Hybrid starts to perform worse (1.5x - 2x) than the best traversal strategy. But for analyses like MWN, VFR, LV, NA, RS and SS, Hybrid performs worse even for smaller graphs that were mis-predicted. This is because of the complexity of the analyses. Since these analyses are lesser in complexity, even for small graphs that are mis-predicted, hybrid's performance is worse. This is because hybrid chooses Worklist for these mis-predicted analyses and in these analyses, time to maintain the Worklist is much higher than the analyses itself.
 %As graph's size increases, Hybrid's performance for mis-predicted graphs worsens and is no more comparable to the best approach. 
 
-\section{Analysis on the Decision Tree Distribution}
+\chapter{Analysis on the Decision Tree Distribution}
 \label{sec:analysis-decision-tree}
 
 \input{tex-figures/paths-table}
@@ -331,12 +331,19 @@ determining strategies for CFGs from the two datasets. Two tables in
 \colorbox{lightblue}{(0\%, 1\%)}, \colorbox{lightblack}{[1\%, 10\%)} and \colorbox{lightgreen}{[10\%, 100\%]}.
 %
 %We evaluated the importance of all the paths in the decision tree that leads to the traversal strategy decision by computing the number of times a path has been taken by the CFGs in the \textit{DaCapo} dataset and the \textit{SourceForge} dataset for the 18 analyses. Figure \ref{fig:decision-distribution} shows two tables, one for each dataset with distribution of decisions over the paths of the decision tree. 
-The result shows a trend which is consistent between two datasets that 5 
-paths (P1, P2, P3 and P11) in the decision tree were used often---more 
-than average. Paths P4, P9 and P10 are less frequently used and paths P5, P6, 
-P7 and P8 were rarely used. 
-%Paths P5, P6, P7, P8 has been visited very less. 
-These four paths were taken less often than the others because they are only 
+The result shows a trend which is consistent between two datasets. 
+
+Path P11 is visited most often because path P11 leads to ANY traversal strategy. This path is taken when we encounter data flow insensitive traversal and since atleast once such traversal is present in every analyses and all graphs irrespective of the cyclicity, take this path, we see about 36\% of the graphs takes Path P11. 
+
+Path P1 is also visited about 35\% of the time. This path P1 is taken by sequential graphs and forward data flow sensitive traversal. Since we have about 70\% sequential graphs in our dataset and about 14 forward data flow sensitive traversal, Path P1 is taken 35\% of the time. 
+
+P2 was visited 10\% of the time even though there are only 4 backward analyses. This is because there are about 70\% sequential CFGs and that boosts up the number to 10\%. 
+P3 is visited much often that P4, since P3 is for forward analyses and P4 is for backward analyses. 
+
+Paths P9 and P10 are less frequently used since only 10\% of the CFGs has loops but since there are about 16 loop sensitive traversal, they were visited 5\% and 2\% of the times respectively. 
+
+Paths P5, P6, 
+P7 and P8 were were taken less often than the others because they are only 
 used for CFGs with loops which are only 10\% of the CFGs in the datatsets.
 %and this 10\% is shared between these 4 paths. 
 %But this 10\% is significant as \textit{SourceForge} dataset contains about 16 million CFGs with loops and the gain in execution time by choosing the best strategy for these CFGs is significant and hence these 4 paths are important in the decision tree. 
@@ -351,7 +358,7 @@ checks.
 
 %The path P11 which leads to sequential order traversal strategy is dominant as all the analysis involves atleast one \textit{data flow insensitive} traversal and for such traversal, according to hybrid approach, sequential order traversal strategy is chosen for all the CFGs. Hence path P11 occupies atleast half of the pie-chart for all the analysis. One can argue that sequential order traversal strategy could be chosen as the default strategy if it occupies half of the pie-chart. Performance of sequential order traversal strategy in Figure \ref{fig:dacapo-singlemachine-time-percentage} answers that argument as hybrid approach gains atleast 40\% reduction in time when compared to sequential order traversal strategy. This is because for traversal for which sequential order traversal strategy is chosen are trivial traversals and for traversals for which sequential order traversal strategy is not chosen, are the traversals that contain major chunk of the analysis. Hence choosing the best traversal for these traversals are important.
 
-\section{Analysis on Traversal Optimization}
+\chapter{Analysis on Traversal Optimization}
 \label{sec:analysis-traversal-opt}
 
 \begin{figure}
@@ -370,9 +377,12 @@ traversal strategy optimization. For analyses that involve at least one
 least 60\% of running time. This is because optimizations in such traversals 
 reduce the number of iterations of traversals over the graphs by eliminating 
 the redundant result re-computation traversal and the
-unnecessary fixpoint condition checking traversal. For analyses involving only 
+unnecessary fixpoint condition checking traversal. Thus in effect, we are ignoring two traversals per graph. Since the dataset contains about 90\% of sequential graph, we only traverse the graph once due to optimization. If no optimization, we would have traversed the graph thrice and therefore we reduced two-third of the running time. This is the reason why we see about 60\% reduction in time due to optimization.
+ 
+For analyses involving only 
 \textit{data-flow insensitive} traversal, there is no reduction in execution time, as 
-hybrid approach does not attempt to optimize.
+hybrid approach does not attempt to optimize. This is because, Hybrid mainly optimizes by removing the redundant result re-computation traversal and the
+unnecessary fixpoint condition checking traversal. Both these traversals are not present in \textit{data-flow insensitive} traversal, and hence Hybrid cannot optimize further.
 
 
 %\section{Hybrid Approach vs. Hand-Optimized Analysis}

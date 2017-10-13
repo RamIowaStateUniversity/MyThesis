@@ -15,27 +15,35 @@
 \BOOKMARK [1][-]{section.62}{3.2 Static and Runtime Properties}{chapter.20}% 15
 \BOOKMARK [2][-]{subsection.63}{3.2.1 Data-Flow Sensitivity}{section.62}% 16
 \BOOKMARK [2][-]{subsection.74}{3.2.2 Computing Data-Flow Sensitivity}{section.62}% 17
-\BOOKMARK [2][-]{subsection.75}{3.2.3 Loop Sensitivity}{section.62}% 18
-\BOOKMARK [2][-]{subsection.111}{3.2.4 Computing Loop Sensitivity}{section.62}% 19
-\BOOKMARK [2][-]{subsection.113}{3.2.5 Graph Cyclicity}{section.62}% 20
-\BOOKMARK [1][-]{section.114}{3.3 Traversal Strategies - Candidates}{chapter.20}% 21
-\BOOKMARK [1][-]{section.116}{3.4 Decision Tree for Traversal Strategy Selection}{chapter.20}% 22
-\BOOKMARK [2][-]{subsection.118}{3.4.1 An Example}{section.116}% 23
-\BOOKMARK [1][-]{section.119}{3.5 Optimizing the Selected Traversal Strategy}{chapter.20}% 24
-\BOOKMARK [0][-]{chapter.120}{4. Empirical Evaluation}{}% 25
-\BOOKMARK [1][-]{section.121}{4.1 Analyses, Datasets and Experiment Setting}{chapter.120}% 26
-\BOOKMARK [2][-]{subsection.123}{4.1.1 Analyses.}{section.121}% 27
-\BOOKMARK [2][-]{subsection.126}{4.1.2 Datasets.}{section.121}% 28
-\BOOKMARK [2][-]{subsection.127}{4.1.3 Setting.}{section.121}% 29
-\BOOKMARK [1][-]{section.128}{4.2 Running Time and Time Reduction}{chapter.120}% 30
-\BOOKMARK [2][-]{subsection.129}{4.2.1 Running Time}{section.128}% 31
-\BOOKMARK [2][-]{subsection.130}{4.2.2 Time Reduction}{section.128}% 32
-\BOOKMARK [2][-]{subsection.135}{4.2.3 Time reduction against hand optimized analysis}{section.128}% 33
-\BOOKMARK [1][-]{section.137}{4.3 Correctness of Analysis Results}{chapter.120}% 34
-\BOOKMARK [1][-]{section.138}{4.4 Traversal Strategy Selection Precision}{chapter.120}% 35
-\BOOKMARK [1][-]{section.158}{4.5 Analysis on the Decision Tree Distribution}{chapter.120}% 36
-\BOOKMARK [1][-]{section.161}{4.6 Analysis on Traversal Optimization}{chapter.120}% 37
-\BOOKMARK [0][-]{chapter.163}{5. Case Studies}{}% 38
-\BOOKMARK [0][-]{chapter.165}{6. Threats to Validity}{}% 39
-\BOOKMARK [0][-]{chapter.166}{7. Related Work}{}% 40
-\BOOKMARK [0][-]{chapter.167}{8. Conclusion}{}% 41
+\BOOKMARK [2][-]{subsection.76}{3.2.3 Loop Sensitivity}{section.62}% 18
+\BOOKMARK [2][-]{subsection.112}{3.2.4 Computing Loop Sensitivity}{section.62}% 19
+\BOOKMARK [2][-]{subsection.115}{3.2.5 Graph Cyclicity}{section.62}% 20
+\BOOKMARK [1][-]{section.116}{3.3 Traversal Strategies - Candidates}{chapter.20}% 21
+\BOOKMARK [1][-]{section.118}{3.4 Decision Tree for Traversal Strategy Selection}{chapter.20}% 22
+\BOOKMARK [2][-]{subsection.120}{3.4.1 An Example}{section.118}% 23
+\BOOKMARK [1][-]{section.121}{3.5 Optimizing the Selected Traversal Strategy}{chapter.20}% 24
+\BOOKMARK [0][-]{chapter.122}{4. Empirical Evaluation}{}% 25
+\BOOKMARK [1][-]{section.123}{4.1 Analyses, Datasets and Experiment Setting}{chapter.122}% 26
+\BOOKMARK [2][-]{subsection.125}{4.1.1 Analyses.}{section.123}% 27
+\BOOKMARK [2][-]{subsection.128}{4.1.2 Datasets.}{section.123}% 28
+\BOOKMARK [2][-]{subsection.129}{4.1.3 Setting.}{section.123}% 29
+\BOOKMARK [0][-]{chapter.130}{5. Running Time and Time Reduction}{}% 30
+\BOOKMARK [1][-]{section.131}{5.1 Running Time}{chapter.130}% 31
+\BOOKMARK [1][-]{section.132}{5.2 Time Reduction}{chapter.130}% 32
+\BOOKMARK [1][-]{section.137}{5.3 Time reduction against hand optimized analysis}{chapter.130}% 33
+\BOOKMARK [0][-]{chapter.139}{6. Correctness of Analysis Results}{}% 34
+\BOOKMARK [0][-]{chapter.140}{7. Traversal Strategy Selection Precision}{}% 35
+\BOOKMARK [0][-]{chapter.160}{8. Analysis on the Decision Tree Distribution}{}% 36
+\BOOKMARK [0][-]{chapter.163}{9. Analysis on Traversal Optimization}{}% 37
+\BOOKMARK [0][-]{chapter.165}{10. Case Studies}{}% 38
+\BOOKMARK [1][-]{section.167}{10.1 API Precondition Mining \(APM\).}{chapter.165}% 39
+\BOOKMARK [1][-]{section.170}{10.2 API Usage Mining \(AUM\).}{chapter.165}% 40
+\BOOKMARK [0][-]{chapter.173}{11. Threats to Validity}{}% 41
+\BOOKMARK [0][-]{chapter.174}{12. Related Work}{}% 42
+\BOOKMARK [1][-]{section.175}{12.1 Mixing static and dynamic information.}{chapter.174}% 43
+\BOOKMARK [1][-]{section.176}{12.2 Optimizing program analysis.}{chapter.174}% 44
+\BOOKMARK [1][-]{section.177}{12.3 Ultra-large-scale source code mining.}{chapter.174}% 45
+\BOOKMARK [1][-]{section.178}{12.4 Graph traversal optimization.}{chapter.174}% 46
+\BOOKMARK [0][-]{chapter.179}{13. Conclusion and Future work}{}% 47
+\BOOKMARK [1][-]{section.180}{13.1 Conclusion}{chapter.179}% 48
+\BOOKMARK [1][-]{section.181}{13.2 Future Work}{chapter.179}% 49

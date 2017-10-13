@@ -1,0 +1,22 @@
+\begin{figure}
+%\begin{figure}[t]%
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrr}
+\toprule
+API Method & First & Second \\
+\midrule
+equals & var!=null & var!=null \&\& arg!=null  \\
+startsWith & var!=null & var!=null \&\& arg!=null \\
+contains & var!=null & var!=null \&\& arg!=null \\
+matches & var!=null & var!=null \&\& arg!=null \\
+split & var!=null & !isEmpty(var) \\
+charAt & var!=null & arg < var.length \\
+substring & var!=null & arg!=-1 \\
+\bottomrule
+\end{tabular}%
+\caption{First and second most mined pre-condition for some of the methods in String java API.}
+\label{fig:precondition}
+%\end{figure}
+\end{figure}

@@ -93,7 +93,7 @@ nodes. For instance, in the reaching definition data-flow analysis, the outputs
 of nodes are computed using the outputs of predecessors and in live variable
 data-flow analysis, the outputs of nodes are computed using the outputs of
 successors. Hence, both reaching definition and live variable analysis are
-data-flow sensitive.
+data-flow sensitive. The term data-flow sensitive is different from the traditional term flow-sensitive, that is used in the literature (~\cite{choi1993efficient}). In literature, a problem is "flow-sensitive" if information about control internal to subroutines is used to compute the final set of data flow facts, while our definition of data-flow sensitive is given below.
 
 % Data flow sensitivity is a property defined for every traversal in the analysis.
 % A traversal is said to be data flow sensitive, if the traversal output of a node
@@ -116,14 +116,8 @@ is data-flow sensitive. That is $P_{DataFlow}$ is \textit{true} otherwise
 % O[n] = F(O[n'])
 % \end{equation}
 
-For instance, consider the lines 16 and 17 of the \lstinline|domT| traversal
-shown in Listing \ref{lst:dominators}. Here, a variable \lstinline|dom| holds
-the traversal output of a node $n$ and it is computed by applying an
-\lstinline|intersection| operation on the traversal outputs of successors of
-$n$. Here, the function $F$ is \lstinline|intersection| over the outputs of all
-successors of a node.
-
 \input{tex-figures/algorithms/flow_sensitivity}
+
 \subsection{Computing Data-Flow Sensitivity}
 \label{sec:df-algo}
 To determine the data-flow sensitivity property of a traversal, the operations
@@ -143,7 +137,7 @@ node \lstinline|n| is computed using the traversal outputs of other nodes
 (\lstinline|n'|) and hence the traversal is data-flow sensitive.
 For performing the points to check, \algoref{algo:flow-sensitive} assumes that
 an alias environment is computed by using must alias
-analysis~\cite{must-alias}. \algoref{algo:flow-sensitive} requires that
+analysis(~\cite{must-alias}). \algoref{algo:flow-sensitive} requires that
 the must alias analysis computes all names in the \lstinline|tbody| that must
 alias each other at any program point. The must alias information ensures that
 \algoref{algo:flow-sensitive} never classifies a data-flow sensitive traversal
@@ -155,13 +149,23 @@ classify the traversal as data-flow sensitive. The control and loop statements
 in the \lstinline|tbody| do not have any impact on \algoref{algo:flow-sensitive}
 for computing the data-flow sensitivity property.
 
+\paragraph{Worked Out Example .}
+For instance, consider the \lstinline|domT| traversal shown in Listing \ref{lst:dominators}. Lets apply \ref{algo:flow-sensitive} to determine if \lstinline|domT| traversal is data-flow sensitive or not. Here \lstinline|domT| is the \lstinline|t|. We first compute the aliases of n. Only n is an alias of n (every variable is an alias of itself). Then for each statement in \lstinline|domT| traversal, we apply line 3-5 in \ref{algo:flow-sensitive}. Consider the line 17 of the \lstinline|domT| traversal. Here, there is a statement \lstinline|output (s, domT )| which if of the form \lstinline|output (n', t' )|. Here \lstinline|domT| which is t' is equal to t and \lstinline|s| which is \lstinline|n'| is not an alias of \lstinline|n|. Hence we return true, indicating \lstinline|domT| is data-flow sensitive.
+
+Intuitively, in line 16 and 17, a variable \lstinline|dom| holds
+the traversal output of a node $n$ and it is computed by applying an
+\lstinline|intersection| operation on the traversal outputs of successors of
+$n$. Here, the function $F$ is \lstinline|intersection| over the outputs of all
+successors of a node.
+
 \subsection{Loop Sensitivity}
 The loop sensitivity property models the effect of the loops in the input graph.
 If an input graph contains loops and if the traversal is affected by the loop,
 the traversal may require multiple iterations to compute the output of nodes.
 In the multiple iterations, the traversal outputs of nodes either shrinks or
 expands to reach a fixpoint. Hence, we define a traversal as loop sensitive,
-if the traversal output of nodes in subsequent iterations shrinks or expands.
+if the traversal output of nodes in subsequent iterations shrinks or expands. The term loop-sensitive is different from the iteration dependences, that is used in the literature (~\cite{blume1996parallel}). In literature, Iteration dependences arise when two different iterations access the same memory location and one or both
+accesses are a memory write, while our definition of loop-sensitive is given below.
 
 \begin{definition}\label{def:loop-sensitivity}
 $P_{Loop}$ (\textbf{Loop sensitivity}). Given a traversal \lstinline|t|, a map
@@ -325,7 +329,8 @@ node always expands, and if there exists \lstinline|intersection| and
 \lstinline|remove| operations, the output of a node always shrinks. For a
 data-flow traversal to be loop sensitive, the output of nodes must either expand
 or shrink, not both (lines 28-29). 
-
+\paragraph{Worked Out Example.} Consider the \lstinline|domT| traversal shown in Listing
+\ref{lst:dominators}. Lets apply \ref{algo:loop-sensitive} to determine if \lstinline|domT| traversal is loop-sensitive or not. Here \lstinline|domT| is the \lstinline|t|. We first compute the aliases of n. Only n is an alias of n (every variable is an alias of itself). Then for each statement in \lstinline|domT| traversal, we apply line 9-14 in \ref{algo:loop-sensitive} to compute \lstinline|V| and \lstinline|V'|. There is only one statement of form \lstinline|v = output(n', t')| in \ref{lst:dominators} (line 8). Here dom maps to v, domT maps to t' and n maps to n. Since \lstinline|domT| is also \lstinline|t|, line 12 in \ref{algo:loop-sensitive} gets executed. At the end of line 14, \lstinline|V| contains \lstinline|dom| and \lstinline|V'| is empty. We once again analyze every statement in \lstinline|domT| traversal to search for union, intersection, add, addAll, remove, removeAll statement (line 15-27). We have intersection (line 17) and add (line 18) statement in \lstinline|domT| traversal, which sets variable \lstinline|shrink| and \lstinline|gen| to true. Line 28 in \ref{algo:loop-sensitive} checks if either both \lstinline|expand| and \lstinline|kill| are true or \lstinline|shrink| and \lstinline|kill| are true. Since both these conditions are not met, the algorithm return \lstinline|domT| as loop-insensitive.
 \subsection{Graph \Graphprop}
 So far we have described the two static properties of the analysis that
 influences the traversal strategy selection. A property of the input graph
@@ -376,7 +381,7 @@ prior to computing the node's output.
 \label{sec:candidates}
 
 We have picked seven traversal strategies as candidates for choosing an optimal
-traversal strategy for given a traversal and an input graph. The selected candidate strategies were arrived at by carefully reviewing compilers textbooks, implementations, and source code analysis frameworks. We also made sure that the selected candidate strategies are applicable to any graphs and analysis. We did not consider strategies like chaotic iteration based on Weak Topological Ordering because they are effective only for computing fixed points of continuous function over lattices of infinite height ~\cite{bourdoncle93}.
+traversal strategy for given a traversal and an input graph. The selected candidate strategies were arrived at by carefully reviewing compilers textbooks, implementations, and source code analysis frameworks. We also made sure that the selected candidate strategies are applicable to any graphs and analysis. We did not consider strategies like chaotic iteration based on Weak Topological Ordering because they are effective only for computing fixed points of continuous function over lattices of infinite height (~\cite{bourdoncle93}).
 The selected traversal strategies are describe below:
 \begin{itemize}
   \item \textbf{Any order (\textit{ANY})}: In this traversal strategy, nodes can

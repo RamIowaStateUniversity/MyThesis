@@ -1,5 +1,6 @@
-\chapter{Conclusion}
+\chapter{Conclusion and Future work}
 \label{conclusion}
+\section{Conclusion}
 Improving the performance of source code analyses that runs on massive code bases
 is an ongoing challenge. One way to improve the performance of
 source code analysis expressed as traversals over graphs like CFGs, is by picking
@@ -19,4 +20,11 @@ representative collection of source code analysis in our evaluation
 were considerably reduced by 1\%-28\% (13 minutes to 72 minutes in absolute time) when compared against the best performing traversal strategy. The case studies show that hybrid traversal reduces 80--175 minutes in running times for three software engineering tasks. The overhead imposed by 
 collecting additional information for our approach is less than 0.2\% of 
 the total running time for a large dataset and less than 0.01\% for an 
-ultra-large dataset.
+ultra-large dataset.\newline
+\section{Future Work}
+One possible future work is to understand how the complexity of analysis affects the decision making of traversal strategies for graphs with loops. Right now, We have mis-predictions for graphs with loops. We have identified that as graph size increases, mis-prediction increase. As part of future work, we would like to explore other factors that affect and expand the decision tree to predict correct strategies for large graphs with loops.\newline
+Another possible future work will be to build an agent and train it using the decision tree so that it understands and builds a model that gives much more accurate decision tree with lesser mis-predictions.\newline
+We could also expand our framework to inter-procedural analysis as we support only intra-procedural analysis right now. Expanding this will be a challenge as we will be dealing with multiple cfgs and the current algorithm for data flow sensitivity and loop sensitivity should be carefully revised. It also requires investigating if any new factors play a role in traversal strategy decision making for inter-procedural analysis.\newline 
+Also there are analysis whose output changes with the traversal used. They are called traversal sensitive analysis and we need to come up with how to handle such analysis and investigate if there is any way we can recommend a traversal to the user.\newline
+Another potential future work is to expand the decision tree to general graphs as we deal with only CFGs now. It requires investigating the factors that affect the traversal strategy decision for general graph analysis and if there is any room for improvement.\newline
+We could also expand our framework such that after running the check once to select the optimal traversal, one would not have to rerun this unless the analysis technique under scrutiny has fundamentally changed. That is, one could store a cache of solutions which could be consulted prior to searching for the optimal traversal algorithm again.
