@@ -1,0 +1,124 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Nullness Analysis},label={lst:na-code}, lastline = 59] 
+p: Project = input;
+m: output collection[string][int] of string;
+
+type T= {in: set of string, out: set of string};
+cfg: CFG;
+
+cur_node_id: int;
+cur_cfg_node: CFGNode;
+
+genset: set of string;
+vardef: string;
+killset: set of string;
+local : set of string;
+
+allVarTraversal := traversal(node: CFGNode) {
+	if(def(node.expr)) {
+		if(node.expr.kind == ExpressionKind.VARDECL) {
+			add(local, node.defVariables);	
+		}
+	}
+};
+
+nullness := traversal(node: CFGNode) : T {
+	in_set : set of string;
+	out_set : set of string;
+	cur_val : T;
+	cur_val = getValue(node);
+	if(node.id==0)
+		cur_val = {in_set, out_set};
+	else
+		cur_val = {setClone(local), out_set};
+	preds := node.predecessors;
+	foreach(pred_node:CFGNode=preds) {	
+		pred := getValue(pred_node);
+		if(def(pred))
+			cur_val.in = intersection(cur_val.in, pred.out);
+	}
+	addAll(cur_val.out, cur_val.in);
+	if(def(node.expr)) {
+		if(node.expr.kind == ExpressionKind.VARDECL) {
+			if(contains(local, node.defVariables)) {
+				if(node.expr.variable_decls[0].initializer.kind == ExpressionKind.LITERAL) {
+					if(node.expr.variable_decls[0].initializer.literal == "null") {
+						remove(cur_val.out, node.defVariables);
+					}
+					else {
+						add(cur_val.out, node.defVariables);
+					}
+				}
+				else if(node.expr.variable_decls[0].initializer.kind == ExpressionKind.OTHER) {
+					remove(cur_val.out, node.defVariables);
+				}
+				else {
+					flag := false;
+					foreach(use:string=node.useVariables) {
+						if(contains(local, use)) {
+							if(!contains(cur_val.out, use)) {
+								flag = true;
+								remove(cur_val.out, node.defVariables);
+								break;
+							}
+						}
+					}
+					if(flag == false) {
+						add(cur_val.out, node.defVariables);
+					}
+				}
+			}
+		}
+		if(node.expr.kind == ExpressionKind.ASSIGN) {
+			if(contains(local, node.defVariables)) {
+				if(node.expr.expressions[1].kind == ExpressionKind.LITERAL) {
+					if(node.expr.expressions[1].literal == "null") {
+						remove(cur_val.out, node.defVariables);
+					}
+					else {
+						add(cur_val.out, node.defVariables);
+					}
+				}
+				else {
+					flag1 := false;
+					foreach(use:string=node.useVariables) {
+						if(contains(local, use)) {
+							if(!contains(cur_val.out, use)) {
+								flag1 = true;
+								remove(cur_val.out, node.defVariables);
+								break;
+							}
+						}
+					}
+					if(flag1 == false) {
+						add(cur_val.out, node.defVariables);
+					}
+				}
+			}
+		}
+	}
+	return cur_val;
+};
+
+fixp1 := fixp(curr, prev: T) : bool {
+	if (difference(curr.out, prev.out) == 0)
+		return true;	
+	return false;
+};
+
+
+reach_def := visitor {
+	before node: Method -> {
+		clear(allVarTraversal);clear(nullness);clear(local);
+
+		cfg = getcfg(node);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, allVarTraversal);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, nullness, fixp1);
+			
+	}
+};
+
+visit(p, reach_def);
+\end{lstlisting}
+\end{figure}

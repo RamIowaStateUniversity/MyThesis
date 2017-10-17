@@ -1,0 +1,63 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Live variable analysis},label={lst:live-variable}] 
+m: output collection[string][string][int] of int;
+p: Project = input;
+
+type T_gen_kill= {gen: set of string, kill: string, dummy : int};
+type T_inout= {in: set of string, out: set of string};
+
+cfg: CFG;
+cur_cfg_node: CFGNode;
+
+genset : set of string;
+killset : set of string;
+
+init := traversal(node: CFGNode): T_gen_kill {
+	cur_value : T_gen_kill;
+	cur_value = {node.useVariables, node.defVariables, 0};
+	return cur_value;
+};
+
+live := traversal(node: CFGNode): T_inout {
+	succs := node.successors;
+	in_set : set of string;
+	out_set : set of string;
+	cur_val : T_inout = {in_set, out_set};
+	if(def(getValue(node))) {
+		cur_val1 := getValue(node);
+		cur_val = clone(cur_val1);
+	}
+	foreach(succ_node:CFGNode=succs) {
+		succ := getValue(succ_node);
+		if(def(succ)) {
+			cur_val.out = union(cur_val.out,succ.in);
+		}
+	}
+	gen_kill := getValue(node, init);
+	if(def(gen_kill)) {
+	remove(cur_val.out, gen_kill.kill);
+	cur_val.in = union(gen_kill.gen, cur_val.out);
+	}
+	return cur_val;
+};
+
+fixp1 := fixp(curr, prev: T_inout) : bool {
+	if (difference(curr.in, prev.in) == 0)
+		return true;	
+	return false;
+};
+
+q_all := visitor {
+	before node: Method -> {
+		clear(init);clear(live);
+
+		cfg = getcfg(node);
+		traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.HYBRID, init);
+		traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.HYBRID, live, fixp1);
+	}
+};
+
+visit(p, q_all);
+\end{lstlisting}
+\end{figure}

@@ -1,0 +1,47 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Implementation code of traversal without fixpoint.},label={lst:allNodeids}] 
+public final void dfsBackward(final CFGNode node, java.util.HashMap<Integer,String> nodeVisitStatus) throws Exception {
+	outputMap.put(node.id, allnodeIds(node));
+	nodeVisitStatus.put(node.getId(),"visited");
+	for (CFGNode pred : node.getPredecessorsList()) {
+		if (nodeVisitStatus.get(pred.getId()).equals("unvisited"))
+			dfsBackward(pred, nodeVisitStatus);
+	}
+}
+
+public final void traverse(final boa.graphs.cfg.CFG cfg, final Traversal.TraversalDirection direction, final Traversal.TraversalKind kind) throws Exception {
+	try {
+		if (preTraverse(cfg)) {			
+			java.util.HashMap<Integer,String> nodeVisitStatus=new java.util.HashMap<Integer,String>();
+			CFGNode[] nl = cfg.nodes();
+			for(int i=0;i<nl.length;i++) {
+				nodeVisitStatus.put(nl[i].getId(),"unvisited");
+			}
+			switch(kind) {
+				case TraversalKind.DFS:
+				switch(direction) {
+					case TraversalDirection.BACKWARD :
+						dfsBackward(cfg.getExitNode(), nodeVisitStatus);
+						break;
+					case TraversalDirection.FORWARD :
+						.....
+				}
+				break;					
+				default:break;
+			}
+		}
+	} catch(Exception e) {return;}
+}
+\end{lstlisting}
+% \caption{}
+% % 
+% % 
+% % Dominator analysis performs traversal over the graph to determine the
+% % dominators of each node. It has two traversals. \textit{init} traversal collects
+% % all node ids. \textit{dom\_T} is called with a fixpoint and it runs till all the
+% % nodes reach the fixpoint condition.}
+% \label{fig:dominator}
+\end{figure}
+
+

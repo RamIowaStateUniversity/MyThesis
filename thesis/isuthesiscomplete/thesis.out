@@ -10,40 +10,57 @@
 \BOOKMARK [1][-]{section.17}{2.3 Graph Cyclicity}{chapter.14}% 10
 \BOOKMARK [1][-]{section.18}{2.4 Decision Tree for Traversal Strategy Selection}{chapter.14}% 11
 \BOOKMARK [1][-]{section.19}{2.5 Evaluation Contribution}{chapter.14}% 12
-\BOOKMARK [0][-]{chapter.20}{3. Hybrid Traversal Selection for Efficient Source Code Analysis}{}% 13
-\BOOKMARK [1][-]{section.22}{3.1 A System For Expressing Source Code Analysis As Traversals}{chapter.20}% 14
-\BOOKMARK [1][-]{section.62}{3.2 Static and Runtime Properties}{chapter.20}% 15
-\BOOKMARK [2][-]{subsection.63}{3.2.1 Data-Flow Sensitivity}{section.62}% 16
-\BOOKMARK [2][-]{subsection.74}{3.2.2 Computing Data-Flow Sensitivity}{section.62}% 17
-\BOOKMARK [2][-]{subsection.76}{3.2.3 Loop Sensitivity}{section.62}% 18
-\BOOKMARK [2][-]{subsection.112}{3.2.4 Computing Loop Sensitivity}{section.62}% 19
-\BOOKMARK [2][-]{subsection.115}{3.2.5 Graph Cyclicity}{section.62}% 20
-\BOOKMARK [1][-]{section.116}{3.3 Traversal Strategies - Candidates}{chapter.20}% 21
-\BOOKMARK [1][-]{section.118}{3.4 Decision Tree for Traversal Strategy Selection}{chapter.20}% 22
-\BOOKMARK [2][-]{subsection.120}{3.4.1 An Example}{section.118}% 23
-\BOOKMARK [1][-]{section.121}{3.5 Optimizing the Selected Traversal Strategy}{chapter.20}% 24
-\BOOKMARK [0][-]{chapter.122}{4. Empirical Evaluation}{}% 25
-\BOOKMARK [1][-]{section.123}{4.1 Analyses, Datasets and Experiment Setting}{chapter.122}% 26
-\BOOKMARK [2][-]{subsection.125}{4.1.1 Analyses.}{section.123}% 27
-\BOOKMARK [2][-]{subsection.128}{4.1.2 Datasets.}{section.123}% 28
-\BOOKMARK [2][-]{subsection.129}{4.1.3 Setting.}{section.123}% 29
-\BOOKMARK [0][-]{chapter.130}{5. Running Time and Time Reduction}{}% 30
-\BOOKMARK [1][-]{section.131}{5.1 Running Time}{chapter.130}% 31
-\BOOKMARK [1][-]{section.132}{5.2 Time Reduction}{chapter.130}% 32
-\BOOKMARK [1][-]{section.137}{5.3 Time reduction against hand optimized analysis}{chapter.130}% 33
-\BOOKMARK [0][-]{chapter.139}{6. Correctness of Analysis Results}{}% 34
-\BOOKMARK [0][-]{chapter.140}{7. Traversal Strategy Selection Precision}{}% 35
-\BOOKMARK [0][-]{chapter.160}{8. Analysis on the Decision Tree Distribution}{}% 36
-\BOOKMARK [0][-]{chapter.163}{9. Analysis on Traversal Optimization}{}% 37
-\BOOKMARK [0][-]{chapter.165}{10. Case Studies}{}% 38
-\BOOKMARK [1][-]{section.167}{10.1 API Precondition Mining \(APM\).}{chapter.165}% 39
-\BOOKMARK [1][-]{section.170}{10.2 API Usage Mining \(AUM\).}{chapter.165}% 40
-\BOOKMARK [0][-]{chapter.173}{11. Threats to Validity}{}% 41
-\BOOKMARK [0][-]{chapter.174}{12. Related Work}{}% 42
-\BOOKMARK [1][-]{section.175}{12.1 Mixing static and dynamic information.}{chapter.174}% 43
-\BOOKMARK [1][-]{section.176}{12.2 Optimizing program analysis.}{chapter.174}% 44
-\BOOKMARK [1][-]{section.177}{12.3 Ultra-large-scale source code mining.}{chapter.174}% 45
-\BOOKMARK [1][-]{section.178}{12.4 Graph traversal optimization.}{chapter.174}% 46
-\BOOKMARK [0][-]{chapter.179}{13. Conclusion and Future work}{}% 47
-\BOOKMARK [1][-]{section.180}{13.1 Conclusion}{chapter.179}% 48
-\BOOKMARK [1][-]{section.181}{13.2 Future Work}{chapter.179}% 49
+\BOOKMARK [0][-]{chapter.20}{3. Background}{}% 13
+\BOOKMARK [1][-]{section.21}{3.1 Graph}{chapter.20}% 14
+\BOOKMARK [1][-]{section.22}{3.2 Graph traversal}{chapter.20}% 15
+\BOOKMARK [1][-]{section.23}{3.3 Graph traversal strategies}{chapter.20}% 16
+\BOOKMARK [2][-]{subsection.24}{3.3.1 Depth-first search}{section.23}% 17
+\BOOKMARK [2][-]{subsection.25}{3.3.2 Breadth-first search}{section.23}% 18
+\BOOKMARK [1][-]{section.26}{3.4 Program analysis}{chapter.20}% 19
+\BOOKMARK [1][-]{section.27}{3.5 Control-flow and Data flow analysis}{chapter.20}% 20
+\BOOKMARK [1][-]{section.28}{3.6 Graph traversal for Program analysis}{chapter.20}% 21
+\BOOKMARK [2][-]{subsection.29}{3.6.1 Random order}{section.28}% 22
+\BOOKMARK [2][-]{subsection.30}{3.6.2 Postorder}{section.28}% 23
+\BOOKMARK [2][-]{subsection.31}{3.6.3 Reverse postorder}{section.28}% 24
+\BOOKMARK [0][-]{chapter.32}{4. Hybrid Traversal Selection for Efficient Source Code Analysis}{}% 25
+\BOOKMARK [1][-]{section.34}{4.1 A System For Expressing Source Code Analysis As Traversals}{chapter.32}% 26
+\BOOKMARK [1][-]{section.74}{4.2 Static and Runtime Properties}{chapter.32}% 27
+\BOOKMARK [2][-]{subsection.75}{4.2.1 Data-Flow Sensitivity}{section.74}% 28
+\BOOKMARK [2][-]{subsection.86}{4.2.2 Computing Data-Flow Sensitivity}{section.74}% 29
+\BOOKMARK [2][-]{subsection.88}{4.2.3 Loop Sensitivity}{section.74}% 30
+\BOOKMARK [2][-]{subsection.124}{4.2.4 Computing Loop Sensitivity}{section.74}% 31
+\BOOKMARK [2][-]{subsection.127}{4.2.5 Graph Cyclicity}{section.74}% 32
+\BOOKMARK [1][-]{section.128}{4.3 Traversal Strategies - Candidates}{chapter.32}% 33
+\BOOKMARK [1][-]{section.130}{4.4 Decision Tree for Traversal Strategy Selection}{chapter.32}% 34
+\BOOKMARK [2][-]{subsection.132}{4.4.1 An Example}{section.130}% 35
+\BOOKMARK [1][-]{section.133}{4.5 Optimizing the Selected Traversal Strategy}{chapter.32}% 36
+\BOOKMARK [0][-]{chapter.134}{5. Implementation on Boa framework}{}% 37
+\BOOKMARK [1][-]{section.135}{5.1 Boa language and infrastructure}{chapter.134}% 38
+\BOOKMARK [1][-]{section.136}{5.2 Source code analysis using Traversal construct}{chapter.134}% 39
+\BOOKMARK [1][-]{section.268}{5.3 Putting it all together}{chapter.134}% 40
+\BOOKMARK [0][-]{chapter.339}{6. Empirical Evaluation}{}% 41
+\BOOKMARK [1][-]{section.340}{6.1 Analyses, Datasets and Experiment Setting}{chapter.339}% 42
+\BOOKMARK [2][-]{subsection.342}{6.1.1 Analyses.}{section.340}% 43
+\BOOKMARK [2][-]{subsection.345}{6.1.2 Datasets.}{section.340}% 44
+\BOOKMARK [2][-]{subsection.346}{6.1.3 Setting.}{section.340}% 45
+\BOOKMARK [0][-]{chapter.347}{7. Running Time and Time Reduction}{}% 46
+\BOOKMARK [1][-]{section.348}{7.1 Running Time}{chapter.347}% 47
+\BOOKMARK [1][-]{section.349}{7.2 Time Reduction}{chapter.347}% 48
+\BOOKMARK [1][-]{section.354}{7.3 Time reduction against hand optimized analysis}{chapter.347}% 49
+\BOOKMARK [0][-]{chapter.356}{8. Correctness of Analysis Results}{}% 50
+\BOOKMARK [0][-]{chapter.357}{9. Traversal Strategy Selection Precision}{}% 51
+\BOOKMARK [0][-]{chapter.377}{10. Analysis on the Decision Tree Distribution}{}% 52
+\BOOKMARK [0][-]{chapter.380}{11. Analysis on Traversal Optimization}{}% 53
+\BOOKMARK [0][-]{chapter.382}{12. Case Studies}{}% 54
+\BOOKMARK [1][-]{section.384}{12.1 API Precondition Mining \(APM\).}{chapter.382}% 55
+\BOOKMARK [1][-]{section.387}{12.2 API Usage Mining \(AUM\).}{chapter.382}% 56
+\BOOKMARK [0][-]{chapter.390}{13. Threats to Validity}{}% 57
+\BOOKMARK [0][-]{chapter.391}{14. Related Work}{}% 58
+\BOOKMARK [1][-]{section.392}{14.1 Mixing static and dynamic information.}{chapter.391}% 59
+\BOOKMARK [1][-]{section.393}{14.2 Optimizing program analysis.}{chapter.391}% 60
+\BOOKMARK [1][-]{section.394}{14.3 Ultra-large-scale source code mining.}{chapter.391}% 61
+\BOOKMARK [1][-]{section.395}{14.4 Graph traversal optimization.}{chapter.391}% 62
+\BOOKMARK [0][-]{chapter.396}{15. Conclusion and Future work}{}% 63
+\BOOKMARK [1][-]{section.397}{15.1 Conclusion}{chapter.396}% 64
+\BOOKMARK [1][-]{section.398}{15.2 Future Work}{chapter.396}% 65
+\BOOKMARK [0][-]{chapter.400}{16. Appendix}{}% 66

@@ -578,38 +578,45 @@ backward analysis analyzes successors of a node prior to analyzing the node.
 
 \section{Optimizing the Selected Traversal Strategy}
 \label{subsec:optimizations}
-The properties of the analysis and the input graph not only helps us select the
-best traversal strategy, it also helps to perform several optimizations to the
-selected traversal strategies. 
+Checking the static and dynamic properties not only determines the best traversal strategies,
+it also helps to perform several optimizations to the selected traversal strategies.
+In the traversal-based program analysis with a fixpoint function, in addition to the analysis
+traversal, two additional traversals of all nodes is required: one traversal to re-compute the
+analysis results at graph nodes, and another traversal to perform the fixpoint check to ensure
+that results at nodes have stabilized. The fixpoint check traversal compares the outputs
+of two traversals of each nodes. The two additional traversals can be eliminated and we
+formulate them as two optimizations, as described below:
+\begin{itemize}
+	\item [[Opt1]] Eliminating the result re-computation traversal: A traversal that re-computes the
+results at graph nodes for enabling a fixpoint traversal to compare the two results (the
+analysis traversal result and the re-computation result) can be eliminated, if it is known
+that results have stabilized and not going to change.
 
-Running an analysis on a cyclic graph may require multiple iterations of the
-nodes to compute the fixpoint solution. At least one additional traversal of the
-nodes is required before the fixpoint check that compares the result of the last
-two traversals to to ensure that results at nodes have stabilized. This
-additional traversal and the fixpoint checks at nodes can be eliminated based on
-the selected traversal strategy.
+\item [[Opt2]] Eliminating the fixpoint check traversal: A fixpoint check traversal that checks the
+results of the two traversals at graph nodes can be eliminated, if it is known that results
+are stabilized and not going to change.
+\end{itemize}
 
-For data-flow insensitive traversals, we know that the traversal outputs of
-nodes does not depend on the outputs of other nodes, hence both the additional
-traversal and the fixpoint checks can be eliminated irrespective of the graph
-cyclicity (path $P_{11}$ in our decision diagram
-\fignref{fig:decision-diagram}).
-In case of data-flow sensitive traversals, the traversal output of a node is
-computed using the traversal outputs of other nodes (predecessors or
-successors). For data-flow sensitive analysis on a acyclic graph provides an
-opportunity to eliminate the additional traversal and fixpoint checks iff the
-selected traversal strategy guarantees that the nodes whose outputs are required
-to compute the output of a node are visited prior to visiting the node (paths
-$P_1$ to $P_4$). 
-In case of data-flow traversals, but loop insensitive traversals, and acyclic
-graphs, the additional traversal and fixpoint checks can be eliminated iff the
-selected traversal strategy guarantees that the nodes whose outputs are required
-to compute the output of a node are visited prior to visiting the node (paths
-$P_5$ to $P_8$).
-The optimizations does not apply for traversals that are both data-flow and loop
-sensitive, and the graph has cycles (paths $P_9$ and $P_{10}$). For such
-traversals, our technique selects the worklist-based traversal strategy which
-must perform fixpoint checks every time a node is visited.
+The same static and dynamic checks that are performed to determine a traversal strategies
+also helps to determine if the optimizations can be performed. For instance, consider path
+$P_1$ in our decision tree shown in \fignref{fig:decision-diagram}. This path selects INC traversal strategy that
+visits nodes in the increasing order of the node ids. While selecting this strategy, we came to know that the analysis is data-flow sensitive (which means the analysis output of neighbors
+(predecessors or successors) is required for computing the output of a node), the graph is
+sequential, (which means there is only one successor or predecessor), and the analysis is a
+forward analysis (which means the output of the predecessor is required to compute the
+output of a node). Together, we know that if a traversal strategy ensures that the predecessor
+is visited before visiting any node, the analysis output can be computed in one traversal and
+no fixpoint check is necessary. The traversal strategy selected for this path is INC and it
+ensures this property. Hence, both Opt1 and Opt2 can be applied to the selected traversal
+strategy to further improve the performance. As we show in our evaluation (\ref{sec:analysis-traversal-opt}), upto 60%
+of the analysis time can be saved by performing these optimizations.
+In our decision tree shown in \fignref{fig:decision-diagram}, all paths from $P_1$ to $P_8$ are eligible for both the
+optimizations. The paths $P_9$ and $P_10$ uses a worklist-based traversal strategy that visits only
+relevant nodes (relevant nodes are the nodes whose outputs have changed from the last visit)
+and must perform a fixpoint check every time a node is visited, hence the optimizations
+cannot be performed. Finally, for path $P_11$, the optimizations are not applicable, because
+data-flow insensitive traversals requires only one traversal to compute the results and no
+fixpoint check is performed.
 % 
 % 
 % \begin{itemize}

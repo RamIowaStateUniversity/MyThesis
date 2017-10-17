@@ -1,0 +1,1012 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={API Usage Mining Analysis},label={lst:aun-code}, firstline = 21, firstnumber = 21, lastline = 81] 
+p: Project = input;
+results: output collection[string][string] of string;
+s: output sum[string] of int;
+verylarge: output sum of int;
+
+types: array of string;
+fulltypes: array of string;
+consts: array of string;
+
+types = {"Iterator","List","Map","ArrayList","HashMap","Enumeration","Vector","Hashtable","Set","StringTokenizer","ResourceBundle","Matcher","Properties","SortedMap","Logger","Collection","Pattern","ListIterator","HashSet","Calendar","LinkedList","Random","TreeMap","Stack","Arrays","Date","Preferences","LinkedHashMap","TimeZone","Collections","TreeSet","Entry","ZipEntry","Comparator","GregorianCalendar","ZipFile","Timer","NoSuchElementException","BitSet","SortedSet","ZipOutputStream","Scanner","ConcurrentHashMap","EnumSet","Locale","AtomicBoolean","JarFile","Queue","EnumMap","WeakHashMap","LinkedHashSet","ScheduledFuture","JarEntry","Future","ConcurrentMap","AtomicReference","Formatter","TimerTask","IdentityHashMap","AtomicInteger","Attributes","Dictionary","GZIPInputStream","ZipInputStream","Executors","SimpleTimeZone","UUID","MissingResourceException","CountDownLatch","Manifest","ExecutorService","FileHandler","ScheduledExecutorService","PriorityQueue","Objects","Deque","GZIPOutputStream","AtomicLong","AtomicReferenceFieldUpdater","ThreadPoolExecutor","CRC32","ServiceLoader","ArrayBlockingQueue","Semaphore","ConcurrentLinkedQueue","JarOutputStream","BlockingQueue","AtomicIntegerFieldUpdater","Executor","NavigableMap","FutureTask","PropertyResourceBundle","Inflater","TimeUnit","LogRecord","MatchResult","DeflaterOutputStream","LinkedBlockingQueue","ReentrantReadWriteLock","JarInputStream","Level","ReentrantLock","ZipException","Currency","EventObject","PreferenceChangeEvent","InflaterInputStream","SimpleEntry","Handler","Deflater","ConsoleHandler","ScheduledThreadPoolExecutor","CopyOnWriteArrayList","Condition","LockSupport","Observer","AbstractPreferences","DataFormatException","AbstractList","AtomicLongFieldUpdater"}; # API classes
+fulltypes = {"java.util.Iterator","java.util.List","java.util.Map","java.util.ArrayList","java.util.HashMap","java.util.Enumeration","java.util.Vector","java.util.Hashtable","java.util.Set","java.util.StringTokenizer","java.util.ResourceBundle","java.util.regex.Matcher","java.util.Properties","java.util.SortedMap","java.util.logging.Logger","java.util.Collection","java.util.regex.Pattern","java.util.ListIterator","java.util.HashSet","java.util.Calendar","java.util.LinkedList","java.util.Random","java.util.TreeMap","java.util.Stack","java.util.Arrays","java.util.Date","java.util.prefs.Preferences","java.util.LinkedHashMap","java.util.TimeZone","java.util.Collections","java.util.TreeSet","java.util.Map.Entry","java.util.zip.ZipEntry","java.util.Comparator","java.util.GregorianCalendar","java.util.zip.ZipFile","java.util.Timer","java.util.NoSuchElementException","java.util.BitSet","java.util.SortedSet","java.util.zip.ZipOutputStream","java.util.Scanner","java.util.concurrent.ConcurrentHashMap","java.util.EnumSet","java.util.Locale","java.util.concurrent.atomic.AtomicBoolean","java.util.jar.JarFile","java.util.Queue","java.util.EnumMap","java.util.WeakHashMap","java.util.LinkedHashSet","java.util.concurrent.ScheduledFuture","java.util.jar.JarEntry","java.util.concurrent.Future","java.util.concurrent.ConcurrentMap","java.util.concurrent.atomic.AtomicReference","java.util.Formatter","java.util.TimerTask","java.util.IdentityHashMap","java.util.concurrent.atomic.AtomicInteger","java.util.jar.Attributes","java.util.Dictionary","java.util.zip.GZIPInputStream","java.util.zip.ZipInputStream","java.util.concurrent.Executors","java.util.SimpleTimeZone","java.util.UUID","java.util.MissingResourceException","java.util.concurrent.CountDownLatch","java.util.jar.Manifest","java.util.concurrent.ExecutorService","java.util.logging.FileHandler","java.util.concurrent.ScheduledExecutorService","java.util.PriorityQueue","java.util.Objects","java.util.Deque","java.util.zip.GZIPOutputStream","java.util.concurrent.atomic.AtomicLong","java.util.concurrent.atomic.AtomicReferenceFieldUpdater","java.util.concurrent.ThreadPoolExecutor","java.util.zip.CRC32","java.util.ServiceLoader","java.util.concurrent.ArrayBlockingQueue","java.util.concurrent.Semaphore","java.util.concurrent.ConcurrentLinkedQueue","java.util.jar.JarOutputStream","java.util.concurrent.BlockingQueue","java.util.concurrent.atomic.AtomicIntegerFieldUpdater"}; # Fully qualified names of API classes
+consts = {"File"}; # API constructors
+queryapis := {"next","get","put","add","nextElement","elementAt","size","remove","nextToken","toArray","getString","group","getProperty","iterator","addElement","info","compile","containsKey","matcher","setProperty","contains","fine","set","keySet","addAll","nextInt","log","entrySet","pop","warning","asList","getTime","push","indexOf","subList","fill","values","clear","getTimeZone","hasNext","getBundle","sort","finest","getLogger","end","start","store","removeElementAt","setTime","removeFirst","severe","finer","copyInto","getKey","peek","insertElementAt","hasMoreTokens","getValue","getName","previous","compare","getBoolean","isEmpty","copyOf","load","elements","getInputStream","getInt","schedule","removeElement","firstElement","appendReplacement","userNodeForPackage","setElementAt","putAll","unmodifiableList","replaceAll","write","split","nextLine","hasMoreElements","after","noneOf","removeLast","before","removeAll","listIterator","addLast","cancel","groupCount","putInt","equals","addFirst","toString","singleton","singletonList","node","getFirst","matches","keys","putBoolean","getLast","copyOfRange","binarySearch","compareTo","isDirectory","scheduleAtFixedRate","nextSetBit","hashCode","setTimeInMillis","config","allOf","getLanguage","poll","find","entering","first","setSize","lastElement","replaceFirst","compareAndSet","putIfAbsent"}; # API methods
+slice := true; # Slice or no slice
+sliceK := 1; # Value of k for k-bound slicing, -1 for infinity
+requireConstructor := false; # If constructor of API class are of interest
+thisORthat := false;
+
+myapis: set of string;
+foundapis: set of string;
+foreach (i: int; def(queryapis[i])) {
+    add(myapis, queryapis[i]);   
+    add(foundapis, queryapis[i]);
+}
+
+cfg: CFG;
+path := "";
+mKey := "";
+decls: stack of string;
+locals: map[string] of string;
+fields: map[string] of string;
+parent_fields: map[string] of string;
+method_args: set of string;
+
+######### Helper functions ##########
+# Given a method, collects the types of all local variables including method parameters
+getTypeOfLocals := function(method: Method): map[string] of string {
+    l: map[string] of string;
+    foreach (i:int; def(method.arguments[i])) {
+        arg := method.arguments[i].name;
+        argType := method.arguments[i].variable_type.name;
+        l[arg] = argType;
+        if (!contains(method_args, arg))
+            add(method_args, arg);
+    }
+    visit(method, visitor {
+        before expr: Expression -> {            
+            if (expr.kind == ExpressionKind.VARDECL) {
+                foreach (j: int; def(expr.variable_decls[j])) {
+                    var := expr.variable_decls[j].name;
+                    varType := expr.variable_decls[j].variable_type.name;
+                    l[var] = varType;
+                }
+            }
+        }
+    });
+    return l;
+};
+
+# Given a class, collects the types of all fields
+getTypeOfFields := function(decl: Declaration): map[string] of string {
+    l: map[string] of string;
+    foreach(i:int; def(decl.fields[i])) {
+        arg := decl.fields[i].name;
+        argType := decl.fields[i].variable_type.name;
+        l[arg] = argType;
+    }
+    return l;
+};
+
+# Given a type name, checks if the type belongs to APIs of interest
+hasAPIType := function(t: string): bool {
+    foreach (i: int; def(types[i])) {
+        if (t == types[i])
+            return true;
+    }
+    
+    foreach (i: int; def(fulltypes[i])) {
+        if (t == fulltypes[i])
+            return true;
+    }
+    return false;    
+};
+
+# Given a variable name, checks its type against the APIs of interest
+getVariableType := function(variable: string, islookup: bool): string {
+    lKeys := keys(locals);
+    t := "";
+    foreach (i: int; def(lKeys[i])) {
+        if (variable == lKeys[i]) {
+            t = locals[lKeys[i]];
+            if (islookup) {
+                if (hasAPIType(t)) {
+                    return t;
+                }
+            } else {
+                return t;
+            }
+        }
+    }
+    lKeys = keys(fields);
+    foreach (i: int; def(lKeys[i])) {
+        if (variable == lKeys[i]) {
+            t = fields[lKeys[i]];
+            if (islookup) {
+                if (hasAPIType(t)) {
+                    return t;
+                }
+            } else {
+                return t;
+            }
+        }
+    }
+    lKeys = keys(parent_fields);
+    foreach (i: int; def(lKeys[i])) {
+        if (variable == lKeys[i]) {
+            t = parent_fields[lKeys[i]];
+            if (islookup) {
+                if (hasAPIType(t)) {
+                    return t;
+                }
+            } else {
+                return t;
+            }
+        }
+    }
+    return "";
+}; 
+
+# Given a type name, checks if it is one of the APIs of interest
+isAPIConstructor := function(constr: string): bool {
+    foreach (i: int; def(consts[i])) {
+        if (constr == consts[i])
+            return true;
+    }
+    foreach (i: int; def(fulltypes[i])) {
+        if (constr == fulltypes[i])
+            return true;
+    }
+    return false;
+};
+
+# Given two sets of strings, merges them into the first set retaining only unique elements
+merge := function(s1: set of string, s2: set of string) {
+    foreach (ss: string = s2) {
+        if (!contains(s1, ss))
+            add(s1, ss);
+    }
+};
+
+# Standard set intersection
+isIntersectionNotNull := function(s1: set of string, s2: set of string): bool {
+    foreach (s11: string = s1) {
+        if (contains(s2, s11))
+            return true;
+    }
+    return false;
+};
+
+# Given a name, checks if it is a valid variable whose type is available
+isVariable := function(var: string): bool {
+    lkeys := keys(locals);
+    foreach (i: int; def(lkeys[i])) {
+        if (var == lkeys[i])
+            return true;
+    }
+    
+    lkeys = keys(fields);
+    foreach (i: int; def(lkeys[i])) {
+        if (var == lkeys[i])
+            return true;
+    }
+    
+    lkeys = keys(parent_fields);
+    foreach (i: int; def(lkeys[i])) {
+        if (var == lkeys[i])
+            return true;
+    }
+    return false;
+};
+
+# Given an expression, get all variable
+getVariables := function(node: Expression): set of string {
+    vars: set of string;
+    visit(node, visitor {
+        before expr: Expression -> {
+            if (expr.kind == ExpressionKind.VARACCESS) {
+                v := expr.variable;
+                if (isVariable(v))
+                    add(vars, v);
+            } else if (expr.kind == ExpressionKind.VARDECL) {
+                add(vars, expr.variable_decls[0].name);
+            }
+        }
+    });
+    return vars;
+};
+
+isPredicateNode := function(name: string): bool {
+    if (name == "IF" || name == "FOR" || name == "WHILE")
+        return true;
+    return false;
+};
+#########################################################
+
+hasMyAPI := false; # Local variable used to track if a node contains API method of interest
+myAPINodes: set of string; # All nodes that contains API methods of interest
+allVars: set of string; # All dependent variables
+allNodeIds: set of string; # Ids of all CFG nodes
+
+hasAPICall := false; # Contains some API calls, not necessarily API call of interest
+apiNodes: set of string; # Nodes that contain API calls
+predicateNodes: set of string; # Nodes that provides predicates
+
+node_apis: map[string] of set of string; # API calls at nodes
+variables: map[string] of set of string; # Variables at nodes
+predicates: map[string] of Expression; # Predicate expressions at nodes
+
+isPP := false;
+lvars: set of string; # All variables defined or used in a node
+testE := function(expression: Expression): string {
+    exprStr := "";
+    clear(lvars);
+    oprs: stack of string;
+    visit(expression, visitor {
+        before expr: Expression -> {
+            opr := "";
+            switch (expr.kind) {
+                case ExpressionKind.ARRAYINDEX:
+                    visit(expr.expressions[0]);
+                    exprStr = format("%s[", exprStr);
+                    visit(expr.expressions[1]);
+                    exprStr = format("%s]", exprStr);
+                    stop;
+                case ExpressionKind.ASSIGN: if (opr == "") opr = "="; 
+                case ExpressionKind.ASSIGN_ADD: if (opr == "") opr = "+="; 
+                case ExpressionKind.ASSIGN_BITAND: if (opr == "") opr = "&="; 
+                case ExpressionKind.ASSIGN_BITOR: if (opr == "") opr = "|="; 
+                case ExpressionKind.ASSIGN_BITXOR: if (opr == "") opr = "^="; 
+                case ExpressionKind.ASSIGN_DIV: if (opr == "") opr = "/="; 
+                case ExpressionKind.ASSIGN_LSHIFT: if (opr == "") opr = "<<="; 
+                case ExpressionKind.ASSIGN_MOD:  if (opr == "") opr = "%="; 
+                case ExpressionKind.ASSIGN_MULT: if (opr == "") opr = "*="; 
+                case ExpressionKind.ASSIGN_RSHIFT: if (opr == "") opr = ">>="; 
+                case ExpressionKind.ASSIGN_SUB: if (opr == "") opr = "-="; 
+                case ExpressionKind.ASSIGN_UNSIGNEDRSHIFT: if (opr == "") opr = ">>>="; 
+                case ExpressionKind.BIT_AND: if (opr == "") opr = "&"; 
+                case ExpressionKind.BIT_LSHIFT: if (opr == "") opr = "<<"; 
+                case ExpressionKind.BIT_NOT: if (opr == "") opr = "~"; 
+                case ExpressionKind.BIT_OR: if (opr == "") opr = "|"; 
+                case ExpressionKind.BIT_RSHIFT: if (opr == "") opr = ">>"; 
+                case ExpressionKind.BIT_UNSIGNEDRSHIFT: if (opr == "") opr = ">>>"; 
+                case ExpressionKind.BIT_XOR: if (opr == "") opr = "^"; 
+                case ExpressionKind.LOGICAL_AND: if (opr == "") opr = "&&"; 
+                case ExpressionKind.LOGICAL_NOT: if (opr == "") opr = "!";
+                case ExpressionKind.LOGICAL_OR: if (opr == "") opr = "||";
+                case ExpressionKind.LT: if (opr == "") opr = "<";
+                case ExpressionKind.LTEQ: if (opr == "") opr = "<="; 
+                case ExpressionKind.EQ: if (opr == "") opr = "==";
+                case ExpressionKind.NEQ: if (opr == "") opr = "!=";
+                case ExpressionKind.GT: if (opr == "") opr = ">";
+                case ExpressionKind.GTEQ: if (opr == "") opr = ">=";
+                case ExpressionKind.OP_ADD: if (opr == "") opr = "+";
+                case ExpressionKind.OP_DEC: if (opr == "") opr = "--";
+                case ExpressionKind.OP_DIV: if (opr == "") opr = "/"; 
+                case ExpressionKind.OP_INC: if (opr == "") opr = "++"; 
+                case ExpressionKind.OP_MOD: if (opr == "") opr = "%"; 
+                case ExpressionKind.OP_MULT: if (opr == "") opr = "*";
+                case ExpressionKind.OP_SUB: if (opr == "") opr = "-";
+                    push(oprs, opr);
+                    if (len(expr.expressions) == 1) {
+                        exprStr = format("%s%s", exprStr, pop(oprs));
+                        if (expr.kind == ExpressionKind.LOGICAL_NOT)
+                            exprStr = format("%s(", exprStr);
+                        visit(expr.expressions[0]);
+                        if (expr.kind == ExpressionKind.LOGICAL_NOT)
+                            exprStr = format("%s)", exprStr);
+                    } else {
+                        if ((expr.kind == ExpressionKind.ASSIGN && isPP) ||
+                            expr.kind == ExpressionKind.LOGICAL_NOT) 
+                            exprStr = format("%s(", exprStr);
+                        foreach (i: int; def(expr.expressions[i])) {
+                            visit(expr.expressions[i]);
+                            exprStr = format("%s%s", exprStr, peek(oprs));
+                        }
+                        opr = pop(oprs);
+                        exprStr = substring(exprStr, 0, (len(exprStr)-len(opr)));
+                        if ((expr.kind == ExpressionKind.ASSIGN && isPP) ||
+                            expr.kind == ExpressionKind.LOGICAL_NOT) 
+                            exprStr = format("%s)", exprStr);
+                    }
+		            stop;
+                case ExpressionKind.CAST:
+                    if (def(expr.new_type)) {
+                        tname := expr.new_type.name;
+                        exprStr = format("%s(%s) ", exprStr, tname);
+                        visit(expr.expressions[0]); 
+                    }
+                    stop;
+                case ExpressionKind.CONDITIONAL:
+                    exprStr = format("%s(", exprStr);
+                    visit(expr.expressions[0]);
+                    exprStr = format("%s)?", exprStr);
+                    visit(expr.expressions[1]);
+                    exprStr = format("%s:", exprStr);
+                    visit(expr.expressions[2]);
+                    stop;
+                case ExpressionKind.METHODCALL:
+                    m := expr.method;
+                    if (len(expr.expressions) > 0) {
+                        recv := expr.expressions[0];  
+                        rv := ""; 
+                        rtype := "";
+                        if (recv.kind == ExpressionKind.VARACCESS) {
+                            rv = recv.variable;
+                            rtype = getVariableType(rv, true);
+                            if (contains(myapis, m) && rtype != "") {
+                                hasMyAPI = true;
+                                remove(foundapis, m);
+                            }
+                        } else if (recv.kind == ExpressionKind.NEW) {
+                            rtype = recv.new_type.name;
+                            if (contains(myapis, m) && isAPIConstructor(recv.new_type.name)) {
+                                hasMyAPI = true;    
+                                remove(foundapis, m);
+                            }
+                        }
+                        visit(expr.expressions[0]);
+                        exprStr = format("%s.", exprStr);
+                        
+                    }
+                    exprStr = format("%s%s(", exprStr, expr.method);
+                    foreach (i: int; def(expr.method_args[i])) {
+                        visit(expr.method_args[i]);  
+                        margtype := "";
+                        if (expr.method_args[i].kind == ExpressionKind.VARACCESS) {
+                            margtype = getVariableType(expr.method_args[i].variable, false);
+                        }
+                        if (margtype != "") {
+                            exprStr = format("%s:%s,", exprStr, margtype);
+                        } else {
+                            exprStr = format("%s,", exprStr);    
+                        }
+                        #exprStr = format("%s,", exprStr);
+                    }
+                    exprStr = format("%s)", exprStr);
+                    stop;
+                case ExpressionKind.NEW:
+                    exprStr = format("%snew %s(", exprStr, expr.new_type.name);
+                    foreach (i: int; def(expr.expressions[i])) {
+                        visit(expr.expressions[i]);  
+                        argtype := "";
+                        if (expr.expressions[i].kind == ExpressionKind.VARACCESS) {
+                            argtype = getVariableType(expr.expressions[i].variable, false);
+                        }
+                        if (argtype != "") {
+                            exprStr = format("%s:%s,", exprStr, argtype);
+                        } else {
+                            exprStr = format("%s,", exprStr);    
+                        }
+                    }
+                    exprStr = format("%s)", exprStr);
+                    if (requireConstructor && isAPIConstructor(expr.new_type.name)) {
+                        hasMyAPI = true;
+                        remove(foundapis, expr.new_type.name);
+                    }
+                    stop;
+                case ExpressionKind.NEWARRAY:
+                    if (def(expr.new_type)) {
+                        exprStr = format("%s new %s", exprStr, expr.new_type.name);
+                    }
+                    stop;
+                case ExpressionKind.VARACCESS:
+                    if (len(expr.expressions) > 0) {
+                        e := expr.expressions[0];
+                        visit(e);
+                        exprStr = format("%s.%s", exprStr, expr.variable);
+                    } else {
+                        exprStr = format("%s%s", exprStr, expr.variable);
+                    }
+                    merge(lvars, getVariables(expr));
+                    stop;
+                case ExpressionKind.VARDECL:
+                    vd := expr.variable_decls[0];
+                    exprStr = format("%s", vd.name);
+                    add(lvars, vd.name);
+                    if (def(vd.initializer)) {
+                        exprStr = format("%s=", exprStr);
+                        visit(vd.initializer);
+                    }
+                    stop;
+                case ExpressionKind.LITERAL:
+                    exprStr = format("%s%s", exprStr, expr.literal);
+                    stop;
+                case ExpressionKind.TYPECOMPARE:
+                    if (len(expr.expressions) > 0) {
+                        left := expr.expressions[0];
+                        visit(left);
+                        if (def(expr.new_type)) {
+                            right := expr.new_type.name;
+                            exprStr = format("%s instanceof %s", exprStr, right);
+                        }
+                    }
+                    stop;
+                case ExpressionKind.NULLCOALESCE:
+                    break;
+                case ExpressionKind.OTHER:
+                    break;
+                default:    
+                        break;
+            }
+        }
+    });
+    return exprStr;
+};
+
+testS := function(statement: Statement): string {
+    stmtStr := "";
+    visit(statement, visitor {
+        before stmt: Statement -> {
+            switch (stmt.kind) {
+                case StatementKind.ASSERT:
+                    stmtStr = "assert ";
+                    break;
+                case StatementKind.CASE:
+                    stmtStr = "case ";
+                    break;
+                case StatementKind.RETURN:
+                    stmtStr = "return ";
+                    break;
+                case StatementKind.SWITCH:
+                    stmtStr = "switch ";
+                    break;
+                case StatementKind.THROW:
+                    stmtStr = "throw ";
+                    break;
+                case StatementKind.EXPRESSION:
+                    stmtStr = format("%s%s", stmtStr, testE(stmt.expression));
+                    stop;
+                default:    
+                    break;
+            }
+        }
+        before expr: Expression -> {
+            stmtStr = format("%s%s", stmtStr, testE(expr));    
+            stop;
+        }
+    });
+    return stmtStr;
+};
+
+hops: map[string] of int;
+addUntilFixP := function() {
+    # Nodes with API methods of interest are at hop = 1
+    foreach (id: string = allNodeIds) {
+        if (contains(myAPINodes, id)) {
+            merge(allVars, variables[id]);
+            hops[id] = 1;
+        }
+    }
+    count := 0;
+    foreach (v: string = allVars) {
+        count++;
+    }
+    tmpVars: set of string;
+    pCount := 0; 
+    hop := 0;
+    while (pCount != count) {
+        hop++; clear(tmpVars);
+        foreach (nid: string = allNodeIds) {
+            if (haskey(hops, nid))  continue;
+            if (isIntersectionNotNull(allVars, variables[nid])) {
+                hops[nid] = hop;
+                merge(tmpVars, variables[nid]);
+            }
+        }
+        merge(allVars, tmpVars);
+        pCount = count; count = 0;
+        foreach (v: string = allVars) {
+            count++;
+        }
+    }
+};
+
+eFors: set of string;
+collectCandidates := traversal(node: CFGNode): bool {
+    apiCalls: set of string;
+    vars: set of string;
+    id := string(node.id);
+    add(allNodeIds, id);
+    api := "";
+    hasMyAPI = false;
+    if (def(node.expr) && !isPredicateNode(node.name)) {
+        api = testE(node.expr);
+    } else if (def(node.stmt) && !isPredicateNode(node.name) && 
+                (node.name != "TRY") && (node.name != "CATCH")) {
+        api = testS(node.stmt);
+    }
+    if (api != "") {
+        add(apiCalls, api);
+        hasAPICall = true;
+        merge(vars, lvars);
+        if (hasMyAPI)
+            add(myAPINodes, id);
+        add(apiNodes, id);
+    }
+    if (isPredicateNode(node.name)) {
+        add(predicateNodes, id); 
+        predicates[id] = node.expr;
+        merge(vars, getVariables(node.expr));
+    }
+    if (node.name == "FOR" && node.expr.kind == ExpressionKind.VARACCESS) {
+        add(eFors, id);    
+    }
+    node_apis[id] = apiCalls;
+    variables[id] = vars;
+        
+    return false;
+};
+
+#### [BEGIN] Dominator analysis ######
+type TDOM= {dom: set of string, dummy : int};
+cfgnode_ids:set of string;
+
+allnode_ids := traversal(node: CFGNode): string {
+	add(cfgnode_ids, string(node.id));
+	return string(node.id);
+};
+
+cfg_dom := traversal(node: CFGNode): TDOM {
+	cur_value : TDOM;
+	if (node.id == 0) {
+			self_dom: set of string;
+			cur_value = {self_dom, 0};
+	}
+	else {
+		cur_value = {setClone(cfgnode_ids), 0};
+	}
+	if (def(getValue(node))) {
+		cur_val1 := getValue(node);
+		cur_value = clone(cur_val1);
+	}
+	preds := node.predecessors;
+	foreach (i: int; def(preds[i])) {
+		pred_value := getValue(preds[i]);
+		if (def(pred_value)) {
+			cur_value.dom = intersection(cur_value.dom,pred_value.dom);
+		}
+	}	
+	gen_kill := getValue(node, allnode_ids);
+	add(cur_value.dom, gen_kill);
+	return cur_value;
+};
+
+fixp_dom := fixp(curr, prev: TDOM) : bool {
+ 	if (difference(curr.dom, prev.dom) == 0)
+ 		return true;	
+ 	return false;
+};
+
+apiPredicateNodes: map[string] of set of string;
+exits: map[string] of string;
+exitsT: map[string] of string;
+terminals: set of string;
+
+dom_more := traversal(node: CFGNode) {
+    id := string(node.id);
+    cur_value := getValue(node, cfg_dom);
+    if (def(cur_value)) {
+        foreach(d: string = cur_value.dom) {
+            if (haskey(exitsT, d)) {
+                predicate := exitsT[d];  
+                if (!contains(apiPredicateNodes[id], predicate))
+                    add(apiPredicateNodes[id], exits[d]);
+            }
+        }
+    }
+};
+
+dom_result := traversal(node: CFGNode): bool {
+    preds: set of string;
+    id := string(node.id);
+    
+    tnodes: set of string;
+    trues: set of string;
+    ss := getStructureInfo(node);
+    
+    entries := splitall(ss, ",");
+    
+    foreach (i: int; def(entries[i])) {
+    	parts := splitall(entries[i], ":"); 
+    	loc := parts[0]; 
+    	token: string;
+    	if (len(parts) == 2) {
+    	    token = parts[1];
+    		if (token == "T") {
+    		    add(trues, loc);    
+    		}
+            add(tnodes, loc);
+    	} else if (len(parts) == 1) {
+    	    add(trues, loc);  
+    		add(tnodes, loc);
+    	}
+    }
+    
+    isExitNode := false;
+    if (match("END", node.name)) {
+        isExitNode = true;
+    }
+    isDependentTerminal := false;
+
+    if (contains(apiNodes, id)) {
+        cur_value := getValue(node, cfg_dom);
+        if (def(cur_value)) {
+            foreach (p: string = predicateNodes) {
+                if (id == p)
+                    continue;
+                if (contains(cur_value.dom, p)) {
+                    directDependence := isIntersectionNotNull(variables[id], variables[p]);
+                    indirectDependence := isIntersectionNotNull(allVars, variables[p]);
+                    
+                    if ((slice && (directDependence || (isExitNode && indirectDependence))) 
+                            || !slice) {
+                        isPP = true;
+                        pdicate := testE(predicates[p]);
+                        if (contains(eFors, p)) {
+                            if (match("\\(", pdicate)) 
+                                pdicate = format("(%s).size() > 0", pdicate);
+                            else
+                                pdicate = format("%s.size() > 0", pdicate);
+                        }
+                        ndicate := pdicate;
+                        if (contains(tnodes, p)) {
+                            if (!contains(trues, p)) {
+                                pdicate = format("!(%s)", pdicate);
+                            } else {
+                                ndicate = format("!(%s)", ndicate);    
+                            }
+                            add(preds, pdicate);    
+                            if (isExitNode) {
+                                exits[p] = ndicate;
+                                exitsT[p] = pdicate;
+                            }
+
+                            if (slice) {
+                                if (!directDependence) {
+                                    isDependentTerminal = true;
+                                }
+                            } else {
+                                if (isExitNode)
+                                    isDependentTerminal = true;	
+                            }
+                        }
+                    } 
+                } 
+            }
+        }
+    } 
+
+    if (isDependentTerminal)
+        add(terminals, id);
+    
+    apiPredicateNodes[id] = preds;
+    return false;
+};
+#### [END] Dominator analysis #####
+
+nodeStructs: map[string] of string;
+##### API Sequence ######
+str := "";
+ts: set of string;
+fs: set of string;
+added: set of string;
+try_catch_finally: stack of string;
+catch_counts: stack of string;
+catch_types: stack of string;
+hasCatchOrFinally := function(ss: string): bool {
+    if (ss == "") {
+        return false;    
+    }
+    entries := splitall(ss, ",");
+    foreach (i: int; def(entries[i])) {
+        parts := splitall(entries[i], ":");
+        loc := parts[0];
+        token: string;
+        if (len(parts) == 2) {
+            token = parts[1];
+            if (token == "finally") {
+                if (contains(ts, loc))
+                    return true;
+            }
+        } else if (len(parts) == 3) {
+            if (contains(ts, loc))
+                return true;
+        }
+    }
+    return false;
+};
+# this traversal visits every node in the cfg and updates the sequence
+# for every visited node, it grabs the structural information, api calls, and preconditions
+# to create the sequence segment for the visited node.
+seqGen := traversal(node: CFGNode) {
+	id := string(node.id);
+	ss := getStructureInfo(node);
+	
+	# update catch type if catch node
+	if (def(node.stmt) && node.stmt.kind == StatementKind.CATCH) {
+	    if (def(node.stmt.variable_declaration)) {
+	        push(catch_types, node.stmt.variable_declaration.variable_type.name);    
+	    } else {
+	        push(catch_types, "NIL");
+	    }
+	}
+	
+	hasVars := false;
+	if (slice) {
+		if (haskey(hops, id)) {
+			if (sliceK != -1) {
+				if (hops[id] <= sliceK)
+					hasVars = true;
+			} else {
+				hasVars = true;
+			}	
+		}
+	}
+	    
+	isDependentTerminal := false;
+	if (contains(terminals, id))
+	    isDependentTerminal = true;
+	    
+	if (slice && !hasVars && !isDependentTerminal && !hasCatchOrFinally(ss))
+	    return;
+	    
+	nodeapis := node_apis[id];
+	if (!isDependentTerminal && (!def(nodeapis) || len(nodeapis) == 0))
+	    return;
+	    
+	apiPredicatesStr := "";
+	if (def(apiPredicateNodes[id])) { 
+	    apiPreds := apiPredicateNodes[id];
+	    foreach (apiPred: string = apiPreds) {
+	        apiPredicatesStr = format("%s && %s", apiPredicatesStr, apiPred);
+	    }
+	    if (apiPredicatesStr != "")
+	        apiPredicatesStr = substring(apiPredicatesStr, 4);
+	}
+	
+	nodeapisStr := "";    
+	isAPI := false;
+	foreach (api: string = nodeapis) {
+	    if (match("\\(", api))
+	        isAPI = true;
+	    nodeapisStr = format("%s@%s -> %s", api, apiPredicatesStr, nodeapisStr);    
+	}
+	if (nodeapisStr != "")
+	    nodeapisStr = substring(nodeapisStr, 0, (len(nodeapisStr) - 4));
+	    
+	if (!isAPI && !isDependentTerminal) 
+	    return;
+	    
+	nodeLabel := ""; 
+	nodeLabel = nodeapisStr; 
+	
+	if (ss == "") {
+	    lefts: set of string;
+	    foreach (e: string = ts) {
+            str = format("%s }", str);
+	    }
+	    str = format("%s -> %s", str, nodeLabel);
+	    clear(ts);
+		return;
+	}
+		
+	entries := splitall(ss, ",");
+	
+	lts: set of string; 
+	rts: set of string;
+	
+	foreach (i: int; def(entries[i])) {
+		parts1 := splitall(entries[i], ":");
+		add(lts, parts1[0]);
+	}	
+	
+	foreach (e: string = ts) {
+		if (!contains(lts, e)) {
+			add(rts, e);
+		}
+	}
+	
+	foreach (r: string = rts) {
+		remove(ts, r);
+		str = format("%s }", str);
+	}
+	
+	clear(lts); clear(rts);
+		
+	foreach (i: int; def(entries[i])) {
+		parts := splitall(entries[i], ":");
+		loc := parts[0];
+		token: string;
+		
+		if (len(parts) == 2) {
+			# if-else, try-finally
+			token = parts[1];
+				
+			if (token == "T") {
+				if (!contains(ts, loc)) {
+					str = format("%s -> IF {", str);
+					add(ts, loc);
+				}
+			} else if (token == "F") {
+				if (!contains(fs, loc)) {
+					str = format("%s } ELSE {", str);
+					add(fs, loc); 
+				}
+			} else if (token == "try") {
+				if (!contains(ts, loc)) {
+					str = format("%s -> TRY {", str);
+					add(ts, loc);
+					push(try_catch_finally, "try");
+				}
+			} else if (token == "finally") {
+				if (!contains(ts, loc)) {
+					str = format("%s -> FINALLY {", str);
+					add(ts, loc);
+					push(try_catch_finally, "finally");
+				} else {
+					if (peek(try_catch_finally) == "catch") {
+						pop(try_catch_finally); pop(catch_counts);
+						str = format("%s } FINALLY {", str);
+						push(try_catch_finally, "finally");
+					} else if (peek(try_catch_finally) == "try") {
+					    pop(try_catch_finally);
+					    str = format("%s } FINALLY {", str);
+					    push(try_catch_finally, "finally");
+					}
+				}
+			} 
+		} else if (len(parts) == 3) {
+			# catch
+			token = parts[1];
+			counter := parts[2];
+			ctype := "";
+			if (!contains(ts, loc)) {
+			    ctype = pop(catch_types);
+			    if (ctype == "NIL") {
+				    str = format("%s -> CATCH() {", str);
+			    } else {
+			        str = format("%s -> CATCH(%s) {", str, ctype);
+			    }
+				add(ts, loc);
+				push(try_catch_finally, "catch");
+				push(catch_counts, counter);
+			} else {
+				if (peek(try_catch_finally) == "try") {
+					pop(try_catch_finally);
+					ctype = pop(catch_types);
+			        if (ctype == "NIL") {
+			            str = format("%s } CATCH() {", str);    
+			        } else {
+			            str = format("%s } CATCH(%s) {", str, ctype);    
+			        }
+					push(try_catch_finally, "catch");
+					push(catch_counts, counter);
+				} else if (peek(try_catch_finally) == "catch" && peek(catch_counts) != counter) {
+					pop(catch_counts);
+					ctype = pop(catch_types);
+			        if (ctype == "NIL") {
+			            str = format("%s } CATCH() {", str);    
+			        } else {
+			            str = format("%s } CATCH(%s) {", str, ctype);    
+			        }
+					push(catch_counts, counter);
+				}
+			}
+		} else if (len(parts) == 1) {
+			if (!contains(ts, loc) && (nodeLabel != "")) {
+				str = format("%s -> LOOP {", str);
+				add(ts, loc);
+			}
+		} 
+	}
+	if (!contains(added, id) && (nodeLabel != "")) {
+        str = format("%s -> %s", str, nodeLabel);
+        add(added, id);
+    }
+	return;
+};
+
+clearAll := function() {
+    hasAPICall = false;
+    clear(locals); clear(method_args);
+	    
+	clear(eFors);
+    clear(collectCandidates);
+    clear(apiNodes); clear(predicateNodes); 
+    clear(node_apis); clear(variables); clear(predicates);
+	    
+	# clear dominator values
+	isPP = false;
+    clear(cfgnode_ids); clear(apiPredicateNodes); clear(exits); clear(exitsT);
+    clear(allnode_ids); clear(cfg_dom); clear(dom_result); clear(dom_more); clear(terminals);
+	    
+    # api sequence
+    str = "";
+    clear(ts); clear(fs); clear(added); clear(try_catch_finally); clear(catch_counts);
+    clear(seqGen); clear(nodeStructs); clear(catch_types);
+    
+    clear(myAPINodes); clear(allVars); clear(allNodeIds); clear(hops); clear(foundapis);
+};
+
+isMyAPINodesEmpty := function(): bool {
+    if (!thisORthat) {
+        foreach(myapinode: string = foundapis)
+            return true;
+    }
+    foreach(myapinode: string = myAPINodes)    
+        return false;
+    return true;
+};
+
+visit(p, visitor {
+	before node: CodeRepository -> {
+	    # ignore projects with less than 100 revisions
+        if (len(node.revisions) < 100) stop;
+		snapshot := getsnapshot(node, "SOURCE_JAVA_JLS");
+		foreach (i: int; def(snapshot[i]))
+			visit(snapshot[i]);
+		stop;
+	}
+	before chfl: ChangedFile -> path = chfl.name;
+	after chfl: ChangedFile -> path = "";
+	before decl: Declaration -> {
+	    push(decls, decl.name);
+	    if (len(keys(fields)) > 0) {
+	        mKeys := keys(fields);    
+	        foreach (i: int; def(mKeys[i])) {
+	        	k := mKeys[i];
+	        	v := fields[k];
+	            parent_fields[k] = v;
+	        }
+	    }
+	    clear(fields);
+	    fields = getTypeOfFields(decl);
+	}
+    after decl: Declaration -> {
+        pop(decls);
+        clear(fields);
+        if (len(decl.nested_declarations) > 0)
+            clear(parent_fields);
+    }
+	before method: Method -> {
+	    mKey = format("%s!%s!%s!%s", p.project_url, path, peek(decls), method.name);
+	    
+        clearAll();
+        locals = getTypeOfLocals(method);
+
+	    cfg = getcfg(method);
+	    size := len(cfg.nodes);
+	    
+	    if (size > 10000) {
+		    verylarge << 1;
+		    stop;
+		}
+		
+		if (size > 0) {
+		    # collect API methods of interest
+		    traverse(cfg, TraversalDirection.FORWARD, TraversalKind.SHALLOW_ITERATIVE, collectCandidates);    
+            
+            # if there exists API methods of interest, 
+            # collect predicates and construct call sequences
+		    if (hasAPICall && !isMyAPINodesEmpty()) {
+		        # in case of slicing, perform dataflow slicing to capture dependencies
+		        if (slice)  addUntilFixP();
+		        
+		        # dominator analysis to collect preconditions
+		        traverse(cfg, TraversalDirection.FORWARD, TraversalKind.SHALLOW_ITERATIVE, allnode_ids);
+			    traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, cfg_dom, fixp_dom);
+			    traverse(cfg, TraversalDirection.FORWARD, TraversalKind.SHALLOW_ITERATIVE, dom_result);
+			    traverse(cfg, TraversalDirection.FORWARD, TraversalKind.SHALLOW_ITERATIVE, dom_more);
+                
+                # traversal to generate the sequence
+		        traverse(cfg, TraversalDirection.FORWARD, TraversalKind.SHALLOW_ITERATIVE, seqGen);
+    			if (str != "") {
+    			    # properly closing the opened braces in the sequence
+    				foreach (tss: string = ts) {
+    					str = format("%s }", str);
+    				}
+    				
+    				# if the method signature has throws exceptions,
+    				# enclose the sequence in a try-catch
+    				if (len(method.exception_types) > 0) {
+    				    etypes := "";
+    				    foreach (i: int; def(method.exception_types[i])) {
+    				        etypes = format("%s,%s", etypes, method.exception_types[i].name);
+    				    }
+    				    etypes = substring(etypes, 1);
+    				    str = format("-> TRY { %s } CATCH(%s) {}", str, etypes);
+    				}
+    				    
+    				#results[mKey]["SEQ"] << str; 
+    				s[str] << 1; 
+    			}
+		    }
+		}
+	}
+});
+\end{lstlisting}
+\end{figure}

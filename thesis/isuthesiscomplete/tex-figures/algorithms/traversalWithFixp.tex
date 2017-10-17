@@ -1,0 +1,43 @@
+\begin{figure}
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Example traversal construct that computes post dominator.},label={lst:traversalWithfixp}] 
+cfgPdom := traversal(node: CFGNode): T {
+	cur_value : T;
+	if(node.id==exitId) {
+		self_dom:set of string;
+		cur_value = self_dom;
+	}
+	else
+		cur_value = cfgnode_ids;
+	
+	if(def(getvalue(node))) {
+		cur_value = getvalue(node);
+	}
+	
+	preds:=node.successors;
+	foreach(i:int;def(preds[i])) {
+		pred_value := getvalue(preds[i]);
+		if(def(pred_value)) {
+			cur_value = intersect(cur_value,pred_value);
+		}
+	}
+	
+	gen_kill := getvalue(node, allnodeIds);
+	if(def(gen_kill)) {
+		add(cur_value, gen_kill);
+	}
+		
+	return cur_value;
+};
+\end{lstlisting}
+% \caption{}
+% % 
+% % 
+% % Dominator analysis performs traversal over the graph to determine the
+% % dominators of each node. It has two traversals. \textit{init} traversal collects
+% % all node ids. \textit{dom\_T} is called with a fixpoint and it runs till all the
+% % nodes reach the fixpoint condition.}
+% \label{fig:dominator}
+\end{figure}
+
+

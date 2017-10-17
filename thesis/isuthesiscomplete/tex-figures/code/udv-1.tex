@@ -1,0 +1,68 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Used defined variable},label={lst:udv-code}] 
+m: output collection[string][string][int] of int;
+p: Project = input;
+
+type T_gen_kill= {gen: set of string, kill: string};
+
+cfg: CFG;
+cur_cfg_node: CFGNode;
+
+genset : set of string;
+killset : string;
+
+node_def := visitor {
+	before expr:Expression -> {
+		switch(expr.kind) {
+			case ExpressionKind.VARDECL: 
+				var_decls := cur_cfg_node.expr.variable_decls;
+				if(len(var_decls)!=0) {
+					killset = var_decls[0].name;
+				}				
+				break;
+			case ExpressionKind.ASSIGN: 
+				exprs := cur_cfg_node.expr.expressions;
+				if(len(exprs)!=0) {				
+					killset = exprs[0].variable;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+};
+
+node_use := visitor {
+	before expr:Expression -> {
+		if(def(expr.variable)) {
+			add(genset, expr.variable);			
+		}
+	}
+};
+
+init := traversal(node: CFGNode): T_gen_kill {
+	cur_value : T_gen_kill;
+	killset = "";
+	init_set1 : set of string;
+	genset = init_set1;
+	cur_cfg_node = node;
+	if(def(node.expr)) {
+		visit(node.expr, node_use);
+		visit(node.expr, node_def);
+	}
+	cur_value = {genset, killset};
+	return cur_value;
+};
+
+q_all := visitor {
+	before node: Method -> {			
+		clear(init);
+		cfg = getcfg(node);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, init);
+	}
+};
+
+visit(p, q_all);
+\end{lstlisting}
+\end{figure}

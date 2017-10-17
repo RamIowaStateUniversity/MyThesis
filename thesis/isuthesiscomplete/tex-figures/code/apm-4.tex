@@ -1,0 +1,315 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={API Precondition Mining Analysis},label={lst:apm-code}, firstline = 112, firstnumber = 112, lastline = 173] 
+p: Project = input;
+results: output collection of string;
+verylarge: output sum of int;
+
+apis: array of string;
+apis = {"next","equals","get","substring","append","put","add","indexOf","length","charAt","startsWith","getString","split","arraycopy","nextElement","equalsIgnoreCase","getInt","setInt","setString","elementAt","getProperty","max","endsWith","getClass","lastIndexOf","parseInt","size","replace","trim","intValue","replaceAll","toString","exit","remove","min","nextToken","toArray","valueOf","format","prepareStatement","contains","sleep","group","getAbsolutePath","println","pow","forName","iterator","addElement","getName","abs","toLowerCase","setLong","info","compareTo","compile","containsKey","getLong","sqrt","delete","matcher","setProperty","invoke","hashCode","setTimestamp","mkdirs","matches","print","getTimestamp","fillRect","parseDouble","fine","set","write","keySet","parseLong","addAll","toUpperCase","drawLine","getBytes","executeQuery","nextInt","setAutoCommit","round","sin","setLength","getPath","cos","getX","getY","isDirectory","listFiles","log","drawString","close","mkdir","entrySet","createTempFile","newInstance","getMethod","getWidth","drawImage","getHeight","pop","setDate","warning","getDate","booleanValue","getParentFile","read","getRow","asList","last","getTime","getDouble","concat","push","getBoolean","replaceFirst","subList","fill","values","encode","clear","setColor","exists","toHexString","getObject","floor","firePropertyChange","getSuperclass","getTimeZone","getBigDecimal","hasNext","toCharArray","insert","getInstance","createNewFile","getBundle","parseFloat","sort","finest","getNewValue","setDaemon","getLogger","doubleValue","end","setObject","isWhitespace","start","parse","store","readLine","ceil","getPoint","setAccessible","isNaN","list","removeElementAt","setBoolean","drawRect","setStroke","setTime","isAssignableFrom","setBigDecimal","position","isDigit","exp","getAnnotation","decode","parseBoolean","removeFirst","interrupt","executeUpdate","setPaint","getChars","getComponent","getParameterTypes","severe","finer","renameTo","getConstructor","copyInto","getKey","peek","getFloat","setMaximumFractionDigits","stringWidth","getMessage","lastModified","execute","getenv","getCanonicalPath","insertElementAt","isFile","setScale","compareToIgnoreCase","hasMoreTokens","longValue","getValue","getColumnName","getParent","setNull","deleteCharAt","previous","allocate","getConnection","getDeclaredMethod","cast","getSimpleName"};
+types: array of string;
+types = {"Iterator","String","List","StringBuffer","Map","IllegalArgumentException","StringBuilder","ArrayList","ResultSet","Dimension","HashMap","System","Enumeration","PreparedStatement","Vector","Math","Object","Integer","Insets","File","RuntimeException","IllegalStateException","Hashtable","Set","StringTokenizer","Exception","Connection","NullPointerException","ResourceBundle","Thread","SimpleDateFormat","Matcher","Properties","Font","SortedMap","Color","Rectangle","PrintWriter","Class","BigDecimal","IOException","GridLayout","Logger","Error","Collection","Pattern","ListIterator","HashSet","Long","Method","Boolean","GridBagConstraints","Graphics","Double","Calendar","Writer","BufferedWriter","SQLException"};
+fulltypes: array of string;
+fulltypes = {"java.util.Iterator","java.lang.String","java.util.List","java.lang.StringBuffer","java.util.Map","java.lang.IllegalArgumentException","java.lang.StringBuilder","java.util.ArrayList","java.sql.ResultSet","java.awt.Dimension","java.util.HashMap","java.lang.System","java.util.Enumeration","java.sql.PreparedStatement","java.util.Vector","java.lang.Math","java.lang.Object","java.lang.Integer","java.awt.Insets","java.io.File","java.lang.RuntimeException","java.lang.IllegalStateException","java.util.Hashtable","java.util.Set","java.util.StringTokenizer","java.lang.Exception","java.sql.Connection","java.lang.NullPointerException","java.util.ResourceBundle",
+"java.lang.Thread","java.text.SimpleDateFormat","java.util.regex.Matcher","java.util.Properties","java.awt.Font","java.util.SortedMap","java.awt.Color","java.awt.Rectangle","java.io.PrintWriter","java.lang.Class","java.math.BigDecimal","java.io.IOException","java.awt.GridLayout","java.util.logging.Logger","java.lang.Error","java.util.Collection","java.util.regex.Pattern","java.util.ListIterator","java.util.HashSet","java.lang.Long","java.lang.reflect.Method","java.lang.Boolean"};
+consts: array of string;
+consts = {"IllegalArgumentException","Dimension","StringBuffer","Integer","Insets","File","RuntimeException","IllegalStateException","Exception","ArrayList","StringTokenizer","NullPointerException","SimpleDateFormat","StringBuilder","Font","Color","Rectangle","BigDecimal","IOException","GridLayout","Error","String","Long","Boolean","GridBagConstraints","Double","SQLException","Point","DecimalFormat","UnsupportedOperationException","BorderLayout","Vector","InputStreamReader","HashMap","URL","OutputStreamWriter","RandomAccessFile","Thread","FlowLayout","BasicStroke","BufferedImage","PrintWriter","FileInputStream","FileOutputStream","FileWriter","Date","HashSet","Float","ActionEvent","StringReader","FileReader","ParseException","GradientPaint","PropertyChangeEvent","ByteArrayOutputStream","NoSuchElementException","AssertionError","Hashtable","SecurityException","Character","URI","ArithmeticException","Random","Locale","BufferedReader","BufferedOutputStream","Button","IndexOutOfBoundsException","NumberFormatException","BufferedWriter","BufferedInputStream","ParsePosition","BigInteger","PropertyDescriptor","ZipEntry","MenuItem","InternalError"};
+path := "";
+decls: stack of string;
+locals: map[string] of string;
+fields: map[string] of string;
+parent_fields: map[string] of string;
+
+getTypeOfLocals := function(method: Method): map[string] of string {
+l: map[string] of string;
+foreach (i:int; def(method.arguments[i])) {
+arg := method.arguments[i].name;
+argType := method.arguments[i].variable_type.name;
+l[arg] = argType;
+}
+visit(method, visitor {
+before expr: Expression -> {            
+if (expr.kind == ExpressionKind.VARDECL) {
+foreach (j: int; def(expr.variable_decls[j])) {
+var := expr.variable_decls[j].name;
+varType := expr.variable_decls[j].variable_type.name;
+l[var] = varType;
+}
+}
+}
+});
+return l;
+};
+
+getTypeOfFields := function(decl: Declaration): map[string] of string {
+l: map[string] of string;
+foreach(i:int; def(decl.fields[i])) {
+arg := decl.fields[i].name;
+argType := decl.fields[i].variable_type.name;
+l[arg] = argType;
+}
+return l;
+};
+
+hasJDKType := function(t: string): bool {
+if (t == "String" || t == "java.lang.String")
+return true;
+return false;
+#    foreach (i: int; def(types[i])) {
+#        if (t == types[i])
+#            return true;
+#    }
+
+#    foreach (i: int; def(fulltypes[i])) {
+#        if (t == fulltypes[i])
+#            return true;
+#    }
+#    
+#    return false;    
+};
+
+getVariableType := function(variable: string): string {
+lKeys := keys(locals);
+t := "";
+foreach (i: int; def(lKeys[i])) {
+if (variable == lKeys[i]) {
+t = locals[lKeys[i]];
+if (hasJDKType(t))
+return t;
+}
+}
+lKeys = keys(fields);
+foreach (i: int; def(lKeys[i])) {
+if (variable == lKeys[i]) {
+t = fields[lKeys[i]];
+if (hasJDKType(t))
+return t;
+}
+}
+lKeys = keys(parent_fields);
+foreach (i: int; def(lKeys[i])) {
+if (variable == lKeys[i]) {
+t = parent_fields[lKeys[i]];
+if (hasJDKType(t))
+return t;
+}
+}
+return "";
+}; 
+
+type T= {dom: set of string, dummy : int};
+cfg: CFG;
+cfgnode_ids:set of string;
+
+allnode_ids := traversal(node: CFGNode): string {
+add(cfgnode_ids, string(node.id));
+return string(node.id);
+};
+
+cfg_dom := traversal(node: CFGNode): T {
+cur_value : T;
+if (node.id == 0) {
+self_dom: set of string;
+cur_value = {self_dom, 0};
+}
+else {
+cur_value = {setClone(cfgnode_ids), 0};
+}
+if (def(getValue(node))) {
+cur_val1 := getValue(node);
+cur_value = clone(cur_val1);
+}
+preds := node.predecessors;
+foreach (i: int; def(preds[i])) {
+pred_value := getValue(preds[i]);
+if (def(pred_value)) {
+cur_value.dom = intersection(cur_value.dom,pred_value.dom);
+}
+}	
+gen_kill := getValue(node, allnode_ids);
+add(cur_value.dom, gen_kill);
+return cur_value;
+};
+
+fixp1 := fixp(curr, prev: T) : bool {
+if (difference(curr.dom, prev.dom) == 0)
+return true;	
+return false;
+};
+
+apiCallNodes: set of string;
+predicateExprsAtNodes: map[string] of string;
+
+hasAPICall := function(expression: Expression): bool {
+ret := false;
+visit(expression, visitor {
+before expr: Expression -> {
+m := expr.method;
+if (expr.kind == ExpressionKind.METHODCALL) {
+foreach (i: int; def(apis[i])) {
+if (m == apis[i]) {
+# check the type of the receiver
+if (len(expr.expressions) > 0) {
+recv := expr.expressions[0];
+rv := "";
+visit(recv, visitor {
+before e: Expression -> {
+if (e.kind == ExpressionKind.VARACCESS) 
+rv = e.variable;
+}
+});
+rvType := getVariableType(rv);
+if (rv != "" && rvType != "") {
+ret = true;
+break;
+}
+}
+}
+} 
+} else if (expr.kind == ExpressionKind.NEW) {
+foreach (i: int; def(consts[i])) {
+if (expr.new_type.name == consts[i]) {
+ret = true;
+break;
+}
+}
+}
+}
+});
+return ret;
+};
+
+mineAPICallsAndPredicates := traversal(node: CFGNode): bool { 
+ret := false;
+if (def(node.expr) && hasAPICall(node.expr)) {
+add(apiCallNodes, string(node.id));
+} else if (node.name == "IF") {
+predicateExpr := format("%s", node.expr);
+predicateExprsAtNodes[string(node.id)] = predicateExpr;
+}
+return ret;
+};
+
+apiPredicates: set of string;
+dom_result := traversal(node: CFGNode): bool {
+ret := false;
+cur_value := getValue(node, cfg_dom);
+nodeId := string(node.id);
+predicates: set of string;
+
+if (def(cur_value)) {
+if (contains(apiCallNodes, nodeId)) {
+foreach(dom: string=cur_value.dom) {
+if (haskey(predicateExprsAtNodes, dom)) {
+predicate := predicateExprsAtNodes[dom];
+add(predicates, predicate);
+}
+}
+}
+}
+if (len(predicates) > 0) {
+if(node.expr.method=="charAt" ||  
+node.expr.method=="codePointAt" || 
+node.expr.method=="codePointBefore" || 
+node.expr.method=="codePointCount" || 
+node.expr.method=="compareTo" || 
+node.expr.method=="compareToIgnoreCase" || 
+node.expr.method=="concat" || 
+node.expr.method=="contains" || 
+node.expr.method=="contentEquals" || 
+node.expr.method=="copyValueOf" || 
+node.expr.method=="endsWith" || 
+node.expr.method=="equals" || 
+node.expr.method=="equalsIgnoreCase" || 
+node.expr.method=="format" || 
+node.expr.method=="getBytes" || 
+node.expr.method=="getChars" || 
+node.expr.method=="hashCode" || 
+node.expr.method=="indexOf" || 
+node.expr.method=="intern" || 
+node.expr.method=="isEmpty" || 
+node.expr.method=="lastIndexOf" || 
+node.expr.method=="length" || 
+node.expr.method=="matches" || 
+node.expr.method=="offsetByCodePoints" || 
+node.expr.method=="regionMatches" || 
+node.expr.method=="replace" || 
+node.expr.method=="replaceAll" || 
+node.expr.method=="replaceFirst" || 
+node.expr.method=="split" ||  
+node.expr.method=="startsWith" ||  
+node.expr.method=="subSequence" || 
+node.expr.method=="substring" || 
+node.expr.method=="toCharArray" || 
+node.expr.method=="toLowerCase" || 
+node.expr.method=="toString" || 
+node.expr.method=="toUpperCase" || 
+node.expr.method=="trim" || 
+node.expr.method=="valueOf")  {
+apiCall := format("%s(%d)", node.expr.method, len(node.expr.method_args));
+preds := format("%s", predicates);
+add(apiPredicates, format("%s --- %s", apiCall, preds));
+}
+}
+return ret;
+};
+
+q_all := visitor {
+before node: CodeRepository -> {
+snapshot := getsnapshot(node, "SOURCE_JAVA_JLS");
+foreach (i: int; def(snapshot[i]))
+visit(snapshot[i]);
+stop;
+}
+before chfl: ChangedFile -> path = chfl.name;
+after chfl: ChangedFile -> path = "";
+before decl: Declaration -> {
+push(decls, decl.name);
+if (len(keys(fields)) > 0) {
+mKeys := keys(fields);    
+foreach (i: int; def(mKeys[i])) {
+k := mKeys[i];
+v := fields[k];
+parent_fields[k] = v;
+}
+}
+clear(fields);
+fields = getTypeOfFields(decl);
+}
+after decl: Declaration -> {
+pop(decls);
+clear(fields);
+if (len(decl.nested_declarations) > 0)
+clear(parent_fields);
+}
+
+before method: Method -> {
+locals = getTypeOfLocals(method);
+
+clear(cfgnode_ids);clear(apiCallNodes); clear(predicateExprsAtNodes);
+clear(mineAPICallsAndPredicates);clear(allnode_ids);clear(cfg_dom); clear(dom_result);
+cfg = getcfg(method);
+if (len(cfg.nodes) > 10000) {
+verylarge << 1;
+stop;
+}
+if(len(cfg.nodes) != 0) {
+traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, mineAPICallsAndPredicates);
+traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, allnode_ids);
+traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, cfg_dom, fixp1);
+traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, dom_result);
+}
+
+}
+after method: Method -> {
+clear(locals);    
+}
+};
+
+visit(p, q_all);
+
+foreach(apiPred: string = apiPredicates) {
+results << apiPred;                
+}
+\end{lstlisting}
+\end{figure}

@@ -1,0 +1,69 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Dominator analysis},label={lst:dominator-code}] 
+m: output collection[string][int] of string;
+mt: output collection[int][string] of string;
+p: Project = input;
+
+type T= {dom: set of string, dummy : int};
+
+cfg: CFG;
+cfgnode_ids:set of string;
+
+allnode_ids := traversal(node: CFGNode) : string{
+	add(cfgnode_ids, string(node.id));
+	return string(node.id);
+};
+
+cfg_dom := traversal(node: CFGNode): T {
+	cur_value : T;
+	if(node.id==0) {
+			self_dom:set of string;
+			cur_value = {self_dom, 0};
+	}
+	else
+		cur_value = {setClone(cfgnode_ids), 0};
+	if(def(getValue(node))) {
+		cur_val1 := getValue(node);
+		cur_value = clone(cur_val1);
+	}
+	preds:=node.predecessors;
+	foreach(i:int;def(preds[i])) {
+		pred_value := getValue(preds[i]);
+		if(def(pred_value)) {
+			cur_value.dom = intersection(cur_value.dom,pred_value.dom);
+		}
+	}	
+	gen_kill := getValue(node, allnode_ids);
+	add(cur_value.dom, gen_kill);
+	return cur_value;
+};
+
+fixp1 := fixp(curr, prev: T) : bool {
+ 	if (difference(curr.dom, prev.dom) == 0)
+ 		return true;	
+ 	return false;
+};
+
+q_all := visitor {
+	before node: CodeRepository -> {
+		snapshot := getsnapshot(node, "SOURCE_JAVA_JLS");
+		foreach (i: int; def(snapshot[i]))
+			visit(snapshot[i]);
+		stop;
+	}
+	before node: Method -> {
+		clear(allnode_ids);clear(cfgnode_ids);clear(cfg_dom);
+
+		cfg = getcfg(node);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, allnode_ids);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, cfg_dom, fixp1);
+	}
+};
+
+visit(p, q_all);
+
+\end{lstlisting}
+\end{figure}
+
+

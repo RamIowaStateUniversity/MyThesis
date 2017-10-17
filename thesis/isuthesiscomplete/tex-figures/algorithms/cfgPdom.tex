@@ -1,0 +1,61 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Implementation code of traversal with fixpoint.},label={lst:cfgPdom-impNodeids}] 
+public abstract class BoaAbstractTraversal<T1> {
+	public java.util.HashMap<Integer,T1> outputMapObj;
+	public java.util.HashMap<Integer,T1> prevOutputMapObj;
+	
+	public T1 getValue(final CFGNode node) throws Exception {
+		return (T1)outputMapObj.get(node.getId());
+	}
+	
+	public final void postorderBackward(final CFGNode node, java.util.HashMap<Integer,String> nodeVisitStatus) throws Exception {
+		nodeVisitStatus.put(node.getId(),"visited");
+		for (CFGNode succ : node.getSuccessorsList()) {
+			if (nodeVisitStatus.get(succ.getId()).equals("unvisited"))
+				postorderBackward(succ, nodeVisitStatus);
+		}
+		outputMapObj.put(node.id, cfgPdom(node));
+	}
+	
+	public final void traverse(final boa.graphs.cfg.CFG cfg, final Traversal.TraversalDirection direction, final Traversal.TraversalKind kind, final BoaAbstractFixP fixp) {
+		switch(kind.getNumber()) {
+		case 12 :
+			boolean fixp_flag;
+			do {
+				prevOutputMapObj = new java.util.HashMap<Integer,T1>(outputMapObj);
+				java.util.HashMap<Integer,String> nodeVisitStatus=new java.util.HashMap<Integer,String>();
+				CFGNode[] nl = cfg.nodes();
+				for(int i=0;i<nl.length;i++) {
+					nodeVisitStatus.put(nl[i].getId(),"unvisited");
+				}
+				postorderBackward(cfg.getEntryNode(), nodeVisitStatus);						
+				fixp_flag=true;
+				for(CFGNode node : nl) {
+					boolean curFlag=outputMapObj.containsKey(node.getId());
+					boolean prevFlag=prevOutputMapObj.containsKey(node.getId());
+					if(curFlag) {
+						if(outputMapObj.containsKey(node.getId()) && prevOutputMapObj.containsKey(node.getId())) { 
+							fixp_flag=fixp_flag && fixp.invoke((T1)outputMapObj.get(node.getId()),(T1)prevOutputMapObj.get(node.getId()));
+						} else {
+							fixp_flag = false; break;
+						}
+					}
+				}
+			}while(!fixp_flag);
+			break;
+		default : break;
+	}
+}
+\end{lstlisting}
+% \caption{}
+% % 
+% % 
+% % Dominator analysis performs traversal over the graph to determine the
+% % dominators of each node. It has two traversals. \textit{init} traversal collects
+% % all node ids. \textit{dom\_T} is called with a fixpoint and it runs till all the
+% % nodes reach the fixpoint condition.}
+% \label{fig:dominator}
+\end{figure}
+
+

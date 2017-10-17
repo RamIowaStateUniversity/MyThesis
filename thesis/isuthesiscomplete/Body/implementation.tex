@@ -1,0 +1,70 @@
+\chapter{Implementation on Boa framework}
+\label{sec:impl}
+
+\section{Boa language and infrastructure}
+Boa is a domain-specific language and infrastructure that eases mining software repositories. Boa's infrastructure leverages distributed computing techniques to execute queries against hundreds of thousands of software projects very efficiently. Boa provide users a
+domain-specific language tailored for software repository mining and allow them to submit queries via
+their web-based interface. These queries are then automatically parallelized and executed on a cluster,
+analyzing a dataset containing almost 700,000 projects, history information from millions of revisions,
+millions of Java source files, and billions of AST nodes. The language also provides an easy to comprehend
+visitor syntax to ease writing source code mining queries. The underlying infrastructure contains
+several optimizations, including query optimizations to make single queries faster as well as a fusion
+optimization to group queries from multiple users into a single query. 
+
+\section{Source code analysis using Traversal construct}
+Users must also be able to easily express source code analysis tasks. For users who are intimately
+familiar with compilers and interpreters, the visitor pattern is well understood. Our traversal patter is quite similar to it, except that our traversal pattern is for graphs. Without traversal pattern, it generally requires writing a
+significant amount of boiler-plate code whose length is proportional to the complexity of the source code analysis being written.
+In this section, we describe how we extended Boa language to support graph traversal and describe our proposed syntax for writing source code analysis. 
+The new syntax is shown in \ref{lst:traversal-syntax}. This syntax is exactly in line with what we described in \ref{sec:language}. The top-level syntax for a analysis task is a traversal type. During traversal of the graph, the body of the traversal is executed when visiting a node of the graph type. The result of this code is a collection of all node ids in a global variable.
+
+\input{tex-figures/algorithms/traversal}
+
+To begin a analysis task, users write a traverse statement:
+
+\begin{figure}[ht!]
+	% \centering
+	\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@,label={lst:traverse-syntax}] 
+	traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.DFS, allnodeIds);
+	\end{lstlisting}
+\end{figure}
+
+that has four parts: the graph to traverse, the traversal direction, the traversal strategy type and a traversal. When this statement executes, a traversal starts at the start node of the cfg using traversal \lstinline|allnodeIds|. 
+\input{tex-figures/algorithms/allNodeids}
+\ref{lst:allNodeids} shows the implementation code that shows how the traverse calls each node of the cfg using the specified traversal strategy and stores the output of each node.
+Line 13 - 17 initializes the visit status for all the nodes in the given cfg. Line 18 - 28 applies the specified traversal strategy. At line 2, you can see the variable \lstinline|outputMap|, which is a map that maintains the output of each node after applying the \lstinline|allNodeIds| traversal.
+The traversal can also take a user defined fixpoint function as another parameter and the traversal of the cfg will continue till all its node attain the fixpoint.
+\input{tex-figures/algorithms/traversalWithFixp} 
+\ref{lst:traversalWithfixp} shows a traversal that computes post dominators of a node. This traversal requires fixpoint and hence the traverse that calls this traversal contains a user defined fixpoint function \lstinline|fixp1| as show in \ref{lst:cfgPdom-traverse}.
+
+\begin{figure}
+	% \centering
+	\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@,label={lst:cfgPdom-traverse}] 
+	traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.POSTORDER, cfgPdom, fixp1);
+	\end{lstlisting}
+\end{figure}
+
+\ref{lst:fixp-imp} shows the user defined fixpoint function.
+
+\begin{figure}
+	% \centering
+	\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@,label={lst:fixp-imp}] 
+	fixp1 := fixp(curr, prev: T) : bool {
+		if (len(difference(curr, prev)) == 0)
+			return true;	
+		return false;
+	};
+	\end{lstlisting}
+\end{figure}
+
+\input{tex-figures/algorithms/cfgPdom}
+
+\ref{lst:cfgPdom-impNodeids} lists the implementation code that shows how the traverse calls each node of the cfg using the specified traversal strategy and how the traversal continues till fixpoint is reached. Line 2-3 shows two variables, \lstinline|outputMapObj| and \lstinline|prevOutputMapObj|. \lstinline|outputMapObj| maintains the current output of the nodes ie output of the nodes in the current traversal iteration while \lstinline|prevOutputMapObj| maintains the previous output of the nodes ie output of the nodes in the previous traversal iteration.
+At line 23, you can see that \lstinline|prevOutputMapObj| is initialized with the values of \lstinline|outputMapObj|. At this point of time, where the traversal have not yet started, both \lstinline|outputMapObj| and \lstinline|prevOutputMapObj| have the same values. Then at line 29, the traversal starts and at line 15, \lstinline|outputMapObj| gets updated with the current traversal iteration's output. After a iteration of a traversal is completed, line 31-41 applies the user defined fixpoint, which basically checks if both \lstinline|outputMapObj| and \lstinline|prevOutputMapObj| have the same values for every node. If not, line 22-41 repeats till the fixpoint is reached. Line 5-7 shows the \lstinline|getValue| function that returns the current traversal output of the specified node. This function is used in line 11 in \ref{lst:traversalWithfixp}.
+
+\section{Putting it all together}
+\input{tex-figures/algorithms/puttingItAllTogether}
+\ref{lst:puttingTogether} lists the complete code for post dominator analysis. Lines 15-18 contains the \lstinline|allNodeIds| traversal that collects all cfg node ids. Line 20 - 44 contains the \lstinline|cfgPdom| traversal that computes the post dominator. Lines 46-50 contains the user defined fixpoint function \lstinline|fixp1|. Lines 52-61 is the boa visitor. Line 53 - 59 contains a set of operation that is done before visiting each method in the input dataset. At line 54, \lstinline|getcfg| method is used which returns the cfg od the given method. Line 57 contains the traverse call to \lstinline|allNodeIds| with cfg, traversal direction and traversal strategy. Line 58 contains the traverse call to \lstinline|cfgPdom| with additional fixpoint parameter. 
+\input{tex-figures/algorithms/result}
+
+After these two traversal is complete, the cfgPdom contains the post dominator set for each node. You can query it using \lstinline|getvalue| function by supplying \lstinline|cfgPdom| and the node you want to get the post-dominator set. \ref{lst:result-query} shows the code snippet to get each node's output of \lstinline|cfgPdom| traversal. 

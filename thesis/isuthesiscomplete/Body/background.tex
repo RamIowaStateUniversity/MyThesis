@@ -1,0 +1,35 @@
+\chapter{Background}
+In this chapter, we will have a look at the background of many ideas that this thesis builds upon.
+
+\section{Graph}
+A graph is a structure amounting to a set of objects in which some pairs of the objects are in some sense "related". The objects correspond to mathematical abstractions called vertices (also called nodes) and each of the related pairs of vertices is called an edge. Typically, a graph is depicted in diagrammatic form as a set of dots for the vertices, joined by lines or curves for the edges. The edges may be directed or undirected. For example, if the vertices represent people at a party, and there is an edge between two people if they shake hands, then this graph is undirected because any person A can shake hands with a person B only if B also shakes hands with A. In contrast, if any edge from a person A to a person B corresponds to A's admiring B, then this graph is directed, because admiration is not necessarily reciprocated. The former type of graph is called an undirected graph and the edges are called undirected edges while the latter type of graph is called a directed graph and the edges are called directed edges.
+
+\section{Graph traversal}
+In computer science, graph traversal refers to the process of visiting each vertex in a graph. Such traversals are classified by the order in which the vertices are visited. Graph traversal may require that some vertices be visited more than once, since it is not necessarily known before transitioning to a vertex that it has already been explored. As graphs become more dense, this redundancy becomes more prevalent, causing computation time to increase; as graphs become more sparse, the opposite holds true.
+Thus, it is usually necessary to remember which vertices have already been explored by the algorithm, so that vertices are revisited as infrequently as possible. This may be accomplished by associating each vertex of the graph with a "visitation" state during the traversal, which is then checked and updated as the algorithm visits each vertex. If the vertex has already been visited, it is ignored and the path is pursued no further; otherwise, the algorithm checks/updates the vertex and continues down its current path.
+
+\section{Graph traversal strategies}
+The two most common traversal patterns are breadth-first traversal and depth-first traversal.
+
+\subsection{Depth-first search}
+A depth-first search (DFS) is an algorithm for traversing a finite graph. DFS visits the child vertices before visiting the sibling vertices; that is, it traverses the depth of any particular path before exploring its breadth. A stack is generally used when implementing the algorithm.
+The algorithm begins with a chosen "root" vertex; it then iteratively transitions from the current vertex to an adjacent, unvisited vertex, until it can no longer find an unexplored vertex to transition to from its current location. The algorithm then backtracks along previously visited vertices, until it finds a vertex connected to yet more uncharted territory. It will then proceed down the new path as it had before, backtracking as it encounters dead-ends, and ending only when the algorithm has backtracked past the original "root" vertex from the very first step
+
+\subsection{Breadth-first search}
+A breadth-first search (BFS) is another technique for traversing a finite graph. BFS visits the neighbor vertices before visiting the child vertices, and a queue is used in the search process. This algorithm is often used to find the shortest path from one vertex to another
+
+\section{Program analysis}
+In computer science, program analysis is the process of automatically analyzing the behavior of computer programs regarding a property such as correctness, robustness, safety and liveness. Program analysis focuses on two major areas: program optimization and program correctness. The first focuses on improving the program’s performance while reducing the resource usage while the latter focuses on ensuring that the program does what it is supposed to do. Program analysis can be performed without executing the program (static program analysis), during runtime (dynamic program analysis) or in a combination of both.
+
+\section{Control-flow and Data flow analysis}
+The purpose of control-flow analysis is to obtain information about which functions can be called at various points during the execution of a program. The collected information is represented by a control flow graph (CFG) where the nodes are instructions of the program and the edges represent the flow of control. By identifying code blocks and loops CFG becomes a starting point for compiler made optimizations.
+
+Data-flow analysis is a technique designed to gather information about the values at each point of the program and how they change over time. This technique is often used by compilers to optimize the code. One of the most known examples of data-flow analysis is taint checking which consists of considering all variables which contain user supplied data – which is considered "tainted", i.e. insecure – and preventing those variables from being used until they have been sanitized. This technique is often used to prevent SQL injection attacks.
+
+\section{Graph traversal for Program analysis}
+\subsection{Random order}
+This iteration order is not aware whether the data-flow equations solve a forward or backward data-flow problem. Therefore, the performance is relatively poor compared to specialized iteration orders.
+\subsection{Postorder}
+This is a typical iteration order for backward data-flow problems. In postorder iteration, a node is visited after all its successor nodes have been visited. Typically, the postorder iteration is implemented with the depth-first strategy.
+\subsection{Reverse postorder}
+This is a typical iteration order for forward data-flow problems. In reverse-postorder iteration, a node is visited before any of its successor nodes has been visited, except when the successor is reached by a back edge. 

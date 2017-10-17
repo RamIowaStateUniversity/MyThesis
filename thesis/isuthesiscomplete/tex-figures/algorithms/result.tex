@@ -1,0 +1,10 @@
+\begin{figure}
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Code to query post dominator set of a node.},label={lst:result-query}] 
+result := traversal(node: CFGNode)  {
+	cur_val := getvalue(node, cfgPdom);
+	if(def(cur_val))
+		m[string(node.id)] << string(cur_val);    
+};
+\end{lstlisting}
+\end{figure}

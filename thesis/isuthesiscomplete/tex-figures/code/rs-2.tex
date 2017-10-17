@@ -1,0 +1,86 @@
+\begin{figure}[ht!]
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Resource status},label={lst:rs-code}, firstline = 59, firstnumber = 59] 
+m: output collection[string][int] of string;
+p: Project = input;
+
+type T= {in: set of string, out : set of string};
+type T1= {gen: string, kill : string};
+
+cfg: CFG;
+cfgnode_ids:set of string;
+
+genStr : string;
+killStr : string; 
+
+evisitor := visitor {
+	before node:Expression -> {
+		switch(node.kind) {
+			case ExpressionKind.METHODCALL: 
+				if(node.method == "write" || node.method == "read" || node.method == "open") {
+					if(len(node.expressions)>0) {
+						genStr = node.expressions[0].variable;
+					}
+				}
+				else if(node.method == "close") {
+					if(len(node.expressions)>0) {
+						killStr = node.expressions[0].variable;
+					}
+				}
+  				break;
+			default: break;
+		}
+	}
+};
+
+track := traversal(node: CFGNode) : T1 {
+	cur_val : T1 = {"",""};
+	genStr = "";
+	killStr = "";
+	if (def(node.expr)) {
+		visit(node.expr, evisitor);
+		cur_val = {genStr, killStr};
+	}
+	return cur_val;
+};
+
+cfg_def := traversal(node: CFGNode) : T {
+	inset : set of string;
+	outset : set of string;
+	cur_val : T = {inset, outset};
+	cur_val = getValue(node);
+	cur_val = {inset, outset};
+	preds := node.predecessors;
+	foreach(pred_node:CFGNode=preds) {
+		pred := getValue(pred_node);
+		if(def(pred))
+			cur_val.in = union(cur_val.in, pred.out);
+	}
+	track_val := getValue(node, track);
+	addAll(cur_val.out, cur_val.in);
+	if(track_val.gen != "")
+		add(cur_val.out, track_val.gen);
+	if(track_val.kill != "")
+		remove(cur_val.out, track_val.kill);
+	return cur_val;
+};
+
+fixp1 := fixp(curr, prev: T) : bool {
+	if (difference(curr.out, prev.out) == 0)
+		return true;	
+	return false;
+};
+
+q_all := visitor {
+	before node: Method -> {
+		clear(track);clear(cfg_def);
+
+		cfg = getcfg(node);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, track);
+		traverse(cfg, TraversalDirection.FORWARD, TraversalKind.HYBRID, cfg_def, fixp1);
+	}
+};
+
+visit(p, q_all);
+\end{lstlisting}
+\end{figure}

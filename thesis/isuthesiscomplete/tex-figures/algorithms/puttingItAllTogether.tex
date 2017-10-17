@@ -1,0 +1,66 @@
+\begin{figure}
+% \centering
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Code to compute post dominator using Boa language.},label={lst:puttingTogether}] 
+p: Project = input;
+cfgnode_ids:set of string;                     
+type T = set of string; 
+exitId : int;
+cfg: CFG;  
+m: output collection[string] of string;
+
+#clones set of string
+clone := function(data: T) : T {
+	s: set of string;
+	s = union(s, data);
+	return s;
+};
+
+allnodeIds := traversal(node: CFGNode) : string {
+	add(cfgnode_ids, string(node.id));
+	return string(node.id);
+};
+
+cfgPdom := traversal(node: CFGNode): T {
+	cur_value : T;
+	if(node.id==exitId) {
+		self_dom:set of string;
+		cur_value = self_dom;
+	}
+	else
+		cur_value = cfgnode_ids;
+	if(def(getvalue(node))) {
+		cur_val1 := getvalue(node);
+		cur_value = clone(cur_val1);
+	}
+
+	preds:=node.successors;
+	foreach(i:int;def(preds[i])) {
+		pred_value := getvalue(preds[i]);
+		if(def(pred_value))
+			cur_value = intersect(cur_value,pred_value);
+	}	
+	gen_kill := getvalue(node, allnodeIds);
+	if(def(gen_kill))
+        add(cur_value, gen_kill);
+		
+	return cur_value;
+};
+
+fixp1 := fixp(curr, prev: T) : bool {
+ 	if (len(difference(curr, prev)) == 0)
+ 		return true;	
+ 	return false;
+};
+
+controlDependenceVisitor:= visitor {
+	before node: Method -> {
+		cfg = getcfg(node);
+		exitId = len(cfg.nodes) - 1;
+		clear(cfgPdom);	clear(cfgnode_ids); clear(allnodeIds);
+		traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.Hybrid, allnodeIds);
+		traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.Hybrid, cfgPdom, fixp1);		    
+	}
+};
+visit(p, controlDependenceVisitor);
+\end{lstlisting}
+\end{figure}
