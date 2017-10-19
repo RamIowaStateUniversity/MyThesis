@@ -34,6 +34,18 @@ public final void traverse(final boa.graphs.cfg.CFG cfg, final Traversal.Travers
 	} catch(Exception e) {return;}
 }
 \end{lstlisting}
+
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={Traverse call with fixpoint function.},label={lst:cfgPdom-traverse}] 
+traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.POSTORDER, cfgPdom, fixp1);
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@, caption={User defined fixpoint function.},label={lst:fixp-imp}] 
+fixp1 := fixp(curr, prev: T) : bool {
+	if (len(difference(curr, prev)) == 0)
+		return true;	
+	return false;
+};
+\end{lstlisting}
 % \caption{}
 % % 
 % % 

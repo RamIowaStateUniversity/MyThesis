@@ -31,31 +31,15 @@ To begin a analysis task, users write a traverse statement:
 
 that has four parts: the graph to traverse, the traversal direction, the traversal strategy type and a traversal. When this statement executes, a traversal starts at the start node of the cfg using traversal \lstinline|allnodeIds|. 
 \input{tex-figures/algorithms/allNodeids}
+\input{tex-figures/algorithms/traversalWithFixp} 
+
 \ref{lst:allNodeids} shows the implementation code that shows how the traverse calls each node of the cfg using the specified traversal strategy and stores the output of each node.
 Line 13 - 17 initializes the visit status for all the nodes in the given cfg. Line 18 - 28 applies the specified traversal strategy. At line 2, you can see the variable \lstinline|outputMap|, which is a map that maintains the output of each node after applying the \lstinline|allNodeIds| traversal.
 The traversal can also take a user defined fixpoint function as another parameter and the traversal of the cfg will continue till all its node attain the fixpoint.
-\input{tex-figures/algorithms/traversalWithFixp} 
 \ref{lst:traversalWithfixp} shows a traversal that computes post dominators of a node. This traversal requires fixpoint and hence the traverse that calls this traversal contains a user defined fixpoint function \lstinline|fixp1| as show in \ref{lst:cfgPdom-traverse}.
-
-\begin{figure}
-	% \centering
-	\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@,label={lst:cfgPdom-traverse}] 
-	traverse(cfg, TraversalDirection.BACKWARD, TraversalKind.POSTORDER, cfgPdom, fixp1);
-	\end{lstlisting}
-\end{figure}
 
 \ref{lst:fixp-imp} shows the user defined fixpoint function.
 
-\begin{figure}
-	% \centering
-	\begin{lstlisting}[numbers=left, tabsize=4, escapechar=@,label={lst:fixp-imp}] 
-	fixp1 := fixp(curr, prev: T) : bool {
-		if (len(difference(curr, prev)) == 0)
-			return true;	
-		return false;
-	};
-	\end{lstlisting}
-\end{figure}
 
 \input{tex-figures/algorithms/cfgPdom}
 

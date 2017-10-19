@@ -37,30 +37,30 @@
 \BOOKMARK [0][-]{chapter.134}{5. Implementation on Boa framework}{}% 37
 \BOOKMARK [1][-]{section.135}{5.1 Boa language and infrastructure}{chapter.134}% 38
 \BOOKMARK [1][-]{section.136}{5.2 Source code analysis using Traversal construct}{chapter.134}% 39
-\BOOKMARK [1][-]{section.268}{5.3 Putting it all together}{chapter.134}% 40
-\BOOKMARK [0][-]{chapter.339}{6. Empirical Evaluation}{}% 41
-\BOOKMARK [1][-]{section.340}{6.1 Analyses, Datasets and Experiment Setting}{chapter.339}% 42
-\BOOKMARK [2][-]{subsection.342}{6.1.1 Analyses.}{section.340}% 43
-\BOOKMARK [2][-]{subsection.345}{6.1.2 Datasets.}{section.340}% 44
-\BOOKMARK [2][-]{subsection.346}{6.1.3 Setting.}{section.340}% 45
-\BOOKMARK [0][-]{chapter.347}{7. Running Time and Time Reduction}{}% 46
-\BOOKMARK [1][-]{section.348}{7.1 Running Time}{chapter.347}% 47
-\BOOKMARK [1][-]{section.349}{7.2 Time Reduction}{chapter.347}% 48
-\BOOKMARK [1][-]{section.354}{7.3 Time reduction against hand optimized analysis}{chapter.347}% 49
-\BOOKMARK [0][-]{chapter.356}{8. Correctness of Analysis Results}{}% 50
-\BOOKMARK [0][-]{chapter.357}{9. Traversal Strategy Selection Precision}{}% 51
-\BOOKMARK [0][-]{chapter.377}{10. Analysis on the Decision Tree Distribution}{}% 52
-\BOOKMARK [0][-]{chapter.380}{11. Analysis on Traversal Optimization}{}% 53
-\BOOKMARK [0][-]{chapter.382}{12. Case Studies}{}% 54
-\BOOKMARK [1][-]{section.384}{12.1 API Precondition Mining \(APM\).}{chapter.382}% 55
-\BOOKMARK [1][-]{section.387}{12.2 API Usage Mining \(AUM\).}{chapter.382}% 56
-\BOOKMARK [0][-]{chapter.390}{13. Threats to Validity}{}% 57
-\BOOKMARK [0][-]{chapter.391}{14. Related Work}{}% 58
-\BOOKMARK [1][-]{section.392}{14.1 Mixing static and dynamic information.}{chapter.391}% 59
-\BOOKMARK [1][-]{section.393}{14.2 Optimizing program analysis.}{chapter.391}% 60
-\BOOKMARK [1][-]{section.394}{14.3 Ultra-large-scale source code mining.}{chapter.391}% 61
-\BOOKMARK [1][-]{section.395}{14.4 Graph traversal optimization.}{chapter.391}% 62
-\BOOKMARK [0][-]{chapter.396}{15. Conclusion and Future work}{}% 63
-\BOOKMARK [1][-]{section.397}{15.1 Conclusion}{chapter.396}% 64
-\BOOKMARK [1][-]{section.398}{15.2 Future Work}{chapter.396}% 65
-\BOOKMARK [0][-]{chapter.400}{16. Appendix}{}% 66
+\BOOKMARK [1][-]{section.266}{5.3 Putting it all together}{chapter.134}% 40
+\BOOKMARK [0][-]{chapter.337}{6. Empirical Evaluation}{}% 41
+\BOOKMARK [1][-]{section.338}{6.1 Analyses, Datasets and Experiment Setting}{chapter.337}% 42
+\BOOKMARK [2][-]{subsection.340}{6.1.1 Analyses.}{section.338}% 43
+\BOOKMARK [2][-]{subsection.343}{6.1.2 Datasets.}{section.338}% 44
+\BOOKMARK [2][-]{subsection.344}{6.1.3 Setting.}{section.338}% 45
+\BOOKMARK [0][-]{chapter.345}{7. Running Time and Time Reduction}{}% 46
+\BOOKMARK [1][-]{section.346}{7.1 Running Time}{chapter.345}% 47
+\BOOKMARK [1][-]{section.347}{7.2 Time Reduction}{chapter.345}% 48
+\BOOKMARK [1][-]{section.352}{7.3 Time reduction against hand optimized analysis}{chapter.345}% 49
+\BOOKMARK [0][-]{chapter.354}{8. Correctness of Analysis Results}{}% 50
+\BOOKMARK [0][-]{chapter.355}{9. Traversal Strategy Selection Precision}{}% 51
+\BOOKMARK [0][-]{chapter.375}{10. Analysis on the Decision Tree Distribution}{}% 52
+\BOOKMARK [0][-]{chapter.378}{11. Analysis on Traversal Optimization}{}% 53
+\BOOKMARK [0][-]{chapter.380}{12. Case Studies}{}% 54
+\BOOKMARK [1][-]{section.382}{12.1 API Precondition Mining \(APM\).}{chapter.380}% 55
+\BOOKMARK [1][-]{section.385}{12.2 API Usage Mining \(AUM\).}{chapter.380}% 56
+\BOOKMARK [0][-]{chapter.388}{13. Threats to Validity}{}% 57
+\BOOKMARK [0][-]{chapter.389}{14. Related Work}{}% 58
+\BOOKMARK [1][-]{section.390}{14.1 Mixing static and dynamic information.}{chapter.389}% 59
+\BOOKMARK [1][-]{section.391}{14.2 Optimizing program analysis.}{chapter.389}% 60
+\BOOKMARK [1][-]{section.392}{14.3 Ultra-large-scale source code mining.}{chapter.389}% 61
+\BOOKMARK [1][-]{section.393}{14.4 Graph traversal optimization.}{chapter.389}% 62
+\BOOKMARK [0][-]{chapter.394}{15. Conclusion and Future work}{}% 63
+\BOOKMARK [1][-]{section.395}{15.1 Conclusion}{chapter.394}% 64
+\BOOKMARK [1][-]{section.396}{15.2 Future Work}{chapter.394}% 65
+\BOOKMARK [0][-]{chapter.398}{16. Appendix}{}% 66

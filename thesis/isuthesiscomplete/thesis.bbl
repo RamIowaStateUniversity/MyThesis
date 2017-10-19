@@ -114,6 +114,12 @@ Gregor, D. and Lumsdaine, A. (2005).
   computations.
 \newblock {\em Parallel Object-Oriented Scientific Computing (POOSC)}, 2:1--18.
 
+\bibitem[\protect\astroncite{Harper and Morrisett}{1995}]{Harper95}
+Harper, R. and Morrisett, G. (1995).
+\newblock Compiling polymorphism using intensional type analysis.
+\newblock In {\em Proceedings of the Symposium on Principles of Programming
+  Languages}, POPL '95, pages 130--141, New York, NY, USA. ACM.
+
 \bibitem[\protect\astroncite{Hong et~al.}{2012}]{hong2012green}
 Hong, S., Chafi, H., Sedlar, E., and Olukotun, K. (2012).
 \newblock Green-marl: A {DSL} for easy and efficient graph analysis.
